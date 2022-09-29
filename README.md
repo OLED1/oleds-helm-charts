@@ -1,5 +1,5 @@
 # Welcome to **Oled's helm charts**
-This repository is a collection of some custom helm charts packaged by Oled.
+This repository is a collection of some custom helm charts adapted and packaged by Oled.
 
 ## Install
 ```
