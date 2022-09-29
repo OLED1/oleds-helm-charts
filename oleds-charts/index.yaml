@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  typemill:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-09-29T09:25:55.246066957+02:00"
+    description: A Helm chart for Kubernetes
+    digest: d62cf03ed90dd16d044b49852c2e2f4ef29cc2a981730c36a1785132eb6dcb29
+    name: typemill
+    type: application
+    urls:
+    - https://https:/github.com/OLED1/oleds-helm-charts/oleds-charts/typemill-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-09-29T09:25:55.2446778+02:00"
