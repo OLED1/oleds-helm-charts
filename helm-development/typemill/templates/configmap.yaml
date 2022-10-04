@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: typemill-htaccess
 data:
-  .htaccess: {{ .Values.typemillhtaccess }}
+  .htaccess: {{ .Values.typemillhtaccess | toYaml | indent 1 }}
