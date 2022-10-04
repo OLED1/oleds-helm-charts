@@ -12,7 +12,7 @@ entries:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    appVersion: 1.16.0
+    appVersion: 1.5.3-3
     created: "2022-10-04T16:36:51.258294+02:00"
     description: A Helm chart for Kubernetes
     digest: d62cf03ed90dd16d044b49852c2e2f4ef29cc2a981730c36a1785132eb6dcb29
