@@ -12,3 +12,7 @@ The official documentation can be found here: https://typemill.net/getting-start
 Find their github repository here: https://github.com/typemill/typemill
 
 ## Installation
+
+
+
+## Migrating

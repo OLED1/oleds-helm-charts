@@ -2,21 +2,29 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Number of replicas to be deployed
 replicaCount: 1
 
+## Unofficial typemill image version based on the official typemill Dockerfile 
+## ref: https://github.com/typemill/typemill
+##
 image:
-  repository: nginx
+  repository: oled01/typemill
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+## The following settings can be left default. They are only needed when you want to deploy your own image
 imagePullSecrets: []
+## The following setting can be left default.
 nameOverride: ""
+## The following setting can be left default.
 fullnameOverride: ""
 
+## You will not need a service account. So leave it empty and default as it is.
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -80,3 +88,100 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+persistence:
+  enabled: false
+  storageClass: ""
+  accessModes: 
+  - ReadWriteOnce
+  size: 1Gi
+
+## Strategy used to replace old pods
+## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
+## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 1
+  #   maxUnavailable: 0
+
+typemillhtaccess: |-
+  <IfModule mod_rewrite.c>
+
+    RewriteEngine On
+
+    # If your homepage is http://yourdomain.com/yoursite
+    # Set the RewriteBase to:
+    # RewriteBase /yoursite
+
+    # In some environements, an empty RewriteBase is required:
+    # RewriteBase /
+
+    # Use this to redirect HTTP to HTTPS on apache servers
+    # RewriteCond %{HTTPS} off
+    # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Use this to redirect www to non-wwww on apache servers
+    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+    # Use this to redirect slash/ to url without slash on apache servers
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+    # Removes index.php
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
+
+    # REWRITE TO INDEX
+
+    # If the requested path and file not /index.php
+    RewriteCond %{REQUEST_URI} !^/index\.php
+
+    # if requested doesn't match a physical file
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # if requested doesn't match a physical folder
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # then rewrite the request to the index.php script
+    RewriteRule ^ index.php [QSA,L]
+
+
+    # FILE/FOLDER PROTECTION
+
+    # Deny access to these file types generally
+    RewriteRule ^(.*)?\.yml$ - [F,L]
+    Rewriterule ^(.*)?\.yaml$ - [F,L]
+    RewriteRule ^(.*)?\.txt$ - [F,L]
+    RewriteRule ^(.*)?\.example$ - [F,L]
+    RewriteRule ^(.*)?\.git+ - [F,L]
+    RewriteRule ^(.*)?\.md - [F,L]
+    RewriteCond %{REQUEST_URI} !/index\.php
+    RewriteRule ^(.*)?\.ph - [F,L]
+    RewriteRule ^(.*)?\.twig - [F,L]
+    RewriteRule ^(media\/tmp\/) - [F,L]
+
+    # Block access to specific files in the root folder
+    RewriteRule ^(composer\.lock|composer\.json|\.htaccess)$ error [F,L]
+
+    # block files and folders starting with a dot except for the .well-known folder (Let's Encrypt)
+    RewriteRule (^|/)\.(?!well-known\/) index.php [L]
+
+    # Allow access to frontend files in author folder
+    RewriteRule ^(system\/author\/css\/) - [L]
+    RewriteRule ^(system\/author\/img\/) - [L]
+    RewriteRule ^(system\/author\/js\/) - [L]
+
+    # redirect all other direct requests to the following physical folders to the index.php so pages with same name work
+    RewriteRule ^(system|content|data|settings|(media\/files\/)) index.php [QSA,L]
+
+    # disallow browsing other folders generally
+    Options -Indexes
+
+  </IfModule>
+
