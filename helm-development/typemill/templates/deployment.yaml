@@ -47,8 +47,9 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
+
           {{- if .Values.persistence.enabled }}
+          volumeMounts:
           - name: typemill-data
             mountPath: /var/www/html/settings
             subPath: settings
@@ -61,21 +62,22 @@ spec:
           - name: htaccess
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
-          {{ else }}
+          {{- else }}
+          volumeMounts:
           - name: htaccess
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
+
       volumes:
       {{- if .Values.persistence.enabled }}
       - name: typemill-data
         persistentVolumeClaim:
           claimName: typemill-app-pv
       {{- end }}
-            - name: htaccess
+      - name: htaccess
         configMap:
           name: typemill-htaccess
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
