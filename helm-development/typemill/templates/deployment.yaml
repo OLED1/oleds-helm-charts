@@ -11,6 +11,10 @@ spec:
   selector:
     matchLabels:
       {{- include "typemill.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -88,9 +92,5 @@ spec:
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.strategy }}
-      strategy:
         {{- toYaml . | nindent 8 }}
       {{- end }}
