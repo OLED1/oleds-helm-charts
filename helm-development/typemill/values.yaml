@@ -89,12 +89,17 @@ tolerations: []
 
 affinity: {}
 
+## Enable if you want your data to be saved forever
 persistence:
   enabled: false
   storageClass: ""
   accessModes: 
   - ReadWriteOnce
   size: 1Gi
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  existingClaim:
 
 ## Strategy used to replace old pods
 ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes

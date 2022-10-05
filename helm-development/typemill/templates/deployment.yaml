@@ -77,7 +77,7 @@ spec:
       {{- if .Values.persistence.enabled }}
       - name: typemill-data
         persistentVolumeClaim:
-          claimName: typemill-app-pv
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "typemill.fullname" . }}-typemill-data{{- end }}
       {{- end }}
       - name: htaccess
         configMap:
