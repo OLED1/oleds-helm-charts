@@ -52,8 +52,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
-          {{- if .Values.persistence.enabled }}
           volumeMounts:
+          {{- if .Values.persistence.enabled }}
           - name: typemill-data
             mountPath: /var/www/html/settings
             subPath: settings
@@ -63,25 +63,21 @@ spec:
           - name: typemill-data
             mountPath: /var/www/html/media
             subPath: media
-          - name: htaccess
-            mountPath: /var/www/html/.htaccess
-            subPath: .htaccess
-          {{- else }}
-          volumeMounts:
-          - name: htaccess
+          {{- end }}
+          {{- if .Values.typemill.htaccess }}
+          - name: typemill-htaccess
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
-
       volumes:
       {{- if .Values.persistence.enabled }}
       - name: typemill-data
         persistentVolumeClaim:
           claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "typemill.fullname" . }}-typemill-data{{- end }}
       {{- end }}
-      - name: htaccess
+      - name: typemill-htaccess
         configMap:
-          name: typemill-htaccess
+          name: {{ template "typemill.fullname" . }}-htaccess
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

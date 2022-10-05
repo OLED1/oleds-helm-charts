@@ -1,6 +1,14 @@
+{{- if .Values.typemill.htaccess }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: typemill-htaccess
+  name: {{ template "typemill.fullname" . }}-htaccess
+  labels:
+    app.kubernetes.io/name: {{ include "typemill.name" . }}
+    helm.sh/chart: {{ include "typemill.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
-  .htaccess: {{ .Values.typemillhtaccess | toYaml | indent 1 }}
+  .htaccess: |-
+{{ .Values.typemill.htaccess | indent 4 }}
+{{- end }}
