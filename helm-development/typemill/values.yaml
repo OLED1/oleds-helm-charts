@@ -93,8 +93,7 @@ affinity: {}
 persistence:
   enabled: false
   storageClass: ""
-  accessModes: 
-  - ReadWriteOnce
+  accessMode: ReadWriteOnce
   size: 1Gi
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true

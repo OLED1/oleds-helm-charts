@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/component: app
 spec:
   accessModes:
-  - {{ .Values.persistence.accessModes | quote }}
+  - {{ .Values.persistence.accessMode | quote }}
   storageClassName: {{ .Values.persistence.storageClass }}
   resources:
     requests:
