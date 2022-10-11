@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "typemill.fullname" . }}-plugin-install-routine
+  labels:
+    app.kubernetes.io/name: {{ include "typemill.name" . }}
+    helm.sh/chart: {{ include "typemill.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  install-selected-plugins.sh: |-
+    #!/bin/bash
+
+    busy_box_path='/mnt/typemill_plugins/'
+
+    {{- range $plugin := .Values.typemill.install_plugins.plugin_names }}
+
+    curl --output-dir {$busy_box_path} https://plugins.typemill.net/download?plugins={{ $plugin }} -O -J -L && \
+    unzip -o {$busy_box_path}{{ $plugin }}.zip -d {$busy_box_path} && \
+    rm -rf {$busy_box_path}{{ $plugin }}.zip
+
+    {{- end }}

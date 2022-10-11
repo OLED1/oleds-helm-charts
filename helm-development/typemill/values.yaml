@@ -156,6 +156,21 @@ typemill:
   ## Hostname where your typemill instance will be available
   host: my-typemill.example.org
 
+  ## List all plugins which should be automatically installed/updated on every deployment install/restart
+  ## Please note, if you add some plugins after the first deployment, you manually need to restart your deployment
+  ## How to? Just navigate to https://plugins.typemill.net/ and copy the plugin name shown on top of every tile
+  install_plugins: 
+    plugins_download_root: https://plugins.typemill.net/download
+    plugins_download_subpath: ?plugins
+    plugin_names: []
+
+  #install_plugins:
+  #  names:
+  #  - analytics
+  #  - clipboard
+  #  - contactform
+  #  - ...
+
   # If web server is not binding default port, you can define it
   # containerPort: 8080
 

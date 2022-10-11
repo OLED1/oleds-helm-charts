@@ -102,12 +102,26 @@ spec:
           - name: typemill-data
             mountPath: /var/www/html/media
             subPath: media
+          - name: typemill-data
+            mountPath: /var/www/html/plugins
+            subPath: plugins
           {{- end }}
           {{- if .Values.typemill.htaccess }}
           - name: typemill-htaccess
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
+      initContainers:
+      - name: install-update-typemill-plugins
+        image: busybox:latest
+        command: ['sh', '-c', 'chmod +x /mnt/install-selected-plugins.sh && sh /mnt/install-selected-plugins.sh']
+        volumeMounts:
+        - name: typemill-data
+          mountPath: /mnt/typemill_plugins/
+          subPath: plugins
+        - name: plugin-install-routine
+          mountPath: /mnt/install-selected-plugins.sh
+          subPath: install-selected-plugins.sh
       volumes:
       {{- if .Values.persistence.enabled }}
       - name: typemill-data
@@ -117,6 +131,9 @@ spec:
       - name: typemill-htaccess
         configMap:
           name: {{ template "typemill.fullname" . }}-htaccess
+      - name: plugin-install-routine
+        configMap:
+          name: {{ template "typemill.fullname" . }}-plugin-install-routine
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
