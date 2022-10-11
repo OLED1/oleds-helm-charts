@@ -115,7 +115,7 @@ spec:
       initContainers:
       - name: install-update-typemill-plugins
         image: busybox:latest
-        command: ['sh', '-c', 'chmod +x /mnt/install-selected-plugins.sh && sh /mnt/install-selected-plugins.sh']
+        command: ['sh', '-c', 'sh /mnt/install-selected-plugins.sh']
         volumeMounts:
         - name: typemill-data
           mountPath: /mnt/typemill_plugins/
