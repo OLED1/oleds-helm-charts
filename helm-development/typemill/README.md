@@ -27,7 +27,7 @@
 5. That's it, you can now setup your typemill instance
 
 ## Migrating
-
+Create a backup of your existing "content" and "media" directory, move into the PV of the new typemill deployment.
 
 ## Installing Plugins
-
+Go to [Typemill Plugins Page](https://plugins.typemill.net/) and note down or remeber the plugin names located on top of every plugin's tile. Just edit your values.yaml in the section "typemill" and add the plugins you want to install to the key "install_plugins" => "plugin_names". An example can be found some lines below.

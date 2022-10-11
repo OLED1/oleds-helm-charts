@@ -158,14 +158,16 @@ typemill:
 
   ## List all plugins which should be automatically installed/updated on every deployment install/restart
   ## Please note, if you add some plugins after the first deployment, you manually need to restart your deployment
-  ## How to? Just navigate to https://plugins.typemill.net/ and copy the plugin name shown on top of every tile
+  ## How to? Just navigate to https://plugins.typemill.net/ and copy the plugin name shown on top of every tile and paste it to "plugin_names" list.
   install_plugins: 
+    #Default: https://plugins.typemill.net/download
     plugins_download_root: https://plugins.typemill.net/download
-    plugins_download_subpath: ?plugins
+    #Default: ?plugins"
+    plugins_download_subpath: "?plugins"
     plugin_names: []
 
   #install_plugins:
-  #  names:
+  #  plugin_names:
   #  - analytics
   #  - clipboard
   #  - contactform

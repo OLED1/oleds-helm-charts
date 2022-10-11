@@ -13,10 +13,12 @@ data:
 
     busy_box_path='/mnt/typemill_plugins/'
 
+    {{- $plugins_download_root := .Values.typemill.install_plugins.plugins_download_root -}}
+    {{- $plugins_download_subpath := .Values.typemill.install_plugins.plugins_download_subpath -}}
     {{- range $plugin := .Values.typemill.install_plugins.plugin_names }}
 
-    curl --output-dir {$busy_box_path} https://plugins.typemill.net/download?plugins={{ $plugin }} -O -J -L && \
-    unzip -o {$busy_box_path}{{ $plugin }}.zip -d {$busy_box_path} && \
-    rm -rf {$busy_box_path}{{ $plugin }}.zip
+    wget -O ${busy_box_path}{{ $plugin }}.zip https://plugins.typemill.net/download?plugins={{ $plugin }} && \
+    unzip -o ${busy_box_path}{{ $plugin }}.zip -d ${busy_box_path} && \
+    rm -rf ${busy_box_path}{{ $plugin }}.zip;
 
     {{- end }}
