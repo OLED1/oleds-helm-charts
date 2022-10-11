@@ -26,8 +26,14 @@
 4. No you can upgrade your deployment using TLS encryption
 5. That's it, you can now setup your typemill instance
 
+> **If you want to move your existing installation**:
+1. Take a look at the "Migrate" section.
+
 ## Migrating
-Create a backup of your existing "content" and "media" directory, move into the PV of the new typemill deployment.
+You don't need to execute the setup because you move existing user details to the new instance.
+Create a backup of your existing **"settings"**, **"content"** and **"media"** directory, move into the PV of the new typemill deployment.
+Currently it was not possible to move the **"plugins"** directory without breaking something. However you can give it a try.
+It's recommended to add you current installed plugins to the values.yaml - config as described under "Installing Plugins" and configure them again.
 
 ## Installing Plugins
 Go to [Typemill Plugins Page](https://plugins.typemill.net/) and note down or remeber the plugin names located on top of every plugin's tile. Just edit your values.yaml in the section "typemill" and add the plugins you want to install to the key "install_plugins" => "plugin_names". An example can be found some lines below.
