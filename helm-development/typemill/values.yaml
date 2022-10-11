@@ -51,9 +51,16 @@ service:
 ingress:
   enabled: false
   className: ""
+## className: "nginx"
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+## Want to setup automatic certificate provisioning? Take a look here:
+## https://www.howtogeek.com/devops/how-to-install-kubernetes-cert-manager-and-configure-lets-encrypt/
+##
+## annotations: 
+## {
+##   cert-manager.io/cluster-issuer: "letsencrypt-prod",
+##   kubernetes.io/tls-acme: "true"
+## }
   hosts:
     - host: my-typemill.example.org
       paths:
@@ -92,26 +99,66 @@ affinity: {}
 ## Enable if you want your data to be saved forever
 persistence:
   enabled: false
-  storageClass: ""
   accessMode: ReadWriteOnce
   size: 1Gi
+
+  ## nextcloud data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  existingClaim:
+  #existingClaim:
 
 ## Strategy used to replace old pods
 ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
 strategy:
-  type: Recreate
-  # type: RollingUpdate
-  # rollingUpdate:
-  #   maxSurge: 1
-  #   maxUnavailable: 0
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  # type: Recreate
+
+## Liveness and readiness probe values
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+##
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
 
 ## Custom settings and configuration for typemill itself
 typemill:
+  ## Hostname where your typemill instance will be available
+  host: my-typemill.example.org
+
+  # If web server is not binding default port, you can define it
+  # containerPort: 8080
+
   ## Will be injected to /var/www/html/.htaccess
   htaccess: |-
     <IfModule mod_rewrite.c>
