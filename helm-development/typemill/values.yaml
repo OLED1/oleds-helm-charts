@@ -56,11 +56,11 @@ ingress:
 ## Want to setup automatic certificate provisioning? Take a look here:
 ## https://www.howtogeek.com/devops/how-to-install-kubernetes-cert-manager-and-configure-lets-encrypt/
 ##
-## annotations: 
-## {
-##   cert-manager.io/cluster-issuer: "letsencrypt-prod",
-##   kubernetes.io/tls-acme: "true"
-## }
+##  annotations: 
+##    {
+##      cert-manager.io/cluster-issuer: "letsencrypt-prod",
+##      kubernetes.io/tls-acme: "true"
+##    }
   hosts:
     - host: my-typemill.example.org
       paths:

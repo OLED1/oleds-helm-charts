@@ -105,6 +105,9 @@ spec:
           - name: typemill-data
             mountPath: /var/www/html/plugins
             subPath: plugins
+          - name: typemill-data
+            mountPath: /var/www/html/themes
+            subPath: themes
           {{- end }}
           {{- if .Values.typemill.htaccess }}
           - name: typemill-htaccess
