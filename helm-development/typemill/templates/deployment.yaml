@@ -111,6 +111,7 @@ spec:
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
+      {{- if .Values.persistence.enabled }}
       initContainers:
       - name: install-update-typemill-plugins
         image: busybox:latest
@@ -122,6 +123,7 @@ spec:
         - name: plugin-install-routine
           mountPath: /mnt/install-selected-plugins.sh
           subPath: install-selected-plugins.sh
+      {{- end }}
       volumes:
       {{- if .Values.persistence.enabled }}
       - name: typemill-data
