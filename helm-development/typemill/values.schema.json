@@ -124,20 +124,30 @@
                     "form": true
                 },
                 "install_plugins" : {
-                    "plugins_autoupdate" : {
-                        "type":"boolean",
-                        "title": "Plugin autoinstall/autoupdate",
-                        "description": "Enable autoinstall and -update of typemill modules. Enable on first deploy. Configure plugins in the yaml file.",
-                        "form": true
+                    "type": "object",
+                    "title": "Configure typemill apps.",
+                    "description" : "This deployment is able to auto install and update all the apps you need.",
+                    "properties": {
+                        "plugins_autoupdate" : {
+                            "type":"boolean",
+                            "title": "Plugin autoinstall/autoupdate",
+                            "description": "Enable autoinstall and -update of typemill modules. Enable on first deploy. Configure plugins in the yaml file.",
+                            "form": true
+                        }
                     }
                 },
                 "install_themes" : {
-                    "themes_autoupdate" : {
-                        "type":"boolean",
-                        "title": "Plugin autoinstall/autoupdate",
-                        "description": "Enable autoinstall and -update of typemill themes. Enable on first deploy. Configure plugins in the yaml file.",
-                        "form": true,
-                        "default": true
+                    "type": "object",
+                    "title": "Configure typemill themes.",
+                    "description" : "This deployment is able to auto install and update all the themes you need.",
+                    "properties": {
+                        "themes_autoupdate" : {
+                            "type":"boolean",
+                            "title": "Plugin autoinstall/autoupdate",
+                            "description": "Enable autoinstall and -update of typemill themes. Enable on first deploy. Configure plugins in the yaml file.",
+                            "form": true,
+                            "default": true
+                        }
                     }
                 }
             }
