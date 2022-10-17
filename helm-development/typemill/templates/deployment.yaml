@@ -140,7 +140,7 @@ spec:
         - name: typemill-data
           mountPath: /mnt/typemill_themes/
           subPath: themes
-        - name: themes-install-routine
+        - name: plugin-install-routine
           mountPath: /mnt/install-selected-themes.sh
           subPath: install-selected-themes.sh
       {{- end }}

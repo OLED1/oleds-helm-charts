@@ -162,7 +162,7 @@ typemill:
   install_plugins: 
     #When enabled, the plugins will be automatically downloaded and replaced at every pod restart
     #Note: Set to true on first deployment! Values: false (no) and true (yes)
-    plugins_autoupdate: true
+    plugins_autoupdate: false
     #Default: https://plugins.typemill.net/download
     plugins_download_root: https://plugins.typemill.net/download
     #Default: ?plugins"
@@ -184,8 +184,8 @@ typemill:
     themes_download_root: https://themes.typemill.net/download
     #Default: ?plugins"
     themes_download_subpath: "?themes"
-    #Cyanine will be installed by default but you can state it if you want
-    theme_names: []
+    theme_names:
+    - cyanine
 
   # If web server is not binding default port, you can define it
   # containerPort: 8080
