@@ -19,9 +19,9 @@
                     "default": "ClusterIP"
                 },
                 "port":{
-                    "type":"integer",
+                    "type": "integer",
                     "form": true,
-                    "default": 8080
+                    "default": 80
                 }
             }
         },
@@ -39,8 +39,7 @@
                     "type":"string",
                     "title": "Ingress class name",
                     "description": "E.g.: nginx",
-                    "form": true,
-                    "path": "ingress/enabled"
+                    "form": true
                 }
             }
         },
@@ -59,21 +58,18 @@
                     "type":"integer",
                     "title":"Least available replicas",
                     "form": true,
-                    "path": "autoscaling/enabled",
                     "default": 1
                 },
                 "maxReplicas":{
                     "type":"integer",
                     "title":"Maximum available replicas",
                     "form": true,
-                    "path": "autoscaling/enabled",
                     "default": 100
                 },
                 "targetCPUUtilizationPercentage":{
                     "type":"integer",
                     "title":"When CPU is utilised for at least x% ",
                     "form": true,
-                    "path": "autoscaling/enabled",
                     "default": 80
                 }
             }
@@ -94,14 +90,12 @@
                     "title": "Access mode",
                     "form": true,
                     "description": "Use ReadWriteMany when multiple pods are planned to run or autoscaling is enabled.",
-                    "enum": ["ReadWriteOnce","ReadWriteMany"],
-                    "path": "persistence/enabled"
+                    "enum": ["ReadWriteOnce","ReadWriteMany"]
                 },
                 "size": {
                     "type":"string",
                     "title": "Persistent voume size",
                     "default": "1Gi",
-                    "path": "persistence/enabled",
                     "form": true
                 },
                 "storageClass": {
@@ -112,7 +106,6 @@
                         "null"
                     ],
                     "default": null,
-                    "path": "persistence/enabled",
                     "form": true
                 }
             }
