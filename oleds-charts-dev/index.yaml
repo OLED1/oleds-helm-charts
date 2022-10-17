@@ -5,7 +5,26 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.511710576+02:00"
+    created: "2022-10-17T14:43:33.306251415+02:00"
+    description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
+    digest: f4d3dacc718003c151e92b58077fa9ef7064034fe109d1d0d109921f0756daaa
+    home: https://typemill.net/
+    icon: https://typemill.net/media/live/typemill-hero-1.png
+    maintainers:
+    - name: Typemill
+      url: https://typemill.net/
+    name: typemill
+    sources:
+    - https://github.com/typemill/typemill
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev7.tgz
+    version: 0.1.3-dev7
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 1.5.3-3
+    created: "2022-10-17T14:43:33.303929981+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c327b24393fa087816a6629caeff3ef44d7a56769a8dab007a9496038a90517a
     home: https://typemill.net/
@@ -24,7 +43,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.510422687+02:00"
+    created: "2022-10-17T14:43:33.302116831+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 35f2cc606fd04cccc088faca9073fe733e870b9af1ea82e210b58766e6bb6dd8
     home: https://typemill.net/
@@ -43,7 +62,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.509238232+02:00"
+    created: "2022-10-17T14:43:33.300867336+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 9650376ee370bcdaae147f0d983f7f2bdec9e08115afd2b9ee2803fc531734e3
     home: https://typemill.net/
@@ -60,7 +79,7 @@ entries:
     version: 0.1.3-dev4
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.507980083+02:00"
+    created: "2022-10-17T14:43:33.299634772+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 9607e6016871ba7faff9ce86a7592317fa649005d93d52c68fb03eff4f00d032
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -71,7 +90,7 @@ entries:
     version: 0.1.3-dev3
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.506813816+02:00"
+    created: "2022-10-17T14:43:33.298439535+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: dd3ee0a0513ab84f49eb6ae9ad569aec4fc775cc3d351c410b0d318761d17e86
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -82,7 +101,7 @@ entries:
     version: 0.1.3-dev2
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-17T14:06:45.505694129+02:00"
+    created: "2022-10-17T14:43:33.297320975+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 9b3fd1c3451897c3451930fce46d2c23d538f745d9cb2e46b00718506e8f3239
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -91,4 +110,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev1.tgz
     version: 0.1.3-dev1
-generated: "2022-10-17T14:06:45.504343548+02:00"
+generated: "2022-10-17T14:43:33.295908434+02:00"
