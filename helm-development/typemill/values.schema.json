@@ -2,15 +2,27 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "frontend": {
+        "replicaCount": {
+            "type": "integer",
+            "title": "Number of replicas",
+            "form": true
+        },
+        "ingress": {
             "type": "object",
-            "title": "Frontend configuration",
-            "form": true,
+            "title": "Ingress configuration",
+            "form" : true,
             "properties": {
-                "replicaCount": {
-                    "type": "integer",
-                    "title": "Number of replicas",
+                "enabled":{
+                    "type":"boolean",
+                    "title": "Enable ingress controller",
                     "form": true
+                },
+                "className":{
+                    "type":"string",
+                    "title": "Ingress class name",
+                    "description": "E.g.: nginx",
+                    "form": "true",
+                    "path": "ingress/enabled"
                 }
             }
         }
