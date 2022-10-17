@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
+{{- if .Values.typemill.install_plugins.plugins_autoupdate }}
   install-selected-plugins.sh: |-
     #!/bin/bash
 
@@ -17,8 +18,25 @@ data:
     {{- $plugins_download_subpath := .Values.typemill.install_plugins.plugins_download_subpath -}}
     {{- range $plugin := .Values.typemill.install_plugins.plugin_names }}
 
-    wget -O ${busy_box_path}{{ $plugin }}.zip https://plugins.typemill.net/download?plugins={{ $plugin }} && \
+    wget -O ${busy_box_path}{{ $plugin }}.zip {{ printf "%s%s=%s" $plugins_download_root $plugins_download_subpath $plugin }} && \
     unzip -o ${busy_box_path}{{ $plugin }}.zip -d ${busy_box_path} && \
     rm -rf ${busy_box_path}{{ $plugin }}.zip;
 
     {{- end }}
+{{- end }}
+{{- if .Values.typemill.install_themes.themes_autoupdate }}
+  install-selected-themes.sh: |-
+    #!/bin/bash
+
+    busy_box_path='/mnt/typemill_themes/'
+
+    {{- $themes_download_root := .Values.typemill.install_themes.themes_download_root -}}
+    {{- $themes_download_subpath := .Values.typemill.install_themes.themes_download_subpath -}}
+    {{- range $theme := .Values.typemill.install_themes.theme_names }}
+
+    wget -O ${busy_box_path}{{ $theme }}.zip {{ printf "%s%s=%s" $themes_download_root $themes_download_subpath $theme }} && \
+    unzip -o ${busy_box_path}{{ $theme }}.zip -d ${busy_box_path} && \
+    rm -rf ${busy_box_path}{{ $theme }}.zip;
+
+    {{- end }}
+{{- end }}

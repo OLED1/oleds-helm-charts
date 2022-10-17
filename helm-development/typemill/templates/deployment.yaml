@@ -108,14 +108,19 @@ spec:
           - name: typemill-data
             mountPath: /var/www/html/themes
             subPath: themes
+          - name: typemill-data
+            mountPath: /var/www/html/cache
+            subPath: cache
           {{- end }}
           {{- if .Values.typemill.htaccess }}
           - name: typemill-htaccess
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
-      {{- if .Values.persistence.enabled }}
+      {{- if and .Values.persistence.enabled }}
+      {{- if or .Values.typemill.install_plugins.plugins_autoupdate .Values.typemill.install_themes.themes_autoupdate }}
       initContainers:
+      {{- if .Values.typemill.install_plugins.plugins_autoupdate }}
       - name: install-update-typemill-plugins
         image: busybox:latest
         command: ['sh', '-c', 'sh /mnt/install-selected-plugins.sh']
@@ -126,6 +131,20 @@ spec:
         - name: plugin-install-routine
           mountPath: /mnt/install-selected-plugins.sh
           subPath: install-selected-plugins.sh
+      {{- end }}
+      {{- if .Values.typemill.install_themes.themes_autoupdate }}
+      - name: install-update-typemill-themes
+        image: busybox:latest
+        command: ['sh', '-c', 'sh /mnt/install-selected-themes.sh']
+        volumeMounts:
+        - name: typemill-data
+          mountPath: /mnt/typemill_themes/
+          subPath: themes
+        - name: themes-install-routine
+          mountPath: /mnt/install-selected-themes.sh
+          subPath: install-selected-themes.sh
+      {{- end }}
+      {{- end }}
       {{- end }}
       volumes:
       {{- if .Values.persistence.enabled }}

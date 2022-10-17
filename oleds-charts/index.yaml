@@ -3,13 +3,24 @@ entries:
   typemill:
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-05T08:54:13.606438114+02:00"
+    created: "2022-10-17T12:01:18.016889453+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
-    digest: 479cbf6524ffb5d808bfd0b6720676cc7936476fbde11fe829aaa4612735f891
+    digest: 36e9dfb3ee59888257bc8b5c5627fa2174f904f689d2825c8e96b83c08c0643d
+    icon: https://typemill.net/media/live/typemill-hero-1.png
+    name: typemill
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts/typemill-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.5.3-3
+    created: "2022-10-17T12:01:18.015661036+02:00"
+    description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
+    digest: 2f6c1a7dc6eecafc992d9adcddea098027d3b2af0f2637950232bd918e3a4aee
     icon: https://typemill.net/media/live/typemill-hero-1.png
     name: typemill
     type: application
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
-generated: "2022-10-05T08:54:13.603681881+02:00"
+generated: "2022-10-17T12:01:18.009174922+02:00"

@@ -32,9 +32,7 @@
 
 ## Migrating
 You don't need to execute the setup because you move existing user details to the new instance.
-Create a backup of your existing **"settings"**, **"content"** and **"media"** directory, move into the PV of the new typemill deployment.
-Currently it was not possible to move the **"plugins"** directory without breaking something. However you can give it a try.
-It's recommended to add you current installed plugins to the values.yaml - config as described under "Installing Plugins" and configure them again.
+Create a backup of your existing **"settings"**, **"content"**, **"media"**, **"plugins"**, **"themes"** and **"plugins"** directory, move into the PV of the new typemill deployment.
 If you want to setup your deployment with tls encryption (HTTPS) **behind a proxy** you need to edit the settings.yaml (settings/settings.yaml) and change **proxy: false** to **proxy: true**.
 
 ## Installing Plugins

@@ -160,6 +160,9 @@ typemill:
   ## Please note, if you add some plugins after the first deployment, you manually need to restart your deployment
   ## How to? Just navigate to https://plugins.typemill.net/ and copy the plugin name shown on top of every tile and paste it to "plugin_names" list.
   install_plugins: 
+    #When enabled, the plugins will be automatically downloaded and replaced at every pod restart
+    #Note: Set to true on first deployment! Values: false (no) and true (yes)
+    plugins_autoupdate: true
     #Default: https://plugins.typemill.net/download
     plugins_download_root: https://plugins.typemill.net/download
     #Default: ?plugins"
@@ -172,6 +175,17 @@ typemill:
   #  - clipboard
   #  - contactform
   #  - ...
+
+  install_themes:
+    #When enabled, the themes will be automatically downloaded and replaced at every pod restart
+    #Note: Set to true on first deployment! Values: false (no) and true (yes)
+    themes_autoupdate: true
+    #Default: https://themes.typemill.net/download
+    themes_download_root: https://themes.typemill.net/download
+    #Default: ?plugins"
+    themes_download_subpath: "?themes"
+    #Cyanine will be installed by default but you can state it if you want
+    theme_names: []
 
   # If web server is not binding default port, you can define it
   # containerPort: 8080
