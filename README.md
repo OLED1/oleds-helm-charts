@@ -8,7 +8,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 ```
 ### Development (DO NOT USE!)
 ```
-helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
+helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
 ```
 
 Some more documentation will follow soon.
