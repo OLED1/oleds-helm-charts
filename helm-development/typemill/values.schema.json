@@ -139,7 +139,6 @@
                             "title": "Plugins to install.",
                             "description": "Please state the names of the plugins you want to install. E.g. The correct name can be found ",
                             "type":"array",
-                            "default":[],
                             "form": true,
                             "items": {
                                 "type": "string"
@@ -163,7 +162,6 @@
                             "title": "Plugins to install.",
                             "description": "Please state the names of the themes you want to install.",
                             "type":"array",
-                            "default":["cyanine"],
                             "form": true,
                             "items": {
                                 "type": "string"
