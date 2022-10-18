@@ -39,7 +39,13 @@ If you want to setup your deployment with tls encryption (HTTPS) **behind a prox
 Go to [Typemill Plugins Page](https://plugins.typemill.net/) and note down or remeber the plugin names located on top of every plugin's tile. Just edit your values.yaml in the section "typemill" and add the plugins you want to install to the key "install_plugins" => "plugin_names". An example can be found some lines below.
 
 ## Feature missing or bug found
-Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts)
+Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).
+
+## Whats new?
+### Chart Version 0.1.3
+- It's now possible to configure most of the needed settings in the "Visual editor" of kubeapps.
+NOTE: Due to wrong list generation of the plugin_names and themes_names section in the Visual editor, they must be added "manually" in the yaml file.
 
 ## FAQ
+If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)
