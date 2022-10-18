@@ -43,8 +43,9 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 
 ## Whats new?
 ### Chart Version 0.1.3
+- Updated App version to typemill 1.5.3.4.
 - It's now possible to configure most of the needed settings in the "Visual editor" of kubeapps.
-NOTE: Due to wrong list generation of the plugin_names and themes_names section in the Visual editor, they must be added "manually" in the yaml file.
+> NOTE: Due to wrong list generation of the plugin_names and themes_names section in the Visual editor, they must be added "manually" in the yaml file.
 
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
