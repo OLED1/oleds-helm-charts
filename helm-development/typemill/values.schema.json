@@ -2,6 +2,21 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "image":{
+            "title": "Image settings",
+            "type":"object",
+            "form": true,
+            "properties": {
+                "pullPolicy": {
+                    "type":"string",
+                    "title": "Image pull policy",
+                    "description": "Define when the image should be pulled.",
+                    "enum": ["IfNotPresent", "Always"],
+                    "default": "IfNotPresent",
+                    "form": true
+                }
+            }
+        },
         "replicaCount": {
             "type": "integer",
             "title": "Number of replicas",
@@ -139,7 +154,6 @@
                             "title": "Plugins to install.",
                             "description": "Please state the names of the plugins you want to install. E.g. The correct name can be found ",
                             "type":"array",
-                            "form": true,
                             "items": {
                                 "type": "string"
                             }
@@ -162,7 +176,6 @@
                             "title": "Plugins to install.",
                             "description": "Please state the names of the themes you want to install.",
                             "type":"array",
-                            "form": true,
                             "items": {
                                 "type": "string"
                             }
