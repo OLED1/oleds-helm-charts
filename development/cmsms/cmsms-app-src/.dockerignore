@@ -1,0 +1,3 @@
+app/config.example.php
+app/tmp/cache/*
+app/tmp/templates_c/*
