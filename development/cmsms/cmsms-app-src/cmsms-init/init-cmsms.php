@@ -66,7 +66,7 @@
             echo "  [EXEC]Executing: UPDATE `cms_siteprefs` SET sitepref_value = $salt WHERE sitepref_name = 'sitemask';\n";
             $dbh->exec("UPDATE `cms_siteprefs` SET sitepref_value = '$salt' WHERE sitepref_name = 'sitemask';");
     
-            echo "[STEP]Setting up e-mail sttings if configured in env's and not existings.\n";
+            echo "[STEP]Setting up e-mail settings if configured in env's and not existing.\n";
             $stmt = $dbh->prepare("SELECT COUNT(*) AS count FROM `cms_siteprefs` WHERE sitepref_name = 'mailprefs'");
             $stmt->execute();
             $mailsettings_count = $stmt->fetch(PDO::FETCH_ASSOC)["count"];
@@ -96,32 +96,31 @@
         print_r($e);
     }
 
+    echo "[STEP]Finished installation and migration steps. Starting server.\n";
+
     function prepareAndExecuteMYSQLStatements(string $fileToLoad, object $dbh){
-        // Temporary variable, used to store current query
         $templine = '';
-        // Read in entire file
         $lines = file($fileToLoad);
-        // Loop through each line
         foreach ($lines as $line)
         {
-            // Skip it if it's a comment
             if (substr($line, 0, 2) == '--' || $line == '' || substr($line, 0, 3) == '/*!')
                 continue;
 
-            // Add this line to the current segment
             $templine .= $line;
-            // If it has a semicolon at the end, it's the end of the query
             if (substr(trim($line), -1, 1) == ';')
-            {
-                // Perform the query
-                
-                echo "  [EXEC]Executing: {$templine}";
-                $dbh->exec($templine)/* or print('Error performing query. <strong>' . $templine . ': <br />')*/;
-                //print_r($dbh->errorInfo());
+            {               
+                try{
+                    $dbh->exec($templine);
+                    echo ".";
+                }catch(Exception $e){
+                    echo "  [ERROR]Execution of {$templine} failed.\n";
+                    print_r($e->getMessage());
+                    continue;
+                }
 
-                // Reset temp variable to empty
                 $templine = '';
             }
         }
+        echo "\n";
     }
 ?>
