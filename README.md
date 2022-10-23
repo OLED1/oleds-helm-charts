@@ -1,5 +1,5 @@
 # Welcome to **Oled's helm charts**
-This repository is a collection of some custom helm charts adapted and packaged by Oled.
+This repository is a collection of some custom helm charts adapted and packaged by Oled1.
 
 > **This Helm chart repository is a custom helm chart packaged by OLED1**.
 > There is no official support from any app developer itself except "Chia(R) Manager" (because I am the developer).

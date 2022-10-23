@@ -27,7 +27,14 @@ RUN chown www-data. * -R
 VOLUME /var/www/html/modules
 VOLUME /var/www/html/uploads
 
-RUN chmod 777 /var/www/html/cmsms-init/init-cmsms.php
+# Create a default copy of uploads and modules in case of empty directories binding
+RUN mkdir -p /var/www/html/uploads.default/ && \
+    cp -R /var/www/html/uploads/* /var/www/html/uploads.default/ && \
+    mkdir -p /var/www/html/modules.default/ && \
+    cp -R /var/www/html/modules/* /var/www/html/modules.default/
+
+# Make init script executable 
+RUN chmod +x /var/www/html/cmsms-init/move_default_files.sh
 
 # Inject default values if content and themes are mounted with empty directories, adjust rights and start the server
-CMD ["sh", "-c", "/usr/local/bin/php /var/www/html/cmsms-init/init-cmsms.php && apache2-foreground"]
+CMD ["sh", "-c", "/bin/sh /var/www/html/cmsms-init/move_default_files.sh && /usr/local/bin/php /var/www/html/cmsms-init/init-cmsms.php && apache2-foreground"]
