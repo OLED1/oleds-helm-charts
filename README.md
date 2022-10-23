@@ -16,7 +16,7 @@ Currently in progress.
 Currently in progress.
 
 ## Install
-## Prerequisites
+### Prerequisites
 - Kubernetes installed
 - Helm installed and configured
 - (Optional) Kubeapps (Helm GUI) installed (https://tanzu.vmware.com/developer/guides/kubeapps-gs/)
