@@ -10,10 +10,11 @@ This repository is a collection of some custom helm charts adapted and packaged 
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
 ### CMSMS (CMS Made Simple)
-Currently in progress.
+> Currently in progress.
+See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/cmsms/README.md)
 
 ### Chia(R) Manager
-Currently in progress.
+> Currently in progress.
 
 ## Install
 ### Prerequisites
