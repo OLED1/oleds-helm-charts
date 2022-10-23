@@ -35,8 +35,8 @@ You don't need to execute the setup because you move existing user details to th
 Create a backup of your existing **"settings"**, **"content"**, **"media"**, **"plugins"**, **"themes"** and **"plugins"** directory, move into the PV of the new typemill deployment.
 If you want to setup your deployment with tls encryption (HTTPS) **behind a proxy** you need to edit the settings.yaml (settings/settings.yaml) and change **proxy: false** to **proxy: true**.
 
-## Installing Plugins
-Go to [Typemill Plugins Page](https://plugins.typemill.net/) and note down or remeber the plugin names located on top of every plugin's tile. Just edit your values.yaml in the section "typemill" and add the plugins you want to install to the key "install_plugins" => "plugin_names". An example can be found some lines below.
+## Installing Plugins and Themes
+Go to [Typemill Plugins Page](https://plugins.typemill.net/) or [Typemill Themes Page](https://themes.typemill.net/) and note down or remeber the plugin names located on top of every plugin's tile. Just edit your values.yaml in the section "typemill" and add the plugins you want to install to the key "install_plugins" => "plugin_names" or "install_themes" => "theme_names". An example can be found some lines below.
 
 ## Feature missing or bug found
 Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).
