@@ -42,7 +42,7 @@
             echo "[STEP]Installing example database.\n";
             prepareAndExecuteMYSQLStatements(__DIR__ . "/cmsms_app_full.sql", $dbh);
     
-            echo "[STEP]Inserting user data.\n";
+            echo "[STEP]Inserting user data and executing cleanup steps.\n";
     
             $username = getenv("CMSMS_APP_ADMIN_USERNAME");
             $password = getenv("CMSMS_APP_ADMIN_PASSWORD");
@@ -56,6 +56,9 @@
             $salted_password = md5($salt.$password);
             $now = new DateTime();
             $now_formatted = $now->format("Y-m-d H:i:s");
+
+            echo "  [EXEC]Executing: DELETE FROM `cms_adminlog`;\n";
+            $dbh->exec("DELETE FROM `cms_adminlog`");
     
             echo "  [EXEC]Executing: DELETE FROM `cms_users` WHERE user_id = 1;\n";
             $dbh->exec("DELETE FROM `cms_users` WHERE user_id = 1");
@@ -90,6 +93,30 @@
                 echo "  [SKIP]Mail settings are currently existing in database or not stated in the env's. Skipping.\n";
                 echo "  [INFO]DB Exists: {$mailsettings_count}, PRECONFIG: " . getenv("CMSMS_SMTP_PRECONFIGURE") . "\n";
             }
+
+            /*if(!(filter_var(getenv("CMSMS_INSTALL_EXAMPLE_CONTENT"), FILTER_VALIDATE_BOOLEAN))){
+                echo "[STEP]Example content not needed. Removing...\n";
+                echo "  [EXEC]Executing: DELETE FROM `cms_content`;\n";
+                $dbh->exec("DELETE FROM `cms_content`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_content_props`;\n";
+                $dbh->exec("DELETE FROM `cms_content_props`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_layout_design_tplassoc`;\n";
+                $dbh->exec("DELETE FROM `cms_layout_design_tplassoc`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_layout_designs`;\n";
+                $dbh->exec("DELETE FROM `cms_layout_designs`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_layout_stylesheets`;\n";
+                $dbh->exec("DELETE FROM `cms_layout_stylesheets`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_layout_templates`;\n";
+                $dbh->exec("DELETE FROM `cms_layout_templates`");
+
+                echo "  [EXEC]Executing: DELETE FROM `cms_layout_tpl_type`;\n";
+                $dbh->exec("DELETE FROM `cms_layout_tpl_type`");
+            }*/
         }
 
     }catch(Exception $e){
