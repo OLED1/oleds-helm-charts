@@ -36,5 +36,6 @@ RUN mkdir -p /var/www/html/uploads.default/ && \
 # Make init script executable 
 RUN chmod +x /var/www/html/cmsms-init/move_default_files.sh
 
-# Inject default values if content and themes are mounted with empty directories, adjust rights and start the server
+# Inject default values if uploads and modules are mounted with empty directories, import default database and insert settings stated in env's and 
+# adjust rights and start the server
 CMD ["sh", "-c", "/bin/sh /var/www/html/cmsms-init/move_default_files.sh && /usr/local/bin/php /var/www/html/cmsms-init/init-cmsms.php && apache2-foreground"]
