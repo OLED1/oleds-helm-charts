@@ -177,7 +177,12 @@ cmsms_settings:
     create: false
     username: Admin
     password: changeme
-    e-mail: admin@example.com
+    email: admin@example.com
+
+    ## Use an existing secret
+    existing_secret: 
+      enabled: false
+      existing_secret_name:
 
   ## This app only supports sending mails via an external smtp server.
   ## Will be saved to a secret.
@@ -200,6 +205,11 @@ cmsms_settings:
       auth_pw:
       ## The connection encryption. Can be ssl/tls or just nothing.
       auth_encryption: 
+
+    ## Use an existing secret
+    existing_secret: 
+      enabled: false
+      existing_secret_name:
 
 
   ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values
@@ -263,6 +273,11 @@ cmsms_db:
     mysql_password: MySuperStrongPassword1234!?
     ## Will not be needed only in initialising, installation and configuration steps of CMSMS
     mysql_root_password: MySuperStrongPassword1234!?
+
+    ## Use an existing secret
+    existing_secret: 
+      enabled: false
+      existing_secret_name:
 
   external_db:
     ## Set to true when you want to use an external database

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "cmsms.fullname" . }}-config
+  labels:
+    app.kubernetes.io/name: {{ include "cmsms.name" . }}
+    helm.sh/chart: {{ include "cmsms.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  config.php: |-
+    <?php
+      # CMS Made Simple Configuration File
+      # Documentation: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
+      #
+      $config['dbms'] = 'mysqli';
+      {{- if and .Values.cmsms_db.external_db.enabled .Values.cmsms_db.external_db.external_mysql_host }}
+      $config['db_hostname'] = {{ .Values.cmsms_db.external_db.external_mysql_host | quote }}
+      {{- else if and (not .Values.cmsms_db.external_db.enabled) .Values.cmsms_db.internal_db.enabled }}
+      $config['db_hostname'] = "{{ include "cmsms.fullname" . }}-mysql-db";
+      {{- end }}
+      $config['db_username'] = getenv("CMSMS_USER");
+      $config['db_password'] = getenv("CMSMS_USER_PW");
+      $config['db_name'] = getenv("CMSMS_DB");
+      $config['db_prefix'] = getenv("CMSMS_DB_PREFIX");
+      $config['root_url'] = getenv("CMSMS_DOMAIN");
+      $config['timezone'] = 'UTC';
+      $config['url_rewriting'] = 'mod_rewrite';
+    ?>

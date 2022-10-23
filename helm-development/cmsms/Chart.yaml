@@ -32,3 +32,9 @@ home: https://www.cmsmadesimple.org/
 maintainers:
   - name: CMS Made Simple Foundation
     url: https://www.cmsmadesimple.org/
+
+dependencies:
+- name: mariadb
+  version: 11.0.*
+  repository: https://charts.bitnami.com/bitnami
+  condition: .Values.cmsms_db.internal_db.enabled
