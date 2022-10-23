@@ -5,57 +5,57 @@ metadata:
   labels:
     {{- include "cmsms.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  {{- if not .Values.cmsms_app.autoscaling.enabled }}
+  replicas: {{ .Values.cmsms_app.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "cmsms.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- with .Values.cmsms_app.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "cmsms.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.cmsms_app.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "cmsms.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.cmsms_app.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml .Values.cmsms_app.securityContext | nindent 12 }}
+          image: "{{ .Values.cmsms_app.image.repository }}:{{ .Values.cmsms_app.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.cmsms_app.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /admin
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /admin
               port: http
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.cmsms_app.resources | nindent 12 }}
+      {{- with .Values.cmsms_app.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.cmsms_app.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.cmsms_app.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

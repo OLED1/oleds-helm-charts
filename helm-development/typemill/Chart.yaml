@@ -35,3 +35,9 @@ maintainers:
 
 sources:
   - https://github.com/typemill/typemill
+
+dependencies:
+- name: mariadb
+  version: 11.0.*
+  repository: https://charts.bitnami.com/bitnami
+  condition: .Values.cmsms_db.internal_db.enabled
