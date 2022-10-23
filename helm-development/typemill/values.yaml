@@ -102,7 +102,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
 
-  ## nextcloud data Persistent Volume Storage Class
+  ## typemill data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
   ## If undefined (the default) or set to null, no storageClassName spec is
@@ -186,6 +186,12 @@ typemill:
     themes_download_subpath: "?themes"
     theme_names:
     - cyanine
+
+  #install_themes:
+  #  theme_names:
+  #  - cyanine
+  #  - dev
+  #  - ...
 
   # If web server is not binding default port, you can define it
   # containerPort: 8080
