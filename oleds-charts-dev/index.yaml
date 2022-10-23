@@ -1,11 +1,29 @@
 apiVersion: v1
 entries:
+  cmsms:
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 2.2.16
+    created: "2022-10-23T12:18:47.485601197+02:00"
+    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
+    digest: e163789d2d19d847b3c39cd20b9f3d965623b515a6ac23ed2ad4697a754b1dbb
+    home: https://www.cmsmadesimple.org/
+    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
+    maintainers:
+    - name: CMS Made Simple Foundation
+      url: https://www.cmsmadesimple.org/
+    name: cmsms
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.0-dev0.tgz
+    version: 0.1.0-dev0
   typemill:
   - annotations:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-10-18T10:16:51.340641102+02:00"
+    created: "2022-10-23T12:18:47.492180891+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -24,7 +42,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-18T10:16:51.338944861+02:00"
+    created: "2022-10-23T12:18:47.488753245+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -39,4 +57,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2022-10-18T10:16:51.33684762+02:00"
+generated: "2022-10-23T12:18:47.484718916+02:00"
