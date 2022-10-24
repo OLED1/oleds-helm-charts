@@ -252,23 +252,21 @@ cmsms_settings:
     ## Here you can adapt or change the default PHP values
     ## It's not recommended to change the already setup values
     php_ini_config:
-      {
-        cmsms_recommended.ini:
-          upload_max_filesize = 100M
-          post_max_size = 100M
-          max_execution_time = 60
-          output_buffering = on
+      cmsms_recommended.ini: |
+        upload_max_filesize = 100M
+        post_max_size = 100M
+        max_execution_time = 60
+        output_buffering = on
 
-        ## Default:
-        #cmsms_recommended.ini:
-        #  upload_max_filesize = 100M
-        #  post_max_size = 100M
-        #  max_execution_time = 60
-        #  output_buffering = on
-        
-        #my_settings.ini:
-        #  example_php_setting = example_value
-      }
+      ## Default:
+      #cmsms_recommended.ini:
+      #  upload_max_filesize = 100M
+      #  post_max_size = 100M
+      #  max_execution_time = 60
+      #  output_buffering = on
+      
+      #my_settings.ini:
+      #  example_php_setting = example_value
 
 
 #################################################################
@@ -337,13 +335,3 @@ mariadb:
       # storageClass: ""
       accessMode: ReadWriteOnce
       size: 8Gi
-
-
-  
-
-  
-
-  
-    
-
-

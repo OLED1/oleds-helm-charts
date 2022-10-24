@@ -9,6 +9,6 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
 {{- range $key, $value := .Values.cmsms_settings.app_config.php_ini_config }}
-    {{ $key }}: |-
-        {{ $value }}
+  {{ $key }}: -|
+{{ $value | indent 4 }}
 {{- end }}
