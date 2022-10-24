@@ -190,7 +190,7 @@ spec:
           mountPath: /var/www/html/config.php
           subPath: config.php
         {{- range $key, $value := .Values.cmsms_settings.app_config.php_ini_config }}
-        - name: {{ $key }}-php-config
+        - name: php-ini-config
           mountPath: /usr/local/etc/php/conf.d/{{ $key }}
           subPath: {{ $key }}
         {{- end }}
