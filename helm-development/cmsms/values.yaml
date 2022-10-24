@@ -173,13 +173,13 @@ cmsms_settings:
   ## Set to true if you want this chart to install and preconfigure an working instance.
   ## Set to false if you want to import an existing CMSMS Instance.
   ## This will import a database with default values an example content.
-  install_cmsms: false
+  install_cmsms: true
 
   ## If you want to setup a new instance you can setup an initial user here.
   ## Will be saved to a secret.
   ## Will only be executed when "install_cmsms" and "create" is set to "true".
   initial_user:
-    create: false
+    create: true
     username: Admin
     password: changeme
     email: admin@example.com
@@ -197,7 +197,7 @@ cmsms_settings:
   ## If you wish it to be preconfigured you can do it here.
   ## Will only be executed when "install_cmsms" and "preconfigure_smtp" is set to "true".
   setup_smtp:
-    preconfigure_smtp: false
+    preconfigure_smtp: true
     smtp_host: smtp.example.com
     ## Normally SMTP Server are listening to 25, 465, 587
     smtp_port: 465
@@ -306,7 +306,7 @@ externalDatabase:
 mariadb:
   ## Set to true when you want to deploy an internal database
   ## NOTE: Will be ignored when "external_db" -> "enabled" is set to true
-  enabled: false
+  enabled: true
 
   ## Decide which type of database you want to deploy
   ## Can be standalone or replication
