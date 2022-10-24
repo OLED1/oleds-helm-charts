@@ -5,7 +5,6 @@
     $user_pass = getenv("CMSMS_USER_PW");
     $root_pass = getenv("MYSQL_ROOT_PASSWORD");
 
-
     echo "[STEP]Waiting for database to come online:";
     $db_con_succ = false;
     while(!$db_con_succ){
@@ -20,7 +19,8 @@
     }
     
     try{ 
-        echo "\n[STEP]Starting migration using following parameters:\n  [INFO]{$db} {$host} {$user} {$user_pass} {$root_pass}\n";
+        echo "\n[STEP]Starting migration using following parameters:\n"
+        echo "[INFO]DB: {$db} HOST: {$host} USER: {$user} USER_PASS: {$user_pass} ROOT_PASS: {$root_pass}\n";
 
         $stmt = $dbh->prepare("SHOW DATABASES LIKE '$db'");
         $stmt->execute();

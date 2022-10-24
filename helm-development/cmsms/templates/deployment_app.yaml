@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cmsms.fullname" . }}
+  name: {{ include "cmsms.fullname" . }}-app
   labels:
     app.kubernetes.io/name: {{ include "cmsms.name" . }}
     helm.sh/chart: {{ include "cmsms.chart" . }}
@@ -48,16 +48,21 @@ spec:
           value: {{ .Values.externalDatabase.database | quote }}
         - name: CMSMS_DB_PREFIX
           value: {{ default "cms_" .Values.externalDatabase.database_prefix | quote }}
-        - name: MYSQL_USER
+        - name: CMSMS_DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
               key: {{ .Values.externalDatabase.existingSecret.usernameKey | default "db-username" }}
-        - name: MYSQL_PASSWORD
+        - name: CMSMS_DB_USER_PW
           valueFrom:
             secretKeyRef:
               name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
               key: {{ .Values.externalDatabase.existingSecret.passwordKey | default "db-password" }}
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ printf "%s-%s" .Release.Name "mariadb" }}
+              key: "mariadb-root-password"
         {{- else if .Values.mariadb.enabled }}
         - name: CMSMS_DB_EXISTS
           {{- if .Values.cmsms_settings.install_cmsms }}

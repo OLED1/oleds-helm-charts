@@ -17,10 +17,10 @@ It's a straight forward installation procedure. Just fill out the values.yaml fi
 
 ## Migrating
 If you plan to move an existing installation you just need follow the upcomming steps:
-1. Skip the installation by change **install_cmsms: true** to **install_cmsms: false**.
-2. Backup the existing **"modules"** directory.
+1. Skip the installation by set **install_cmsms: false**.
+2. Backup the existing **"modules"** and **"uploads"** directory.
 3. Backup your existing database.
-4. Import the previously backed up **"modules"** directory to the newly created CMSMS-PV.
+4. Import the previously backed up **"modules"** and **"uploads"** directory to the newly created CMSMS-PV.
 5. Import the previously backed up database to the newly created DB-PV and import it by exec into the db container.
 6. That's it.
 
