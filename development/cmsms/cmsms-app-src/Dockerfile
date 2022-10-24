@@ -27,6 +27,10 @@ RUN chown www-data. * -R
 VOLUME /var/www/html/modules
 VOLUME /var/www/html/uploads
 
+# Adapt DUMP to meet mysql requirements
+RUN sed -i 's/utf8mb4_0900_ai_ci/utf8_general_ci/g' /var/www/html/cmsms-init/cmsms_app_full.sql
+RUN sed -i 's/CHARSET=utf8mb4/CHARSET=utf8/g' /var/www/html/cmsms-init/cmsms_app_full.sql
+
 # Create a default copy of uploads and modules in case of empty directories binding
 RUN mkdir -p /var/www/html/uploads.default/ && \
     cp -R /var/www/html/uploads/* /var/www/html/uploads.default/ && \

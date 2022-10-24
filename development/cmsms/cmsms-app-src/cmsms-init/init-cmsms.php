@@ -22,12 +22,24 @@
         echo "\n[STEP]Starting migration using following parameters:\n";
         echo "[INFO]DB: {$db} HOST: {$host} USER: {$user} USER_PASS: {$user_pass} ROOT_PASS: {$root_pass}\n";
 
+        $install_db = true;
+
         $stmt = $dbh->prepare("SHOW DATABASES LIKE '$db'");
         $stmt->execute();
-        $db_returned = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($db_returned || filter_var(getenv("CMSMS_INSTALL"), FILTER_VALIDATE_BOOLEAN)){
-            echo "  [INFO]Database $db is existing or installation should be skipped. Skipping some steps.\n";
-            echo "  [INFO]DB Exists: {$db_returned}, CMSMS_INSTALL: " . getenv("CMSMS_INSTALL") . "\n";
+        $db_exists = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($db_exists){
+            $dbh = new PDO("mysql:host=$host;dbname=$db", "root", $root_pass);
+            $stmt = $dbh->prepare("SHOW TABLES LIKE 'cms_layout_templates'");
+            $stmt->execute();
+            $table_exists = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if($table_exists) $install_db = false;
+        }
+
+        if(!$install_db || !filter_var(getenv("CMSMS_INSTALL"), FILTER_VALIDATE_BOOLEAN)){
+            echo "  [INFO]Database $db is existing and setup or installation should be skipped. Skipping some steps.\n";
+            echo "  [INFO]INSTALL DB: " . ($install_db ? "true" : "false") . ", CMSMS_INSTALL: " . getenv("CMSMS_INSTALL") . "\n";
         }else{
             echo "  [INFO]Database $db is not existing and first installation steps should be executed.\n";
             echo "  [EXEC]Executing: CREATE DATABASE IF NOT EXISTS `$db`; FLUSH PRIVILEGES;\n";
