@@ -236,8 +236,8 @@ cmsms_settings:
     additional_config_settings: []
 
     #additional_config_settings:
-    #- $config['param_key1'] = "param_key1";
-    #- $config['param_key2'] = "param_key2";
+    #- $config['param_key1'] = "param_value1";
+    #- $config['param_key2'] = "param_value2";
 
     ## If you not wish to use the CMSMS' default htaccess
     htaccess:
