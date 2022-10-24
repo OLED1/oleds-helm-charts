@@ -1,6 +1,6 @@
 <?php
     $db = getenv("CMSMS_DB");
-    $host = getenv("CMSMS_HOST");
+    $host = getenv("CMSMS_DB_HOST");
     $user = getenv("CMSMS_USER");
     $user_pass = getenv("CMSMS_USER_PW");
     $root_pass = getenv("MYSQL_ROOT_PASSWORD");
@@ -24,8 +24,10 @@
 
         $stmt = $dbh->prepare("SHOW DATABASES LIKE '$db'");
         $stmt->execute();
-        if($stmt->fetch(PDO::FETCH_ASSOC)){
+        $db_returned = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($db_returned || filter_var(getenv("CMSMS_INSTALL"), FILTER_VALIDATE_BOOLEAN)){
             echo "  [INFO]Database $db is existing or installation should be skipped. Skipping some steps.\n";
+            echo "  [INFO]DB Exists: {$db_returned}, CMSMS_INSTALL: " . getenv("CMSMS_INSTALL") . "\n";
         }else{
             echo "  [INFO]Database $db is not existing and first installation steps should be executed.\n";
             echo "  [EXEC]Executing: CREATE DATABASE IF NOT EXISTS `$db`; FLUSH PRIVILEGES;\n";

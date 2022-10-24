@@ -49,8 +49,9 @@ cmsms_app:
   ##
   image:
     repository: oled01/cmsms
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
+    pullPolicy: Always
+    ## Overrides the image tag whose default is the chart appVersion.
+    ## Use with caution, every chart version is balanced with the container image and used tag
     tag: ""
 
   ## The following settings can be left default. They are only needed when you want to deploy your own image
@@ -74,10 +75,12 @@ cmsms_app:
     # runAsUser: 1000
 
   ## Number of replicas to be deployed
+  ## Use accessMode: ReadWriteMany when using replicaCount > 1 when setting up persistence
   replicaCount: 1
 
   ## Enable if you want your data to be saved forever
   ## Please use ReadWriteMany when its planned to use more than one pod
+  ## Peristence will be enabled for modules and uploads directory
   persistence:
     enabled: false
     accessMode: ReadWriteOnce
@@ -163,12 +166,14 @@ cmsms_app:
 ########################################################
 cmsms_settings:
   ## Hostname where your cmsms instance will be available
-  host: my-cmsms.example.org
+  ## Notation: http://domain.tld or https://domain.tld
+  host: https://my-cmsms.example.org
 
   ## Install CMSMS instance
-  ## Set to false if you want to import an existing CMSMS Instance
-  ## This will import a database with default values an example content
-  install_cmsms: true
+  ## Set to true if you want this chart to install and preconfigure an working instance.
+  ## Set to false if you want to import an existing CMSMS Instance.
+  ## This will import a database with default values an example content.
+  install_cmsms: false
 
   ## If you want to setup a new instance you can setup an initial user here.
   ## Will be saved to a secret.
@@ -180,9 +185,12 @@ cmsms_settings:
     email: admin@example.com
 
     ## Use an existing secret
-    existing_secret: 
+    existingSecret: 
       enabled: false
-      existing_secret_name:
+      #secretName: nameofsecret
+      #usernameKey: username
+      #passwordKey: password
+      #emailKey: email
 
   ## This app only supports sending mails via an external smtp server.
   ## Will be saved to a secret.
@@ -200,17 +208,19 @@ cmsms_settings:
     ## SMTP authentication settings
     smtp_auth:
       ## Set to true when username and password is needed
+      ## TRUE is always recommended because SMTP Server should alwys use authentication no matter if internal or external used!
       auth_needed: false
       auth_user:
       auth_pw:
       ## The connection encryption. Can be ssl/tls or just nothing.
-      auth_encryption: 
+      auth_encryption:
 
-    ## Use an existing secret
-    existing_secret: 
-      enabled: false
-      existing_secret_name:
-
+      ## Use an existing secret
+      existingSecret: 
+        enabled: false
+        #secretName: nameofsecret
+        #usernameKey: username
+        #passwordKey: password
 
   ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values
   ## @see: https://docs.cmsmadesimple.org/configuration/config-file
@@ -226,93 +236,107 @@ cmsms_settings:
     additional_config_settings: []
 
     #additional_config_settings:
-    #- $config['param_key1'] = "param_key1"
-    #- $config['param_key2'] = "param_key2"
+    #- $config['param_key1'] = "param_key1";
+    #- $config['param_key2'] = "param_key2";
 
     ## If you not wish to use the CMSMS' default htaccess
     htaccess:
       use_default_htaccess: true
       ## You can insert an custom htaccess here
-      ## NOTE: Will only be used when "use_default_htaccess" is set to false
-      custom_htaccess: []
+      ## NOTE: Will only be used when "use_default_htaccess" is set to false and custom_htaccess has content
+      custom_htaccess: 
+        #custom_htaccess:
+        #  My custom content
 
-      #custom_htaccess: -|
-      #  My custom content
 
     ## Here you can adapt or change the default PHP values
     ## It's not recommended to change the already setup values
-    cmsms-php-ini:
-      cmsms_recommended.ini: -|
-        upload_max_filesize = 100M
-        post_max_size = 100M
-        max_execution_time = 60
-        output_buffering = on
+    php_ini_config:
+      {
+        cmsms_recommended.ini:
+          upload_max_filesize = 100M
+          post_max_size = 100M
+          max_execution_time = 60
+          output_buffering = on
 
-      ## Default:
-      #cmsms_recommended.ini: -|
-      #  upload_max_filesize = 100M
-      #  post_max_size = 100M
-      #  max_execution_time = 60
-      #  output_buffering = on
-      
-      #my_settings.ini: -|
+        ## Default:
+        #cmsms_recommended.ini:
+        #  upload_max_filesize = 100M
+        #  post_max_size = 100M
+        #  max_execution_time = 60
+        #  output_buffering = on
+        
+        #my_settings.ini:
+        #  example_php_setting = example_value
+      }
+
 
 #################################################################
 ## Custom settings and configuration for cmsms needed database ##
 #################################################################
-## Only MYSQL/MariaDB is currently supported
-cmsms_db:
-  ## The name of the database where CMSMS is/should be installed
-  database_name: cmsms_app
+## External MYSQL/MariaDB Database
+externalDatabase:
+  ## Set to true when you want to use an external database
+  ## When "use_external_db" is set to false a database pod will be created using the stated auth values
+  enabled: false
+  ## Hostname or IP Address of you external mysql instance
+  host: mysql.local
 
-  ## When "use_external_db" is set to false a databse pod will be created using the stated auth values
-  ## When "use_external_db" is set to true this values will be used to connect to the external database
-  ## Auth Data will be saved to a secret
-  mysql_auth:
-    mysql_user: cmsms
-    mysql_password: MySuperStrongPassword1234!?
-    ## Will not be needed only in initialising, installation and configuration steps of CMSMS
-    mysql_root_password: MySuperStrongPassword1234!?
+  ## Database user
+  user: cmsms
 
-    ## Use an existing secret
-    existing_secret: 
-      enabled: false
-      existing_secret_name:
+  ## Database password
+  password: MySuperStrongPassword1234!?
 
-  external_db:
-    ## Set to true when you want to use an external database
+  ## Database name
+  database: cmsms_app
+
+  ## CMS Made Simple database prefix as stated in the installer
+  ## Can be left default when deploying a new instance
+  ## Adapt when Prefix changed in existing installation
+  database_prefix: cms_
+
+  ## Use an existing secret
+  existingSecret: 
     enabled: false
-    ## Hostname or IP Address of you external mysql instance
-    external_mysql_host: mysql.local
+    # secretName: nameofsecret
+    # usernameKey: username
+    # passwordKey: password
 
-  internal_db:
-    ## Set to true when you want to deploy an internal database
-    ## NOTE: Will be ignored when "external_db" -> "enabled" is set to true
-    enabled: true
+## Only MYSQL/MariaDB is currently supported
+## Internal database
+mariadb:
+  ## Set to true when you want to deploy an internal database
+  ## NOTE: Will be ignored when "external_db" -> "enabled" is set to true
+  enabled: false
 
-    ## Where and on which port the CMSMS DB should be published
-    service:
-      type: ClusterIP
-      port: 3306
+  ## Decide which type of database you want to deploy
+  ## Can be standalone or replication
+  ## Use "accessMode: ReadWriteMany" in the persistence section when using replication
+  architecture: standalone
 
-    ## CMS Made Simple database prefix as stated in the installer
-    ## Can be left default when deploying a new instance
-    ## Adapt when Prefix changed in existing installation
-    database_prefix: cms_
+  ## Auth Data will be saved to a secret
+  auth:
+    ## The name of the database where CMSMS is/should be installed
+    database: cmsms_app
+    username: cmsms
+    password: MySuperStrongPassword1234!?
 
-    ## Decide which type of database you want to deploy
-    ## Can be standalone or replication
-    architecture: standalone
+  ## CMS Made Simple database prefix as stated in the installer
+  ## Can be left default when deploying a new instance
+  ## Adapt when Prefix changed in existing installation
+  ## DO NOT CHANGE ON NEW INSTALLATION WHERE HELM SHOULD CONFIGURE THE NEW INSTANCE!
+  database_prefix: cms_
 
-    ## Enable persistence using Persistent Volume Claims
-    ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
-    ##
-    primary:
-      persistence:
-        enabled: false
-        # storageClass: ""
-        accessMode: ReadWriteOnce
-        size: 8Gi
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  primary:
+    persistence:
+      enabled: false
+      # storageClass: ""
+      accessMode: ReadWriteOnce
+      size: 8Gi
 
 
   

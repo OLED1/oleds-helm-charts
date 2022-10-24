@@ -1,0 +1,27 @@
+{{- if .Values.cmsms_app.persistence.enabled }}
+{{- if not .Values.cmsms_app.persistence.existingClaim }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "cmsms.fullname" . }}-cmsms-data
+  labels:
+    app.kubernetes.io/name: {{ include "cmsms.name" . }}
+    helm.sh/chart: {{ include "cmsms.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: app
+spec:
+  accessModes:
+  - {{ .Values.cmsms_app.persistence.accessMode | quote }}
+{{- if .Values.cmsms_app.persistence.storageClass }}
+{{- if (eq "-" .Values.cmsms_app.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.cmsms_app.persistence.storageClass }}"
+{{- end }}
+{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.cmsms_app.persistence.size | quote }}
+{{- end }}
+{{- end }}

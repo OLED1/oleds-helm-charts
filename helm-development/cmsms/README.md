@@ -13,7 +13,7 @@
 - The official documentation can be found here: https://docs.cmsmadesimple.org/
 
 ## Installation
-It a straight forward installation procedure. Just fill out the values.yaml file and deploy it.
+It's a straight forward installation procedure. Just fill out the values.yaml file and deploy it.
 
 ## Migrating
 If you plan to move an existing installation you just need follow the upcomming steps:

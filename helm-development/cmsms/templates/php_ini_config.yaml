@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "cmsms.fullname" . }}-php-ini-config
+  labels:
+    app.kubernetes.io/name: {{ include "cmsms.name" . }}
+    helm.sh/chart: {{ include "cmsms.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+{{- range $key, $value := .Values.cmsms_settings.app_config.php_ini_config }}
+    {{ $key }}: |-
+        {{ $value }}
+{{- end }}
