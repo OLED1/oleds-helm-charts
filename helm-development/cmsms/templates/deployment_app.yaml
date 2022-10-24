@@ -3,6 +3,11 @@ kind: Deployment
 metadata:
   name: {{ include "cmsms.fullname" . }}
   labels:
+    app.kubernetes.io/name: {{ include "cmsms.name" . }}
+    helm.sh/chart: {{ include "cmsms.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: app
     {{- include "cmsms.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.cmsms_app.autoscaling.enabled }}
