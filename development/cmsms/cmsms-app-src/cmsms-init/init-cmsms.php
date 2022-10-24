@@ -1,8 +1,8 @@
 <?php
     $db = getenv("CMSMS_DB");
     $host = getenv("CMSMS_DB_HOST");
-    $user = getenv("CMSMS_USER");
-    $user_pass = getenv("CMSMS_USER_PW");
+    $user = getenv("CMSMS_DB_USER");
+    $user_pass = getenv("CMSMS_DB_USER_PW");
     $root_pass = getenv("MYSQL_ROOT_PASSWORD");
 
     echo "[STEP]Waiting for database to come online:";
@@ -19,7 +19,7 @@
     }
     
     try{ 
-        echo "\n[STEP]Starting migration using following parameters:\n"
+        echo "\n[STEP]Starting migration using following parameters:\n";
         echo "[INFO]DB: {$db} HOST: {$host} USER: {$user} USER_PASS: {$user_pass} ROOT_PASS: {$root_pass}\n";
 
         $stmt = $dbh->prepare("SHOW DATABASES LIKE '$db'");
