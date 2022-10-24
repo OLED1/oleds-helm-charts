@@ -259,13 +259,13 @@ cmsms_settings:
         output_buffering = on
 
       ## Default:
-      #cmsms_recommended.ini:
+      #cmsms_recommended.ini: |
       #  upload_max_filesize = 100M
       #  post_max_size = 100M
       #  max_execution_time = 60
       #  output_buffering = on
       
-      #my_settings.ini:
+      #my_settings.ini: |
       #  example_php_setting = example_value
 
 

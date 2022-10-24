@@ -5,7 +5,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:40:00.024807459+02:00"
+    created: "2022-10-24T17:45:32.700519374+02:00"
     dependencies:
     - condition: and mariadb.enabled (not externalDatabase.enabled)
       name: mariadb
@@ -27,7 +27,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:40:00.016501397+02:00"
+    created: "2022-10-24T17:45:32.690834724+02:00"
     dependencies:
     - condition: and mariadb.enabled (not externalDatabase.enabled)
       name: mariadb
@@ -49,7 +49,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:40:00.009347818+02:00"
+    created: "2022-10-24T17:45:32.684183679+02:00"
     dependencies:
     - condition: and mariadb.enabled (not externalDatabase.enabled)
       name: mariadb
@@ -71,7 +71,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:40:00.001554673+02:00"
+    created: "2022-10-24T17:45:32.677355068+02:00"
     dependencies:
     - condition: and mariadb.enabled (not externalDatabase.enabled)
       name: mariadb
@@ -93,7 +93,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:39:59.99359059+02:00"
+    created: "2022-10-24T17:45:32.665882256+02:00"
     description: Helm chart for CMS Made Simple. - An easy to use CMS System.
     digest: 5a873c03af393480590c0c99b1a043de24d67ff4013c02adf0428db6ec982222
     home: https://www.cmsmadesimple.org/
@@ -110,7 +110,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-24T17:39:59.992899314+02:00"
+    created: "2022-10-24T17:45:32.664874673+02:00"
     description: Helm chart for CMS Made Simple. - An easy to use CMS System.
     digest: 94aef521c4ceabd0f99e984b9e37bbf4ec83bfedbec0d47c27c5b75052da3f26
     home: https://www.cmsmadesimple.org/
@@ -128,7 +128,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-10-24T17:40:00.027123578+02:00"
+    created: "2022-10-24T17:45:32.703579879+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -147,7 +147,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-24T17:40:00.026006077+02:00"
+    created: "2022-10-24T17:45:32.702188717+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -162,4 +162,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2022-10-24T17:39:59.99202031+02:00"
+generated: "2022-10-24T17:45:32.663594221+02:00"
