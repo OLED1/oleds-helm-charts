@@ -13,7 +13,8 @@
 - The official documentation can be found here: https://docs.cmsmadesimple.org/
 
 ## Installation
-It's a straight forward installation procedure. Just fill out the values.yaml file and deploy it.
+This helm chart fully installs the CMSMS (CMS Made Simple) App with default content and stylesheets.
+Just fill out the values.yaml file or use Visual Editor to deploy the application.
 
 > Please Note: Pretty URL's are configured per default. Just use the default htaccess file.
 
