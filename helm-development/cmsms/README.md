@@ -166,7 +166,7 @@ Watch out for **ref** tags in the comments.
 Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).
 
 ## Whats new?
-### Chart Version 0.1.0
+### Chart Version 0.1.0 (0.1.18-dev) - 25.10.22
 - First release of CMS Made Simple Helm Chart
 - CMSMS Version 2.2.16
 - Added dependency MariaDB 11.0.14
