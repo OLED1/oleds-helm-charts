@@ -167,7 +167,9 @@ cmsms_app:
 cmsms_settings:
   ## Hostname where your cmsms instance will be available
   ## Notation: http://domain.tld or https://domain.tld
-  host: https://my-cmsms.example.org
+  host: my-cmsms.example.org
+  ## If you are planning to use https:// set enable_site_encryption to true.
+  enable_site_encryption: false
 
   ## Install CMSMS instance
   ## Set to true if you want this chart to install and preconfigure an working instance.
@@ -223,8 +225,6 @@ cmsms_settings:
         #passwordKey: password
 
   ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values
-  ## @see: https://docs.cmsmadesimple.org/configuration/config-file
-  ## @see: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
   ## Plese note: Pretty URLS are enable by default
   app_config:
     ## The PHP Timezone which should be used by CMSMS
@@ -233,6 +233,8 @@ cmsms_settings:
 
     ## You can setup more settings by following the CMSMS Guide
     ## Take a look at the examples some lines below
+    ## @see: https://docs.cmsmadesimple.org/configuration/config-file
+    ## @see: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
     additional_config_settings: []
 
     #additional_config_settings:

@@ -93,7 +93,11 @@ spec:
               key: "mariadb-root-password"
         {{- end }}
         - name: CMSMS_DOMAIN
-          value: {{ .Values.cmsms_settings.host | quote }}
+          {{- if .Values.cmsms_settings.enable_site_encryption }}
+          value: {{ printf "%s%s" "https://" .Values.cmsms_settings.host | quote }}
+          {{- else }}
+          value: {{ printf "%s%s" "http://" .Values.cmsms_settings.host | quote }}
+          {{- end }}
         - name: CMSMS_INSTALL
           value: {{ default "false" .Values.cmsms_settings.install_cmsms | quote }}
         - name: CMSMS_SMTP_PRECONFIGURE
