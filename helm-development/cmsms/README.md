@@ -171,6 +171,9 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - CMSMS Version 2.2.16
 - Added dependency MariaDB 11.0.14
 
+### Chart Version 0.1.1 (0.1.19-dev) - 25.10.22
+- MariaDB password generation bug fixed
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)

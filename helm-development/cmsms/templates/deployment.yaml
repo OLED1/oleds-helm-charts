@@ -56,8 +56,8 @@ spec:
         - name: CMSMS_DB_USER_PW
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
-              key: {{ .Values.externalDatabase.existingSecret.passwordKey | default "db-password" }}
+              name: {{ printf "%s-%s" .Release.Name "mariadb" }}
+              key: "mariadb-password"
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
