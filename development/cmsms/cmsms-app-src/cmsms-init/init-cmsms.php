@@ -156,7 +156,7 @@
                 }catch(Exception $e){
                     echo "  [ERROR]Execution of {$templine} failed.\n";
                     print_r($e->getMessage());
-                    continue;
+                    exit(1);
                 }
 
                 $templine = '';
