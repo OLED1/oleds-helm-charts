@@ -71,7 +71,7 @@ spec:
           value: "true"
           {{- end }}
         - name: CMSMS_DB_HOST
-          value: {{ template "mariadb.primary.fullname" .Subcharts.mariadb }}
+          value: "{{ template "mariadb.primary.fullname" .Subcharts.mariadb }}"
         - name: CMSMS_DB
           value: {{ .Values.mariadb.auth.database | quote }}
         - name: CMSMS_DB_PREFIX
@@ -122,15 +122,15 @@ spec:
         {{- end }}
         {{- if .Values.cmsms_settings.setup_smtp.preconfigure_smtp }}
         - name: CMSMS_SMTP_HOST
-          value: {{ default "" .Values.cmsms_settings.setup_smtp.smtp_host }}
+          value: {{ default "" .Values.cmsms_settings.setup_smtp.smtp_host  | quote }}
         - name: CMSMS_SMTP_PORT
-          value: {{ default "465" .Values.cmsms_settings.setup_smtp.smtp_port }}
+          value: {{ default "465" .Values.cmsms_settings.setup_smtp.smtp_port  | quote }}
         - name: CMSMS_SMTP_FROM
-          value: {{ default "info@example.com" .Values.cmsms_settings.setup_smtp.smtp_from }}
+          value: {{ default "info@example.com" .Values.cmsms_settings.setup_smtp.smtp_from  | quote }}
         - name: CMSMS_SMTP_SENDERRNAME
-          value: {{ default "My Example Site" .Values.cmsms_settings.setup_smtp.smtp_sender_name }}
+          value: {{ default "My Example Site" .Values.cmsms_settings.setup_smtp.smtp_sender_name  | quote }}
         - name: CMSMS_SMTP_AUTH_NEEDED
-          value: {{ default "true" .Values.cmsms_settings.setup_smtp.smtp_sender_name }}
+          value: {{ default "true" .Values.cmsms_settings.setup_smtp.smtp_sender_name  | quote }}
         - name: CMSMS_SMTP_AUTH_USER
           valueFrom:
             secretKeyRef:
@@ -143,9 +143,9 @@ spec:
               key: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.passwordKey | default "cmsms_smtp_password" }}
         - name: CMSMS_SMTP_AUTH_ENCRYPTION
           {{- if eq "none" .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }}
-          value:
+          value: ""
           {{- else }}
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }} #ssl|tls|none
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption  | quote }} #ssl|tls|none
           {{- end }}
         {{- end }}
         {{- end }}

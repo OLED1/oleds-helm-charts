@@ -456,10 +456,7 @@
                             "storageClass": {
                                 "title": "StorageClass(Name) configuration",
                                 "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
+                                "type": ["string", "null"],
                                 "default": null,
                                 "form": true
                             }
