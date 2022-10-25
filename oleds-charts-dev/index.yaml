@@ -5,7 +5,29 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T11:26:12.414575635+02:00"
+    created: "2022-10-25T11:41:40.48890268+02:00"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.0.*
+    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
+    digest: 7cfd799bb65fac88e15a573a560db76c7f76bd846119887b5adc489e31725092
+    home: https://www.cmsmadesimple.org/
+    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
+    maintainers:
+    - name: CMS Made Simple Foundation
+      url: https://www.cmsmadesimple.org/
+    name: cmsms
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.5-dev.tgz
+    version: 0.1.5-dev
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 2.2.16
+    created: "2022-10-25T11:41:40.478504648+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -27,7 +49,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T11:26:12.404833593+02:00"
+    created: "2022-10-25T11:41:40.465929232+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -49,7 +71,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T11:26:12.397741329+02:00"
+    created: "2022-10-25T11:41:40.454604191+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -71,7 +93,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T11:26:12.388635657+02:00"
+    created: "2022-10-25T11:41:40.443630996+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -94,7 +116,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-10-25T11:26:12.418162849+02:00"
+    created: "2022-10-25T11:41:40.492864356+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -113,7 +135,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-25T11:26:12.41596411+02:00"
+    created: "2022-10-25T11:41:40.490907199+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -128,4 +150,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2022-10-25T11:26:12.378519378+02:00"
+generated: "2022-10-25T11:41:40.431423926+02:00"

@@ -18,6 +18,8 @@ It's a straight forward installation procedure. Just fill out the values.yaml fi
 > Please Note: Pretty URL's are configured per default. Just use the default htaccess file.
 
 ### Not included in visual editor
+#### Ingress hostname and tls configuration
+
 #### Certbot configuration (SSL autoconfiguration)
 
 #### Using existing secrets

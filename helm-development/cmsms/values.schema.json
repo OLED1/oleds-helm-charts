@@ -34,13 +34,27 @@
                     "type": "string",
                     "title": "Ingress class name",
                     "description": "Set the class name of your ingress controller. E.g. nginx.",
-                    "form": true
+                    "form": true,
+                    "hidden" : {
+                        "conditions" : [{
+                            "path": "ingress/enabled",
+                            "value": false
+                        }],
+                        "operator": "and"
+                    }
                 },
                 "hosts": {
                     "type": "array",
                     "title": "Ingress host names",
                     "description": "The host names on which the ingress controller should listen to.",
                     "form": true,
+                    "hidden" : {
+                        "conditions" : [{
+                            "path": "ingress/enabled",
+                            "value": false
+                        }],
+                        "operator": "and"
+                    },
                     "items": {
                         "type": "object",
                         "properties": {
@@ -65,10 +79,24 @@
                     }
                 },
                 "annotations": {
-                    "type": "object"
+                    "type": "object",
+                    "hidden" : {
+                        "conditions" : [{
+                            "path": "ingress/enabled",
+                            "value": false
+                        }],
+                        "operator": "and"
+                    }
                 },
                 "tls": {
-                    "type": "array"
+                    "type": "array",
+                    "hidden" : {
+                        "conditions" : [{
+                            "path": "ingress/enabled",
+                            "value": false
+                        }],
+                        "operator": "and"
+                    }
                 }
             }
         },
@@ -267,6 +295,10 @@
                             "type": "string",
                             "title": "Persistent voume size",
                             "default": "1Gi",
+                            "render": "slider",
+                            "sliderMin": 1,
+                            "sliderMax": 100,
+                            "sliderUnit": "Gi",
                             "form": true
                         },
                         "storageClass": {
@@ -571,19 +603,44 @@
                 },
                 "primary": {
                     "type": "object",
-                    "properties": {
-                        "persistence": {
-                            "type": "object",
-                            "properties": {
-                                "accessMode": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "size": {
-                                    "type": "string"
-                                }
+                    "persistence": {
+                        "type": "object",
+                        "title": "Pod data persistence",
+                        "description": "If you want your data saved.",
+                        "form": true,
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean",
+                                "title": "Enable persistent volume",
+                                "default": false,
+                                "form": true
+                            },
+                            "accessMode": {
+                                "type": "string",
+                                "title": "AccessMode of the PV created",
+                                "default": "ReadWriteOnce",
+                                "enum": ["ReadWriteOnce","ReadWriteMany"],
+                                "form": true
+                            },
+                            "size": {
+                                "type": "string",
+                                "title": "Persistent voume size",
+                                "default": "1Gi",
+                                "render": "slider",
+                                "sliderMin": 1,
+                                "sliderMax": 100,
+                                "sliderUnit": "Gi",
+                                "form": true
+                            },
+                            "storageClass": {
+                                "title": "StorageClass(Name) configuration",
+                                "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "default": null,
+                                "form": true
                             }
                         }
                     }
