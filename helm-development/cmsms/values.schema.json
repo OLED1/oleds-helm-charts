@@ -1,0 +1,645 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "ingress": {
+            "type": "object",
+            "title": "Ingress configuration",
+            "form": true,
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable ingress",
+                    "form": true
+                },
+                "className": {
+                    "type": "string",
+                    "title": "Ingress class name",
+                    "description": "Set the class name of your ingress controller. E.g. nginx.",
+                    "form": true
+                },
+                "hosts": {
+                    "type": "array",
+                    "title": "Ingress host names",
+                    "description": "The host names on which the ingress controller should listen to.",
+                    "form": true,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "host": {
+                                "type": "string"
+                            },
+                            "paths": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "pathType": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "annotations": {
+                    "type": "object"
+                },
+                "tls": {
+                    "type": "array"
+                }
+            }
+        },
+        "cmsms_app": {
+            "type": "object",
+            "title": "CMSMS app settings",
+            "description": "Settings regarding the CMSMS pod",
+            "form": true,
+            "properties": {
+                "service": {
+                    "type": "object",
+                    "title": "CMSMS service configuration",
+                    "form": true,
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "title": "CMSMS service",
+                            "enum": ["ClusterIP", "NodePort", "LoadBalancer", "ExternalName"],
+                            "default": "ClusterIP",
+                            "form": true
+                        },
+                        "port": {
+                            "title": "CMSMS service port",
+                            "type": "integer",
+                            "default": 80,
+                            "form": true
+                        }
+                    }
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string",
+                            "title": "Image pull policy",
+                            "description": "Define when the image should be pulled.",
+                            "enum": ["IfNotPresent", "Always"],
+                            "default": "Always",
+                            "form": true
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "affinity": {
+                    "type": "object"
+                },
+                "autoscaling": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable autoscaling",
+                            "form": true
+                        },
+                        "minReplicas": {
+                            "type": "integer",
+                            "title":"Least available replicas",
+                            "form": true,
+                            "default": 1
+                        },
+                        "maxReplicas": {
+                            "type": "integer",
+                            "title":"Maximum available replicas",
+                            "form": true,
+                            "default": 100
+                        },
+                        "targetCPUUtilizationPercentage": {
+                            "type": "integer",
+                            "title":"When CPU is utilised for at least x% ",
+                            "form": true,
+                            "default": 80
+                        }
+                    }
+                },
+                "fullnameOverride": {
+                    "type": "string"
+                },
+                "imagePullSecrets": {
+                    "type": "array"
+                },
+                "livenessProbe": {
+                    "type": "object",
+                    "title": "Liveness probe",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable liveness probe",
+                            "default": true,
+                            "form": true
+                        },
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "readinessProbe": {
+                    "type": "object",
+                    "title": "Readiness probe",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable readiness probe",
+                            "default": true,
+                            "form": true
+                        },
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "startupProbe": {
+                    "type": "object",
+                    "title": "Startup probe",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable startup probe",
+                            "default": true,
+                            "form": true
+                        },
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "nameOverride": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "type": "object"
+                },
+                "persistence": {
+                    "type": "object",
+                    "title": "Pod data persistence",
+                    "description": "If you want your data saved.",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable persistent volume",
+                            "default": false,
+                            "form": true
+                        },
+                        "accessMode": {
+                            "type": "string",
+                            "title": "AccessMode of the PV created",
+                            "default": "ReadWriteOnce",
+                            "enum": ["ReadWriteOnce","ReadWriteMany"],
+                            "form": true
+                        },
+                        "size": {
+                            "type": "string",
+                            "title": "Persistent voume size",
+                            "default": "1Gi",
+                            "form": true
+                        },
+                        "storageClass": {
+                            "title": "StorageClass(Name) configuration",
+                            "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "default": null,
+                            "form": true
+                        }
+                    }
+                },
+                "podAnnotations": {
+                    "type": "object"
+                },
+                "podSecurityContext": {
+                    "type": "object"
+                },
+                "replicaCount": {
+                    "type": "integer",
+                    "title": "Number of replicas",
+                    "form": true
+                },
+                "resources": {
+                    "type": "object"
+                },
+                "securityContext": {
+                    "type": "object"
+                },
+                "strategy": {
+                    "type": "object",
+                    "properties": {
+                        "rollingUpdate": {
+                            "type": "object",
+                            "properties": {
+                                "maxSurge": {
+                                    "type": "integer"
+                                },
+                                "maxUnavailable": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "tolerations": {
+                    "type": "array"
+                }
+            }
+        },
+        "cmsms_settings": {
+            "type": "object",
+            "title": "CMSMS settings",
+            "description": "Custom settings and configuration for cmsms itself",
+            "form": true,
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "title": "CMSMS hostname",
+                    "description": "Hostname where your cmsms instance will be available.",
+                    "form": true
+                },
+                "site_encryption_enabled": {
+                    "type": "boolean",
+                    "title": "Site encryption enabled",
+                    "description": "If you are planning to use https:// set site_encryption_enabled to true.",
+                    "form": true
+                },
+                "install_cmsms": {
+                    "type": "boolean",
+                    "title": "Install CMSMS instance",
+                    "description": "Set to true if you want this chart to install and preconfigure a working instance.",
+                    "default": true,
+                    "form": true
+                },
+                "initial_user": {
+                    "type": "object",
+                    "title": "Initial CMSMS user configuration",
+                    "description": "If you want to setup a new instance you can setup an initial user here.",
+                    "default": true,
+                    "form": true,
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "title": "Create initial user",
+                            "description": "Set to true if a new user should be created on first deployment.",
+                            "default": true,
+                            "form": true
+                        },
+                        "username": {
+                            "type": "string",
+                            "title": "Username of initial user",
+                            "default": "Admin",
+                            "form": true
+                        },
+                        "password": {
+                            "type": "string",
+                            "title": "Password of initial user",
+                            "description": "Leave emtpy and a password will be generated.",
+                            "default": "",
+                            "form": true
+                        },
+                        "email": {
+                            "type": "string",
+                            "title": "E-Mail of initial user",
+                            "default": "admin@example.com",
+                            "form": true
+                        },
+                        "existingSecret": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "setup_smtp": {
+                    "type": "object",
+                    "title": "Initial SMTP connection configuration",
+                    "description": "If you wish to preconfigure mailing via SMTP you can do it here.",
+                    "default": false,
+                    "form": true,
+                    "properties": {
+                        "preconfigure_smtp": {
+                            "type": "boolean",
+                            "title": "Preconfigure SMTP",
+                            "default": false,
+                            "form": true
+                        },
+                        "smtp_host": {
+                            "type": "string",
+                            "title": "SMTP server hostname",
+                            "description": "The hostname of the SMTP server over which should be sent.",
+                            "form": true
+                        },
+                        "smtp_port": {
+                            "type": "integer",
+                            "title": "SMTP server port",
+                            "description": "Normally SMTP server are listening to 25, 465, 587.",
+                            "default": 465,
+                            "form": true
+                        },
+                        "smtp_from": {
+                            "type": "string",
+                            "title": "SMTP sender from",
+                            "description": "The e-mail address of the sender.",
+                            "form": true
+                        },
+                        "smtp_sender_name": {
+                            "type": "string",
+                            "title": "SMTP sender name",
+                            "description": "This settings configures the name from where the mail was sent from.",
+                            "form": true
+                        },
+                        "smtp_auth": {
+                            "type": "object",
+                            "title": "SMTP authentication settings",
+                            "form": true,
+                            "properties": {
+                                "auth_needed": {
+                                    "type": "boolean",
+                                    "title": "SMTP authentication",
+                                    "description": "Set to true when username and password is needed.",
+                                    "default": false,
+                                    "form": true
+                                },
+                                "auth_user": {
+                                    "type": ["string","null"],
+                                    "title": "SMTP login username",
+                                    "default": "",
+                                    "form": true
+                                },
+                                "auth_pw": {
+                                    "type": ["string","null"],
+                                    "title": "SMTP login password",
+                                    "default": "",
+                                    "form": true
+                                },
+                                "auth_encryption": {
+                                    "type": "string",
+                                    "title": "SMTP encryption method",
+                                    "enum": ["ssl","tls","none"],
+                                    "default": "none",
+                                    "form": true
+                                },
+                                "existingSecret": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "app_config": {
+                    "type": "object",
+                    "title": "CMSMS app configuration",
+                    "description": "In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values.",
+                    "form": true,
+                    "properties": {
+                        "timezone": {
+                            "type": "string",
+                            "title": "CMSMS Timezone configuration",
+                            "description": "The PHP Timezone which should be used by CMSMS.",
+                            "default": "UTC",
+                            "form": true
+                        },
+                        "additional_config_settings": {
+                            "type": "array"
+                        },
+                        "htaccess": {
+                            "type": "object",
+                            "title": "CMSMS htaccess configuration",
+                            "form": true,
+                            "properties": {
+                                "use_default_htaccess": {
+                                    "type": "boolean",
+                                    "title": "Use CMSMS default htaccess.",
+                                    "default": true,
+                                    "form": true
+                                },
+                                "custom_htaccess": {
+                                    "type": ["string","null"]
+                                }
+                            }
+                        },
+                        "php_ini_config": {
+                            "type": "object",
+                            "properties": {
+                                "cmsms_recommended.ini": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "mariadb": {
+            "type": "object",
+            "title": "Internal database configuration",
+            "description": "An internal mariadb pod will be deployed.",
+            "form": true,
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable internal database",
+                    "default": true,
+                    "form": true
+                },
+                "architecture": {
+                    "type": "string",
+                    "title": "Internal database architecture configuration",
+                    "description": "Decide which architecture of the internal database you want to deploy.",
+                    "enum": ["standalone","replication"],
+                    "default": "standalone",
+                    "form": true
+                },
+                "auth": {
+                    "type": "object",
+                    "title": "User and database configuration",
+                    "form": true,
+                    "properties": {
+                        "database": {
+                            "type": "string",
+                            "title": "CMSMS Database configuration",
+                            "description": "The name of the database where CMSMS is/should be installed.",
+                            "default": "cmsms_app",
+                            "form": true
+                        },
+                        "username": {
+                            "type": "string",
+                            "title": "MariaDB database username",
+                            "default": "cmsms",
+                            "form": true
+                        },
+                        "password": {
+                            "type": "string",
+                            "title": "MariaDB database password",
+                            "description": "Please change this password immediately.",
+                            "default": "MySuperStrongPassword1234!?",
+                            "form": true
+                        }
+                    }
+                },
+                "database_prefix": {
+                    "type": "string",
+                    "title": "CMSMS table prefix configuration",
+                    "description": "The table prefix of the CMSMS installed tables.",
+                    "default": "cms_",
+                    "form": true
+                },
+                "primary": {
+                    "type": "object",
+                    "properties": {
+                        "persistence": {
+                            "type": "object",
+                            "properties": {
+                                "accessMode": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "size": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "externalDatabase": {
+            "type": "object",
+            "title": "External database configuration",
+            "description": "External MYSQL/MariaDB Database configuration.",
+            "form": true,
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable external database connection",
+                    "default": false,
+                    "form": true
+                },
+                "host": {
+                    "type": "string",
+                    "title": "Enable external database connection",
+                    "description": "The hostname or IP address of the instance where CMSMS should connect to.",
+                    "default": "mysql.local",
+                    "form": true
+                },
+                "database": {
+                    "type": "string",
+                    "title": "CMSMS Database configuration",
+                    "description": "The name of the database where CMSMS is/should be installed.",
+                    "default": "cmsms_app",
+                    "form": true
+                },
+                "user": {
+                    "type": "string",
+                    "title": "MariaDB database username",
+                    "default": "cmsms",
+                    "form": true
+                },
+                "password": {
+                    "type": "string",
+                    "title": "MariaDB database password",
+                    "default": "MySuperStrongPassword1234!?",
+                    "form": true
+                },
+                "database_prefix": {
+                    "type": "string",
+                    "title": "CMSMS table prefix configuration",
+                    "description": "The table prefix of the CMSMS installed tables.",
+                    "default": "cms_",
+                    "form": true
+                },
+                "existingSecret": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

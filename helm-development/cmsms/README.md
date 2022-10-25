@@ -15,6 +15,19 @@
 ## Installation
 It's a straight forward installation procedure. Just fill out the values.yaml file and deploy it.
 
+> Please Note: Pretty URL's are configured per default. Just use the default htaccess file.
+
+### Not included in visual editor
+#### Certbot configuration (SSL autoconfiguration)
+
+#### Using existing secrets
+
+#### Additional CMSMS config
+
+#### PHP INI Settings
+
+#### Custom htaccess configuration
+
 ## Migrating
 If you plan to move an existing installation you just need follow the upcomming steps:
 1. Skip the installation by set **install_cmsms: false**.
@@ -23,6 +36,9 @@ If you plan to move an existing installation you just need follow the upcomming 
 4. Import the previously backed up **"modules"** and **"uploads"** directory to the newly created CMSMS-PV.
 5. Import the previously backed up database to the newly created DB-PV and import it by exec into the db container.
 6. That's it.
+
+## Feature configuration documentation
+
 
 ## Feature missing or bug found
 Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).

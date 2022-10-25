@@ -36,11 +36,13 @@ ingress:
   #      - chart-example.local
 
 ######################################
-## Settings regarding the CMSMS Pod ##
+## Settings regarding the CMSMS pod ##
 ######################################
 cmsms_app:
   ## Where and on which port the CMSMS Service should be published
   service:
+    #Can be ClusterIP, NodePort, LoadBalancer or ExternalName
+    #ref: https://kubernetes.io/docs/concepts/services-networking/service/
     type: ClusterIP
     port: 80
 
@@ -169,10 +171,10 @@ cmsms_settings:
   ## Notation: http://domain.tld or https://domain.tld
   host: my-cmsms.example.org
   ## If you are planning to use https:// set enable_site_encryption to true.
-  enable_site_encryption: false
+  site_encryption_enabled: false
 
   ## Install CMSMS instance
-  ## Set to true if you want this chart to install and preconfigure an working instance.
+  ## Set to true if you want this chart to install and preconfigure a working instance.
   ## Set to false if you want to import an existing CMSMS Instance.
   ## This will import a database with default values an example content.
   install_cmsms: true
@@ -199,7 +201,7 @@ cmsms_settings:
   ## If you wish it to be preconfigured you can do it here.
   ## Will only be executed when "install_cmsms" and "preconfigure_smtp" is set to "true".
   setup_smtp:
-    preconfigure_smtp: true
+    preconfigure_smtp: false
     smtp_host: smtp.example.com
     ## Normally SMTP Server are listening to 25, 465, 587
     smtp_port: 465
@@ -215,7 +217,7 @@ cmsms_settings:
       auth_user:
       auth_pw:
       ## The connection encryption. Can be ssl/tls or just nothing.
-      auth_encryption:
+      auth_encryption: "none"
 
       ## Use an existing secret
       existingSecret: 
@@ -224,31 +226,33 @@ cmsms_settings:
         #usernameKey: username
         #passwordKey: password
 
-  ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values
+  ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values.
   ## Plese note: Pretty URLS are enable by default
   app_config:
     ## The PHP Timezone which should be used by CMSMS
-    ## @see https://docs.cmsmadesimple.org/configuration/config-file/config-reference#config_timezone
+    ## see https://docs.cmsmadesimple.org/configuration/config-file/config-reference#config_timezone
+    ## see https://www.php.net/manual/en/timezones.php
     timezone: UTC
 
     ## You can setup more settings by following the CMSMS Guide
     ## Take a look at the examples some lines below
-    ## @see: https://docs.cmsmadesimple.org/configuration/config-file
-    ## @see: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
+    ## see: https://docs.cmsmadesimple.org/configuration/config-file
+    ## see: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
     additional_config_settings: []
 
     #additional_config_settings:
     #- $config['param_key1'] = "param_value1";
     #- $config['param_key2'] = "param_value2";
 
-    ## If you not wish to use the CMSMS' default htaccess
+    ## CMSMS htaccess configuration
     htaccess:
+      ## Set to false if you do not wish to use the CMSMS' default htaccess and use your own or no htacess
+      ## Use with care, it might break your intance
       use_default_htaccess: true
       ## You can insert an custom htaccess here
       ## NOTE: Will only be used when "use_default_htaccess" is set to false and custom_htaccess has content
       custom_htaccess: 
-        #custom_htaccess:
-        #  My custom content
+      #  My custom content
 
 
     ## Here you can adapt or change the default PHP values
@@ -274,52 +278,24 @@ cmsms_settings:
 #################################################################
 ## Custom settings and configuration for cmsms needed database ##
 #################################################################
-## External MYSQL/MariaDB Database
-externalDatabase:
-  ## Set to true when you want to use an external database
-  ## When "use_external_db" is set to false a database pod will be created using the stated auth values
-  enabled: false
-  ## Hostname or IP Address of you external mysql instance
-  host: mysql.local
-
-  ## Database user
-  user: cmsms
-
-  ## Database password
-  password: MySuperStrongPassword1234!?
-
-  ## Database name
-  database: cmsms_app
-
-  ## CMS Made Simple database prefix as stated in the installer
-  ## Can be left default when deploying a new instance
-  ## Adapt when Prefix changed in existing installation
-  database_prefix: cms_
-
-  ## Use an existing secret
-  existingSecret: 
-    enabled: false
-    # secretName: nameofsecret
-    # usernameKey: username
-    # passwordKey: password
-
 ## Only MYSQL/MariaDB is currently supported
-## Internal database
+## Internal database configuration
 mariadb:
   ## Set to true when you want to deploy an internal database
   ## NOTE: Will be ignored when "external_db" -> "enabled" is set to true
   enabled: true
 
-  ## Decide which type of database you want to deploy
+  ## Decide which architecture of the internal database you want to deploy
   ## Can be standalone or replication
   ## Use "accessMode: ReadWriteMany" in the persistence section when using replication
   architecture: standalone
 
+  ## MariaDB user and database configuration
   ## Auth Data will be saved to a secret
   auth:
     ## The name of the database where CMSMS is/should be installed
     database: cmsms_app
-    username: cmsms
+    username: cmsms 
     password: MySuperStrongPassword1234!?
 
   ## CMS Made Simple database prefix as stated in the installer
@@ -337,3 +313,33 @@ mariadb:
       # storageClass: ""
       accessMode: ReadWriteOnce
       size: 8Gi
+
+## External MYSQL/MariaDB Database
+externalDatabase:
+  ## Set to true when you want to use an external database
+  ## When "use_external_db" is set to false a database pod will be created using the stated auth values
+  enabled: false
+  ## Hostname or IP Address of you external mysql instance
+  host: mysql.local
+  
+  ## Database name
+  database: cmsms_app
+
+  ## Database user
+  user: cmsms
+
+  ## Database password
+  password: MySuperStrongPassword1234!?
+
+
+  ## CMS Made Simple database prefix as stated in the installer
+  ## Can be left default when deploying a new instance
+  ## Adapt when Prefix changed in existing installation
+  database_prefix: cms_
+
+  ## Use an existing secret
+  existingSecret: 
+    enabled: false
+    # secretName: nameofsecret
+    # usernameKey: username
+    # passwordKey: password

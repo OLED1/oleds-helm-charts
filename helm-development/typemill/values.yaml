@@ -99,6 +99,7 @@ affinity: {}
 ## Enable if you want your data to be saved forever
 persistence:
   enabled: false
+  ## Can be "ReadWriteOnce" or "ReadWriteMany"
   accessMode: ReadWriteOnce
   size: 1Gi
 

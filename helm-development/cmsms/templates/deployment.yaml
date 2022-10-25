@@ -93,7 +93,7 @@ spec:
               key: "mariadb-root-password"
         {{- end }}
         - name: CMSMS_DOMAIN
-          {{- if .Values.cmsms_settings.enable_site_encryption }}
+          {{- if .Values.cmsms_settings.site_encryption_enabled }}
           value: {{ printf "%s%s" "https://" .Values.cmsms_settings.host | quote }}
           {{- else }}
           value: {{ printf "%s%s" "http://" .Values.cmsms_settings.host | quote }}
@@ -142,7 +142,11 @@ spec:
               name: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
               key: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.passwordKey | default "cmsms_smtp_password" }}
         - name: CMSMS_SMTP_AUTH_ENCRYPTION
-          value: {{ default "" .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }} #ssl|tls|none
+          {{- if eq "none" .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }}
+          value:
+          {{- else }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }} #ssl|tls|none
+          {{- end }}
         {{- end }}
         {{- end }}
         ports:
@@ -152,7 +156,7 @@ spec:
         {{- if .Values.cmsms_app.livenessProbe.enabled }}
         livenessProbe:
           httpGet:
-            path: /admin
+            path: /admin/login.php
             port: http
             httpHeaders:
             - name: Host
@@ -166,7 +170,7 @@ spec:
         {{- if and .Values.cmsms_app.readinessProbe.enabled }}
         readinessProbe:
           httpGet:
-            path: /admin
+            path: /admin/login.php
             port: http
             httpHeaders:
             - name: Host
@@ -180,7 +184,7 @@ spec:
         {{- if and .Values.cmsms_app.startupProbe.enabled }}
         startupProbe:
           httpGet:
-            path: /admin
+            path: /admin/login.php
             port: http
             httpHeaders:
             - name: Host
