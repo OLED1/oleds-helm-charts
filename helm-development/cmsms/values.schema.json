@@ -4,15 +4,19 @@
     "properties": {
         "serviceAccount": {
             "type": "object",
+            "form": false,
             "properties": {
                 "annotations": {
-                    "type": "object"
+                    "type": "object",
+                    "form": true
                 },
                 "create": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "form": true
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "form": true
                 }
             }
         },
