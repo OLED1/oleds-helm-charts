@@ -2,21 +2,6 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object",
-                    "hidden" : ""
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
         "ingress": {
             "type": "object",
             "title": "Ingress configuration",
@@ -32,56 +17,7 @@
                     "title": "Ingress class name",
                     "description": "Set the class name of your ingress controller. E.g. nginx.",
                     "form": true,
-                    "hidden": {
-                        "condition": false,
-                        "value": "ingress.enabled"
-                    }
-                },
-                "hosts": {
-                    "type": "array",
-                    "title": "Ingress host names",
-                    "description": "The host names on which the ingress controller should listen to.",
-                    "form": true,
-                    "hidden": {
-                        "condition": false,
-                        "value": "ingress.enabled"
-                    },
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "annotations": {
-                    "type": "object",
-                    "hidden": {
-                        "condition": false,
-                        "value": "ingress.enabled"
-                    }
-                },
-                "tls": {
-                    "type": "array",
-                    "hidden": {
-                        "condition": false,
-                        "value": "ingress.enabled"
-                    }
+                    "hidden": "ingress.enabled"
                 }
             }
         },
@@ -130,9 +66,6 @@
                         }
                     }
                 },
-                "affinity": {
-                    "type": "object"
-                },
                 "autoscaling": {
                     "type": "object",
                     "properties": {
@@ -160,12 +93,6 @@
                             "default": 80
                         }
                     }
-                },
-                "fullnameOverride": {
-                    "type": "string"
-                },
-                "imagePullSecrets": {
-                    "type": "array"
                 },
                 "livenessProbe": {
                     "type": "object",
@@ -251,12 +178,6 @@
                         }
                     }
                 },
-                "nameOverride": {
-                    "type": "string"
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
                 "persistence": {
                     "type": "object",
                     "title": "Pod data persistence",
@@ -298,44 +219,10 @@
                         }
                     }
                 },
-                "podAnnotations": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "type": "object"
-                },
                 "replicaCount": {
                     "type": "integer",
                     "title": "Number of replicas",
                     "form": true
-                },
-                "resources": {
-                    "type": "object"
-                },
-                "securityContext": {
-                    "type": "object"
-                },
-                "strategy": {
-                    "type": "object",
-                    "properties": {
-                        "rollingUpdate": {
-                            "type": "object",
-                            "properties": {
-                                "maxSurge": {
-                                    "type": "integer"
-                                },
-                                "maxUnavailable": {
-                                    "type": "integer"
-                                }
-                            }
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
                 }
             }
         },
