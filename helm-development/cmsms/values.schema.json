@@ -405,9 +405,8 @@
                             "form": true
                         },
                         "password": {
-                            "type": ["string","null"],
+                            "type": "string",
                             "title": "MariaDB database password",
-                            "description": "Leave blank if you want it to be generated.",
                             "default": "",
                             "form": true
                         }

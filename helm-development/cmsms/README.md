@@ -174,6 +174,9 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 ### Chart Version 0.1.1 (0.1.19-dev) - 25.10.22
 - MariaDB password generation bug fixed
 
+### Chart Version 0.1.2 (0.1.20-dev) - 25.10.22
+- Reverted back to manually adding password
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)

@@ -297,8 +297,7 @@ mariadb:
     ## The name of the database where CMSMS is/should be installed
     database: cmsms_app
     username: cmsms 
-    ## Leave it empty and a password will be generated
-    password: 
+    password: changeMeNow!
 
   ## CMS Made Simple database prefix as stated in the installer
   ## Can be left default when deploying a new instance
