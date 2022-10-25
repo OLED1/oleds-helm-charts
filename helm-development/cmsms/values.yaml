@@ -33,7 +33,7 @@ ingress:
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
-  #      - chart-example.local
+  #      - my-cmsms.example.org
 
 ######################################
 ## Settings regarding the CMSMS pod ##
