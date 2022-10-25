@@ -33,6 +33,9 @@ maintainers:
   - name: CMS Made Simple Foundation
     url: https://www.cmsmadesimple.org/
 
+sources:
+  - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
+
 dependencies:
 - name: mariadb
   version: 11.0.*
