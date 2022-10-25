@@ -124,7 +124,7 @@ spec:
         - name: CMSMS_SMTP_HOST
           value: {{ .Values.cmsms_settings.setup_smtp.smtp_host | default "" | quote }}
         - name: CMSMS_SMTP_PORT
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_port | default 465 }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_port | default 465 | quote }}
         - name: CMSMS_SMTP_FROM
           value: {{ .Values.cmsms_settings.setup_smtp.smtp_from | default "info@example.com" | quote }}
         - name: CMSMS_SMTP_SENDERRNAME
