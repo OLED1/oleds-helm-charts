@@ -4,19 +4,16 @@
     "properties": {
         "serviceAccount": {
             "type": "object",
-            "form": false,
             "properties": {
                 "annotations": {
                     "type": "object",
-                    "form": false
+                    "hidden" : ""
                 },
                 "create": {
-                    "type": "boolean",
-                    "form": false
+                    "type": "boolean"
                 },
                 "name": {
-                    "type": "string",
-                    "form": false
+                    "type": "string"
                 }
             }
         },
@@ -35,12 +32,9 @@
                     "title": "Ingress class name",
                     "description": "Set the class name of your ingress controller. E.g. nginx.",
                     "form": true,
-                    "hidden" : {
-                        "conditions" : [{
-                            "path": "ingress/enabled",
-                            "value": false
-                        }],
-                        "operator": "and"
+                    "hidden": {
+                        "condition": false,
+                        "value": "ingress.enabled"
                     }
                 },
                 "hosts": {
@@ -48,12 +42,9 @@
                     "title": "Ingress host names",
                     "description": "The host names on which the ingress controller should listen to.",
                     "form": true,
-                    "hidden" : {
-                        "conditions" : [{
-                            "path": "ingress/enabled",
-                            "value": false
-                        }],
-                        "operator": "and"
+                    "hidden": {
+                        "condition": false,
+                        "value": "ingress.enabled"
                     },
                     "items": {
                         "type": "object",
@@ -80,22 +71,16 @@
                 },
                 "annotations": {
                     "type": "object",
-                    "hidden" : {
-                        "conditions" : [{
-                            "path": "ingress/enabled",
-                            "value": false
-                        }],
-                        "operator": "and"
+                    "hidden": {
+                        "condition": false,
+                        "value": "ingress.enabled"
                     }
                 },
                 "tls": {
                     "type": "array",
-                    "hidden" : {
-                        "conditions" : [{
-                            "path": "ingress/enabled",
-                            "value": false
-                        }],
-                        "operator": "and"
+                    "hidden": {
+                        "condition": false,
+                        "value": "ingress.enabled"
                     }
                 }
             }
