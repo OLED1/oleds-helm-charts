@@ -8,15 +8,15 @@
             "properties": {
                 "annotations": {
                     "type": "object",
-                    "form": true
+                    "form": false
                 },
                 "create": {
                     "type": "boolean",
-                    "form": true
+                    "form": false
                 },
                 "name": {
                     "type": "string",
-                    "form": true
+                    "form": false
                 }
             }
         },
