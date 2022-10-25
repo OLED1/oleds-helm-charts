@@ -159,10 +159,7 @@
                         "storageClass": {
                             "title": "StorageClass(Name) configuration",
                             "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": ["string", "null"],
                             "default": null,
                             "form": true
                         }
@@ -222,7 +219,7 @@
                             "form": true
                         },
                         "password": {
-                            "type": "string",
+                            "type": ["string", "null"],
                             "title": "Password of initial user",
                             "description": "Leave emtpy and a password will be generated.",
                             "default": "",
