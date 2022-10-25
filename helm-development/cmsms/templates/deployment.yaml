@@ -122,15 +122,15 @@ spec:
         {{- end }}
         {{- if .Values.cmsms_settings.setup_smtp.preconfigure_smtp }}
         - name: CMSMS_SMTP_HOST
-          value: {{ default "" .Values.cmsms_settings.setup_smtp.smtp_host  | quote }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_host | default "" | quote }}
         - name: CMSMS_SMTP_PORT
-          value: {{ default 465 .Values.cmsms_settings.setup_smtp.smtp_port }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_port | default 465 }}
         - name: CMSMS_SMTP_FROM
-          value: {{ default "info@example.com" .Values.cmsms_settings.setup_smtp.smtp_from  | quote }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_from | default "info@example.com" | quote }}
         - name: CMSMS_SMTP_SENDERRNAME
-          value: {{ default "My Example Site" .Values.cmsms_settings.setup_smtp.smtp_sender_name  | quote }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_sender_name | default "My Example Site" | quote }}
         - name: CMSMS_SMTP_AUTH_NEEDED
-          value: {{ default "true" .Values.cmsms_settings.setup_smtp.smtp_sender_name  | quote }}
+          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_needed | default "true" | quote }}
         - name: CMSMS_SMTP_AUTH_USER
           valueFrom:
             secretKeyRef:
