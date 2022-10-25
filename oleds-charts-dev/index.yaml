@@ -5,7 +5,31 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.078341495+02:00"
+    created: "2022-10-25T16:02:09.102912064+02:00"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.0.*
+    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
+    digest: 07fb5c450500128494c91017d675ad82e14c56171a0779cf27303a71f7957fd5
+    home: https://www.cmsmadesimple.org/
+    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
+    maintainers:
+    - name: CMS Made Simple Foundation
+      url: https://www.cmsmadesimple.org/
+    name: cmsms
+    sources:
+    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.16-dev.tgz
+    version: 0.1.16-dev
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 2.2.16
+    created: "2022-10-25T16:02:09.094486854+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -29,7 +53,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.070089525+02:00"
+    created: "2022-10-25T16:02:09.08611867+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -49,308 +73,12 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.14-dev.tgz
     version: 0.1.14-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.061508762+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: ff499e5b6d49c6b57b585161d8ece4a2f8455f3399285eaf5918c1e7ca98ab3a
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    sources:
-    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.13-dev.tgz
-    version: 0.1.13-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.05519086+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: c3984a8399af3d1e15b7010a24e0563011cc30d60fe25e2b09c69887b20711aa
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    sources:
-    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.12-dev.tgz
-    version: 0.1.12-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.047792896+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: b2950e860105476b0ff87189cee18d61c69192d8386e9ff66369baa002ce9038
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    sources:
-    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.11-dev.tgz
-    version: 0.1.11-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.041543348+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: f13934639f09b802cdbc40625748dc0d113ff979d96a6c405b60acaab091133b
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    sources:
-    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.10-dev.tgz
-    version: 0.1.10-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.137332406+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: 59d4f73dd217af84683d6128c27d1df1f149d147a2a6328194e78eee6f717cfe
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    sources:
-    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.9-dev.tgz
-    version: 0.1.9-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.131450822+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: c63596d9c792ff559e85a8dffd0da525adeb37556887fc20b76bfe658c8852b0
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.8-dev.tgz
-    version: 0.1.8-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.124648597+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: 962752a1f245dd0d0be736b26cdae625b7c32ec439535a53ac9bd28b6f0a06d0
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.7-dev.tgz
-    version: 0.1.7-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.118163779+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: f333fd7e985f545a5d0c11f28b90dfe86bf3676dd64ce918925c1b0feda45e05
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.6-dev.tgz
-    version: 0.1.6-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.112269544+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: 7cfd799bb65fac88e15a573a560db76c7f76bd846119887b5adc489e31725092
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.5-dev.tgz
-    version: 0.1.5-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.101654024+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: 7fd93a888bfc6dce5f8daf91138dcfaa82b7e374f2c5f66c7f28b1319ae64cb5
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.4-dev.tgz
-    version: 0.1.4-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.092552755+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: ca721b1800b2e337e4d126e257942b540fe182af0d6fcd24dba9673ce8bcddb3
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.3-dev.tgz
-    version: 0.1.3-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.085132744+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: 06d41350fde9e3eddaf46bd8bda6b86460660ee418e37674f6b7e6a8ae6aa2e9
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.2-dev.tgz
-    version: 0.1.2-dev
-  - annotations:
-      category: CMS
-    apiVersion: v2
-    appVersion: 2.2.16
-    created: "2022-10-25T15:18:22.033155485+02:00"
-    dependencies:
-    - condition: mariadb.enabled
-      name: mariadb
-      repository: https://charts.bitnami.com/bitnami
-      version: 11.0.*
-    description: Helm chart for CMS Made Simple. - An easy to use CMS System.
-    digest: fb6fdbe6472920b64c3d7f79bf57bb5dbd1bab11490cff0b408c703882644652
-    home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-    maintainers:
-    - name: CMS Made Simple Foundation
-      url: https://www.cmsmadesimple.org/
-    name: cmsms
-    type: application
-    urls:
-    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/cmsms-0.1.1-dev.tgz
-    version: 0.1.1-dev
   typemill:
   - annotations:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-10-25T15:18:22.13969839+02:00"
+    created: "2022-10-25T16:02:09.105902588+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -369,7 +97,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-10-25T15:18:22.138436049+02:00"
+    created: "2022-10-25T16:02:09.104369909+02:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -384,4 +112,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2022-10-25T15:18:22.024494593+02:00"
+generated: "2022-10-25T16:02:09.079265745+02:00"
