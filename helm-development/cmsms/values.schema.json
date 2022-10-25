@@ -425,6 +425,7 @@
                 },
                 "primary": {
                     "type": "object",
+                    "title": "Primary persistence configuration",
                     "form": true,
                     "persistence": {
                         "type": "object",

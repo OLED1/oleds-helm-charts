@@ -185,7 +185,8 @@ cmsms_settings:
   initial_user:
     create: true
     username: Admin
-    password: changeme
+    ## Leave it empty and a password will be generated
+    password:
     email: admin@example.com
 
     ## Use an existing secret
@@ -216,8 +217,8 @@ cmsms_settings:
       auth_needed: false
       auth_user:
       auth_pw:
-      ## The connection encryption. Can be ssl/tls or just nothing.
-      auth_encryption: "none"
+      ## The connection encryption. Can be ssl/tls or none.
+      auth_encryption: none
 
       ## Use an existing secret
       existingSecret: 
@@ -312,7 +313,7 @@ mariadb:
       enabled: false
       # storageClass: ""
       accessMode: ReadWriteOnce
-      size: 8Gi
+      size: 1Gi
 
 ## External MYSQL/MariaDB Database
 externalDatabase:
