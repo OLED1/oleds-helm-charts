@@ -108,7 +108,7 @@ $config['timezone'] = <TIMEZONE>;
 $config['url_rewriting'] = 'mod_rewrite';
 ```
 
-By editing **additional_config_settings** setting which can be found under ** cmsms_settings -> app_config -> additional_config_settings ** you add more settings:
+By editing **additional_config_settings** setting which can be found under **cmsms_settings -> app_config -> additional_config_settings** you add more settings:
 ```
 additional_config_settings:
 - $config['param_key1'] = "param_value1";
