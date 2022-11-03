@@ -5,3 +5,4 @@ development/cmsms/kubernetes
 development/cmsms/cmsms-app-src/app/config.php
 development/cmsms/cmsms-app-src/app/tmp/cache/*
 development/cmsms/cmsms-app-src/app/tmp/templates_c/*
+development/db-backup/kubernetes
