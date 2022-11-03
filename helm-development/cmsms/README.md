@@ -9,6 +9,9 @@
 - Helm installed and configured. [See here](https://helm.sh/docs/intro/install/)
 - (Optional) Kubeapps (Helm GUI) installed. [See here](https://tanzu.vmware.com/developer/guides/kubeapps-gs/)
 
+## Short app description
+CMS Made Simple (CMSMS) is a free, open source (GPL) content management system (CMS) to provide developers, programmers and site owners a web-based development and administration area. In 2017 it won the CMS Critic annual award for Best Open Source Content Management.
+
 ## Documentation
 - The official documentation can be found here: https://docs.cmsmadesimple.org/
 
