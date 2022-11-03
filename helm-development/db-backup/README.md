@@ -18,8 +18,8 @@ This dumps then uploaded to a configured webdav share (Tested with Nextcloud) or
 - Currently only MYSQL databse(s) can be dumped
 - Dumps multiple databases in a single namespace at once (you can state only one host)
 - When using an external database, you can dump multiple databases at once
-- Uploads the dumps automatically to a webdav share (Tested on Nextcloud)
-- Backups the dumps automatically to an existing pv (e.g. NFS Share)
+- Uploads the dumps automatically to a webdav share (Tested with Nextcloud)
+- Copies the dumps automatically to an existing pv (e.g. NFS Share)
 - Sends an e-mail when a backup ends with details about the process
 
 ## Installation
@@ -37,10 +37,10 @@ This dumps then uploaded to a configured webdav share (Tested with Nextcloud) or
 Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).
 
 ## Whats new?
-### Chart Version 0.1.3
-- Updated App version to typemill 1.5.3.4.
-- It's now possible to configure most of the needed settings in the "Visual editor" of kubeapps.
-> NOTE: Due to wrong list generation of the plugin_names and themes_names section in the Visual editor, they must be added "manually" in the yaml file.
+### Chart Version 0.1.0
+- First version of the tool
+- Support only MySQL/MariaDB dumping
+- See further features in the "features" section
 
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
