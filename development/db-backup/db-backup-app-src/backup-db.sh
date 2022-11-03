@@ -18,7 +18,9 @@ echo "\n" > $mailoutfile
 rm -rf /tmp/*.sql.gz
 
 (
-
+#################################
+#       Dumping Databases       #
+#################################
 echo "${BWhite}[$(date)]${INFO}[INFO]${NC}The following databases will be dumped: ${DBS_TO_DUMP}."
 for this_db_to_dump in $DBS_TO_DUMP;
 do
@@ -37,66 +39,37 @@ do
     sleep 1
 done
 
+#####################################
+#       Backup to webdav share      #
+#####################################
 if [ $execstatus -eq 0 ];then
-    echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Copying files to target directories."
+    echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Uploading/Copying files to target directories."
     if [ "${DAVBACKUPENABLED}" = "true" ];then
         echo "${BWhite}[$(date)]${STEP}[STEP]${NC}DAV backup seems to be enabled."
-        echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Creating local mount for dav share."
-        mkdir -p /mnt/davs > /dev/null 2>&1
-        echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Adding secrets to dav secrets file."
-        echo "$DAVROOTDIR $DAVUSER $DAVPWD" > /etc/davfs2/secrets
-        echo "${BWhite}[$(date)]${INFO}[INFO]${NC}$( cat /etc/davfs2/secrets )"
+        echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Uploading files '$(ls /tmp/ | grep sql.gz | tr '\n' ', ')' to '${DAVROOTDIR}${DAVBACKUPSUBDIR}'."
 
-        echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Mounting remote dav directory '${DAVROOTDIR}' to '${local_dav_dir}'."
-        
-
-        if find $local_dav_dir -maxdepth 0 -empty | read v;
-        then
-            #echo y | mount -t davfs $DAVROOTDIR $local_dav_dir
-
-            for file in ${tmpdir}/*.sql.gz
-            do
-                echo $file
-                curl --progress-bar -u $DAVUSER:$DAVPWD -T ${file} ${DAVROOTDIR}${DAVBACKUPSUBDIR} | cat
-                connection_status=$?
-                
-                if [ $connection_status -eq 0 ] && [ $(ls -l $local_dav_dir | wc -l) -gt 0 ];
-                then
-                    echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All worked fine. Hanging on..."
-                else
-                    echo "${BWhite}[$(date)]${ERROR}[ERROR]${NC}That did not work as expected. $connection_status"
-                    execstatus=1
-                fi
-            done
-        else 
-            echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Already mounted."
-        fi
-
-
-        #backuppath="${local_dav_dir}${DAVBACKUPSUBDIR}${BackupFolderName}/"
-        #ls -al $local_dav_dir
-        #echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Copying file(s) '$(ls /tmp/ | grep sql.gz | tr '\n' ', ')' to '$backuppath'."
-        #mkdir -p $backuppath
-        #rsync -av --progress  ${tmpdir}/*.sql.gz $local_dav_dir
-        #copystatus=$?
-
-        #ls -al $local_dav_dir
-
-        #sleep 5
-
-        #if [ $copystatus -eq 0 ] || [ $execstatus -eq 0 ];
-        #then
-        #    echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All worked fine. Hanging on..."
-        #else
-        #    echo "${BWhite}[$(date)]${ERROR}[ERROR]${NC}That did not work as expected (Status: $copystatus)."
-        #    execstatus=1
-        #fi
+        for file in ${tmpdir}/*.sql.gz
+        do
+            echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Uploading file '${file}' to '${DAVROOTDIR}${DAVBACKUPSUBDIR}'."
+            httpcode=$(curl -w "%{http_code}" --progress-bar -u $DAVUSER:$DAVPWD -T ${file} ${DAVROOTDIR}${DAVBACKUPSUBDIR} | cat)
+            
+            if [ $httpcode -eq 201 ];
+            then
+                echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All worked fine. Hanging on..."
+            else
+                echo "${BWhite}[$(date)]${ERROR}[ERROR]${NC}That did not work as expected (http code: $httpcode). $connection_status"
+                execstatus=1
+            fi
+        done
     fi
 fi
 
+#############################
+#       Backup to pv        #
+#############################
 if [ $execstatus -eq 0 ];then
     if [ "${PVBACKUPENABLED}" = "true" ] || [ $execstatus -eq 0 ];then
-        backuppath="${local_pv_dir}/${BackupFolderName}/"
+        backuppath="${local_pv_dir}/"
         echo "${BWhite}[$(date)]${STEP}[STEP]${NC}PV backup seems to be enabled."
         echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Copying files '$(ls /tmp/ | grep sql.gz | tr '\n' ', ')' to '$backuppath'."
         mkdir -p $backuppath
@@ -116,6 +89,9 @@ fi
 echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}Script execution ended with statucode ${execstatus}."
 ) 2>&1 | tee -a $mailoutfile
 
+#################################
+#       Send status mail        #
+#################################
 if [ "${ENABLE_SMTP}" = "true" ];then
     echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}Sending status mail."
 
@@ -139,5 +115,5 @@ UseSTARTTLS=${SMTP_STARTTLS}" > /etc/ssmtp/ssmtp.conf
 
     echo "\n\n$(cat $mailoutfile | aha --black)" >> ${mailoutfile}.html
 
-    #ssmtp -vvv -F"$MAIL_FROM_NAME" $RCPT_LIST < ${mailoutfile}.html
+    ssmtp -vvv -F"$MAIL_FROM_NAME" $RCPT_LIST < ${mailoutfile}.html
 fi

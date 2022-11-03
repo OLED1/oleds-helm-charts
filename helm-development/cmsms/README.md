@@ -6,8 +6,8 @@
 
 ## Prerequisites
 - Kubernetes installed
-- Helm installed and configured
-- (Optional) Kubeapps (Helm GUI) installed (https://tanzu.vmware.com/developer/guides/kubeapps-gs/)
+- Helm installed and configured. [See here](https://helm.sh/docs/intro/install/)
+- (Optional) Kubeapps (Helm GUI) installed. [See here](https://tanzu.vmware.com/developer/guides/kubeapps-gs/)
 
 ## Documentation
 - The official documentation can be found here: https://docs.cmsmadesimple.org/
