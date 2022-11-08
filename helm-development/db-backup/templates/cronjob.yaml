@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "db-backup.labels" . | nindent 4 }}
 spec:
-  schedule: {{ .Values.backup.job.schedule | default "0 0,12 * * *" }}
+  schedule: {{ .Values.backup.job.schedule | default "0 0,12 * * *" | quote }}
   successfulJobsHistoryLimit: {{.Values.backup.job.successfulJobsHistoryLimit | default 5 }}
   failedJobsHistoryLimit: {{ .Values.backup.job.failedJobsHistoryLimit | default 2 }}
   jobTemplate:
