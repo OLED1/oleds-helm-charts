@@ -1,8 +1,7 @@
-# Typemill helm chart
+# DB-Backup helm chart
 
 > **This Helm chart is a custom helm chart packaged by OLED1**.
-> There is no official support from typemill itself.
-> Active unofficial supported chart. If a new version will be released a new updated package will be created.
+> If you are missing some features tell me, i will try to implement them.
 
 ## Prerequisites
 - Kubernetes installed

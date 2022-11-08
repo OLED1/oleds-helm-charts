@@ -16,7 +16,7 @@ spec:
           imagePullSecrets:
             {{- toYaml . | nindent 8 }}
           {{- end }}
-          restartPolicy: {{ .Values.backup.job.failedJobsHistoryLimit | default "OnFailure" }}
+          restartPolicy: {{ .Values.backup.job.restartPolicy | default "OnFailure" }}
           containers:
           - name: app
             securityContext:
