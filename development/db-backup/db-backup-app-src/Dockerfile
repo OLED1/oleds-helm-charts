@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 # Update Base and install required packages
-RUN apt-get update && apt-get upgrade -y && apt-get install mysql-client ssmtp aha rsync curl -y
+RUN apt-get update && apt-get upgrade -y && apt-get install mysql-client ssmtp aha rsync curl tzdata -y
 
 # Copy app content
 # Use the .dockerignore file to control what ends up inside the image!

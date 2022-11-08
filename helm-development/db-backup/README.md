@@ -19,7 +19,7 @@ This dumps then uploaded to a configured webdav share (Tested with Nextcloud) or
 - Dumps multiple databases in a single namespace at once (you can state only one host)
 - When using an external database, you can dump multiple databases at once
 - Uploads the dumps automatically to a webdav share (Tested with Nextcloud)
-- Copies the dumps automatically to an existing pv (e.g. NFS Share)
+- Copies the dumps automatically to an existing pv or an NFS Share
 - Sends an e-mail when a backup ends with details about the process
 
 ## Installation
@@ -39,7 +39,7 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 ## Whats new?
 ### Chart Version 0.1.0
 - First version of the tool
-- Support only MySQL/MariaDB dumping
+- Supports only MySQL/MariaDB dumping
 - See further features in the "features" section
 
 ## FAQ

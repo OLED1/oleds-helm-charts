@@ -2,11 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: oled01/db-backup
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -14,21 +12,14 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
-securityContext: {}
+securityContext: 
+  {
+    privileged: true
+  }
   # capabilities:
   #   drop:
   #   - ALL
@@ -36,47 +27,136 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 80
+backup:
+  ## Job settings
+  job:
+    ## Configure when or/and in which interval the pod should be executed
+    ## ref: https://de.wikipedia.org/wiki/Cron
+    ## ref: https://wiki.ubuntuusers.de/Cron/
+    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+    #          ┌───────────── minute (0 - 59)
+    #          │ ┌───────────── hour (0 - 23)
+    #          │ │ ┌───────────── day of the month (1 - 31)
+    #          │ │ │ ┌───────────── month (1 - 12)
+    #          │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday;
+    #          │ │ │ │ │                                   7 is also Sunday on some systems)
+    #          │ │ │ │ │                                   OR sun, mon, tue, wed, thu, fri, sat
+    #          │ │ │ │ │
+    #          * * * * *
+    # Defaults to every 12 Hours (0 pm, 12 am : 0 0,12 * * *)
+    # Find help here: https://crontab.guru/
+    schedule: "0 0,12 * * *"
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    # When the job shouldbe restarted
+    restartPolicy: OnFailure
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+    ## How many completed pods should be kept in the history
+    successfulJobsHistoryLimit: 5
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+    ## How many failed pods should be kept in the history
+    failedJobsHistoryLimit: 2
 
-nodeSelector: {}
+  ## App container settings
+  container:
+    ## The timezone you are living
+    ## E.g.: Europe/Vienna, Europe/Berlin, Europe/Kiev, America/Chicago, ...
+    ## ref: https://manpages.ubuntu.com/manpages/xenial/man3/DateTime::TimeZone::Catalog.3pm.html
+    timezone: "Europe/Vienna"
 
-tolerations: []
+  ## Database configuration
+  db_settings:
+    ## Configuration for mariadb or mysql database
+    mariadb_mysql:
+      ## The host of the database
+      ## Can be an IP or an DNS Name
+      database_host: 
 
-affinity: {}
+      ## Database authentication settings
+      database_auth:
+        ## The database user which has the ability to dump the databases you want to dump
+        user: root
+        ## The password of the database user which has the ability to dump the databases you want to dump
+        password:
+
+      ## Which database(s) should be dumped
+      ## db_1 db_2 db_3 db_x
+      databases_to_dump:
+
+  ## Get notified about the last dump status using external smtp
+  ## This container uses ssmtp as mailer
+  ## ref: https://wiki.debian.org/sSMTP
+  mail_settings:
+    ## Enable notfication via mail
+    enable: false
+
+    host_setting:
+      ## SMTP Host
+      host: smtp.example.com
+      ## SMTP Port
+      port: 465
+
+    auth:
+      ## Set to true when smtp needs authentication (recommended)
+      enabled: false
+      ## SMTP Username
+      username:
+      ## SMTP Password
+      password:
+      ## Set to yes when host supports tls for encryption
+      tls_encryption: no
+      ## Set to yes when host supports starttls as encryption
+      starttls_encryption: no
+
+    mail_details:
+      ## It's used to be able to differ from which instance the backup notification is comming from
+      ## E.g. Nextcloud Productive Instance, Wordpress Test Instance, and so on ...
+      ## Will be shown as follows: "My Super Important Productive Instance" <my-instance@example.com>
+      mail_from: My Super Important Productive Instance
+      ## From which e-mail is the notification comming from
+      mail_from_email: my-instance@example.com
+      ## Who should get the notification mail
+      ## State mails comma seperated
+      ## E.g. e-mail1, e-mail2, e-mail3, ...
+      mail_recepient_list:
+
+      #mail_recepient_list: e-mail1@example.com, e-mail2@example.com, e-mail3@example.com
+
+  ## Webdav Backup settings
+  ## Move your database backup to a webdav share
+  webdav:
+    ## If you want to upload you database backup to a webdav share
+    ## set 'enabled' to true
+    enabled: false
+    ## Set the root directory of your webdav share including the domain part
+    ## For nextcloud it would be: https://my-nextcloud.example.com/remote.php/dav/files/<USER>/
+    webdav_root:
+    ## The subdirectory (above the root directoy) where the backups finally should be placed
+    ## NOTE: The subdirectory must exist!
+    subdirectory:
+    ## The webdav login user
+    webdav_user:
+    ## The password to you webdav
+    ## NOTE: If you are using nextcloud with a second factor, create a login key first in your security settings
+    webdave_user_password:
+
+  ## Move your database backup to an existing persistent volume
+  ## NOTE: An existing share is required
+  persistent_volume:
+    ## If you want to move your database backup to an existing pv
+    ## set 'enabled' to true
+    enabled: false
+    ## A manually managed Persistent Volume and Claim
+    ## Requires persistence.enabled: true
+    ## If defined, PVC must be created manually before volume will be bound
+    existingClaim:
+
+  ## NFS Backup settings
+  ## Move your database backup to a nfs share
+  nfs:
+    ## If you want to move your database backup to a nfs share
+    ## set 'enabled' to true
+    enabled: false
+    ## Hostname or IP of your NFS Server
+    nfs_host:
+    ## Full path of your NFS share
+    nfs_path:
