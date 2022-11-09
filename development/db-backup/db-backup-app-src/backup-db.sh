@@ -62,6 +62,7 @@ if [ $execstatus -eq 0 ];then
         for file in ${tmpdir}/*.sql.gz
         do
             echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Uploading file '${file}' to '${DAVROOTDIR}${DAVBACKUPSUBDIR}'."
+            httpcode=500
             httpcode=$(curl -s -w "%{http_code}" -o /dev/null -u $DAVUSER:$DAVPWD -T ${file} ${DAVROOTDIR}${DAVBACKUPSUBDIR})
             
             if [ $httpcode -eq 201 ];

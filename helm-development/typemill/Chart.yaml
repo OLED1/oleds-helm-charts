@@ -1,6 +1,6 @@
 apiVersion: v2
 name: typemill
-description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
+description: A lightweight flat file cms for micro-publishers.
 annotations:
   category: CMS
 

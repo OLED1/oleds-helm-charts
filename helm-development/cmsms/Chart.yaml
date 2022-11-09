@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cmsms
-description: Helm chart for CMS Made Simple. - An easy to use CMS System.
+description: An easy to use CMS System.
 annotations:
   category: CMS
 

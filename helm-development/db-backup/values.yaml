@@ -141,10 +141,10 @@ backup:
     enabled: false
     ## Set the root directory of your webdav share including the domain part
     ## For nextcloud it would be: https://my-nextcloud.example.com/remote.php/dav/files/<USER>/
-    webdav_root:
+    webdav_root: https://my-nextcloud.example.com/remote.php/dav/files/<USER>/
     ## The subdirectory (above the root directoy) where the backups finally should be placed
     ## NOTE: The subdirectory must exist!
-    subdirectory:
+    subdirectory: /my/backup/dir
     ## Configure Webdav authentication here
     auth:
       ## The webdav login user
