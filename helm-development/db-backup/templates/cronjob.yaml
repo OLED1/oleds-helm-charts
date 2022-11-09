@@ -45,7 +45,7 @@ spec:
             #Mail Settings
             {{- if .Values.backup.mail_settings.enable -}}
             - name: ENABLE_SMTP
-              value: {{ .Values.backup.mail_settings.enable }}
+              value: {{ .Values.backup.mail_settings.enable | quote }}
             - name: SMTP_HOST
               value: {{ .Values.backup.mail_settings.host_setting.host | quote }}
             - name: SMTP_PORT
@@ -74,7 +74,7 @@ spec:
             #DAV Settings
             {{- if .Values.backup.webdav.enabled -}}
             - name: DAVBACKUPENABLED
-              value: {{ .Values.backup.webdav.enabled }}
+              value: {{ .Values.backup.webdav.enabled | quote }}
             - name: DAVROOTDIR
               value: {{ .Values.backup.webdav.webdav_root | quote }}
             - name: DAVBACKUPSUBDIR
@@ -92,12 +92,12 @@ spec:
             {{- end -}}
             #PV DUMP Settings (Requires existing PV)
             - name: PVBACKUPENABLED
-              value: {{ .Values.backup.persistent_volume.enabled }}
+              value: {{ .Values.backup.persistent_volume.enabled | quote }}
             #NFS DUMP Settings
             - name: NFSBACKUPENABLED
-              value: {{ .Values.backup.nfs.enabled }}
+              value: {{ .Values.backup.nfs.enabled | quote }}
             volumeMounts:
-            {{- if .Values.backup.persistent_volume.enabled -}}
+            {{- if .Values.backup.persistent_volume.enabled }}
             - mountPath: /mnt/pv-backup
               name: pv-backup
             {{- end -}}
