@@ -148,10 +148,10 @@ backup:
     ## Configure Webdav authentication here
     auth:
       ## The webdav login user
-      webdav_user:
+      webdav_user: webdav
       ## The password to you webdav
       ## NOTE: If you are using nextcloud with a second factor, create a login key first in your security settings
-      webdav_user_password:
+      webdav_user_password: webdav
 
       ## If theres already an existing secret with you webdav credentials you set it up here
       ## You can leave webdav_user and webdav_user_password blank

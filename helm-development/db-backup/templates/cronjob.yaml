@@ -24,10 +24,8 @@ spec:
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             env:
-            # Container Settings
             - name: TZ
               value: {{ .Values.backup.container.timezone | default "Europe/Vienna" }}
-            # MYSQL/MariaDB Connection Settings
             - name: DBS_TO_DUMP
               value: {{ .Values.backup.db_settings.mariadb_mysql.databases_to_dump | quote }}
             - name: DB_HOST
@@ -42,8 +40,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
                   key: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.passwordKey | default "db_auth_password" }}
-            #Mail Settings
-            {{- if .Values.backup.mail_settings.enable -}}
+            {{- if .Values.backup.mail_settings.enable }}
             - name: ENABLE_SMTP
               value: {{ .Values.backup.mail_settings.enable | quote }}
             - name: SMTP_HOST
@@ -70,8 +67,7 @@ spec:
               value: {{ .Values.backup.mail_settings.mail_details.mail_from | quote }}
             - name: RCPT_LIST
               value: {{ .Values.backup.mail_settings.mail_details.mail_recepient_list | quote }} 
-            {{- end -}}
-            #DAV Settings
+            {{- end }}
             {{- if .Values.backup.webdav.enabled -}}
             - name: DAVBACKUPENABLED
               value: {{ .Values.backup.webdav.enabled | quote }}
@@ -89,31 +85,29 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.backup.webdav.auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
                   key: {{ .Values.backup.webdav.auth.existingSecret.passwordKey | default "webdav_password" }}
-            {{- end -}}
-            #PV DUMP Settings (Requires existing PV)
+            {{- end }}
             - name: PVBACKUPENABLED
               value: {{ .Values.backup.persistent_volume.enabled | quote }}
-            #NFS DUMP Settings
             - name: NFSBACKUPENABLED
               value: {{ .Values.backup.nfs.enabled | quote }}
             volumeMounts:
             {{- if .Values.backup.persistent_volume.enabled }}
             - mountPath: /mnt/pv-backup
               name: pv-backup
-            {{- end -}}
-            {{- if .Values.backup.nfs.enabled -}}
+            {{- end }}
+            {{- if .Values.backup.nfs.enabled }}
             - mountPath: /mnt/nfs-backup
               name: nfs-backup
-            {{- end -}}
+            {{- end }}
           volumes:
-          {{- if .Values.backup.persistent_volume.enabled -}}
+          {{- if .Values.backup.persistent_volume.enabled }}
           - name: pv-backup
             persistentVolumeClaim:
-              claimName: {{- if .Values.backup.persistent_volume.existingClaim -}}{{ .Values.backup.persistent_volume.existingClaim }}{{- end -}}
-          {{- end -}}
-          {{- if .Values.backup.nfs.enabled -}}
+              claimName: {{- if .Values.backup.persistent_volume.existingClaim }}{{ .Values.backup.persistent_volume.existingClaim }}{{- end }}
+          {{- end }}
+          {{- if .Values.backup.nfs.enabled }}
           - name: nfs-backup
             nfs:
               server: {{ .Values.backup.nfs.nfs_host }}
               path: {{ .Values.backup.nfs.nfs_path }}
-          {{- end -}}
+          {{- end }}
