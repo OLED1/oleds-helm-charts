@@ -79,7 +79,7 @@ fi
 #       Backup to pv        #
 #############################
 if [ $execstatus -eq 0 ];then
-    if [ "${PVBACKUPENABLED}" = "true" ] || [ $execstatus -eq 0 ];then
+    if [ "${PVBACKUPENABLED}" = "true" ] && [ $execstatus -eq 0 ];then
         printf "%100s\n" " " | tr ' ' '-' 
         backuppath="${local_pv_dir}/"
         echo "${BWhite}[$(date)]${STEP}[STEP]${NC}PV backup seems to be enabled."
@@ -102,7 +102,7 @@ fi
 #       Backup to nfs       #
 #############################
 if [ $execstatus -eq 0 ];then
-    if [ "${NFSBACKUPENABLED}" = "true" ] || [ $execstatus -eq 0 ];then
+    if [ "${NFSBACKUPENABLED}" = "true" ] && [ $execstatus -eq 0 ];then
         printf "%100s\n" " " | tr ' ' '-' 
         backuppath="${local_nfs_dir}/"
         echo "${BWhite}[$(date)]${STEP}[STEP]${NC}NFS backup seems to be enabled."

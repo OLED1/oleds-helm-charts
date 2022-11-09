@@ -68,7 +68,7 @@ spec:
             - name: RCPT_LIST
               value: {{ .Values.backup.mail_settings.mail_details.mail_recepient_list | quote }} 
             {{- end }}
-            {{- if .Values.backup.webdav.enabled -}}
+            {{- if .Values.backup.webdav.enabled }}
             - name: DAVBACKUPENABLED
               value: {{ .Values.backup.webdav.enabled | quote }}
             - name: DAVROOTDIR
