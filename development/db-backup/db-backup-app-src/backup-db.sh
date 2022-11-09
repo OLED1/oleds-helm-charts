@@ -1,5 +1,4 @@
 #!/bin/bash
-local_dav_dir="/mnt/davs"
 local_pv_dir="/mnt/pv-backup"
 local_nfs_dir="/mnt/nfs-backup"
 tmpdir="/tmp"
@@ -144,7 +143,7 @@ fi
 #       Send status mail        #
 #################################
 if [ "${ENABLE_SMTP}" = "true" ];then
-    echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}Sending status mail."
+    echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Sending status mail."
 
     echo "root=
 mailhub=${SMTP_HOST}:${SMTP_PORT}

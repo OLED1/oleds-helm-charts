@@ -48,9 +48,17 @@ spec:
             - name: SMTP_PORT
               value: {{ .Values.backup.mail_settings.host_setting.port | quote }}
             - name: SMTP_TLS
-              value: {{ .Values.backup.mail_settings.auth.tls_encryption | quote }}
+              {{- if .Values.backup.mail_settings.auth.tls_encryption }}
+              value: "yes"
+              {{- else }}
+              value: "no"
+              {{- end }}
             - name: SMTP_STARTTLS
-              value: {{ .Values.backup.mail_settings.auth.starttls_encryption | quote }}
+              {{- if .Values.backup.mail_settings.auth.starttls_encryption }}
+              value: "yes"
+              {{- else }}
+              value: "no"
+              {{- end }}
             - name: SMTP_LOGIN_NAME
               valueFrom:
                 secretKeyRef:
