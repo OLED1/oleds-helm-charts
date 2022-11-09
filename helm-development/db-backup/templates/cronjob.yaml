@@ -33,13 +33,19 @@ spec:
             - name: DB_HOST
               value: {{ .Values.backup.db_settings.mariadb_mysql.database_host | quote }}
             - name: DB_USER
-              value: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.user | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.usernameKey | default "db_auth_username" }}
             - name: DB_USER_PASSWORD
-              value: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.password | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.db_settings.mariadb_mysql.database_auth.existingSecret.passwordKey | default "db_auth_password" }}
             #Mail Settings
             {{- if .Values.backup.mail_settings.enable -}}
             - name: ENABLE_SMTP
-              value: {{ .Values.backup.mail_settings.enable | quote }}
+              value: {{ .Values.backup.mail_settings.enable }}
             - name: SMTP_HOST
               value: {{ .Values.backup.mail_settings.host_setting.host | quote }}
             - name: SMTP_PORT
@@ -49,9 +55,15 @@ spec:
             - name: SMTP_STARTTLS
               value: {{ .Values.backup.mail_settings.auth.starttls_encryption | quote }}
             - name: SMTP_LOGIN_NAME
-              value: {{ .Values.backup.mail_settings.auth.username | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.mail_settings.auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.mail_settings.auth.existingSecret.usernameKey | default "db_backup_smtp_username" }}
             - name: SMTP_LOGIN_PW
-              value: {{ .Values.backup.mail_settings.auth.password | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.mail_settings.auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.mail_settings.auth.existingSecret.passwordKey | default "db_backup_smtp_password" }}
             - name: MAIL_FROM_EMAIL
               value: {{ .Values.backup.mail_settings.mail_details.mail_from_email | quote }}
             - name: MAIL_FROM_NAME
@@ -62,22 +74,28 @@ spec:
             #DAV Settings
             {{- if .Values.backup.webdav.enabled -}}
             - name: DAVBACKUPENABLED
-              value: {{ .Values.backup.webdav.enabled | quote }}
+              value: {{ .Values.backup.webdav.enabled }}
             - name: DAVROOTDIR
               value: {{ .Values.backup.webdav.webdav_root | quote }}
             - name: DAVBACKUPSUBDIR
               value: {{ .Values.backup.webdav.subdirectory | quote }}
             - name: DAVUSER
-              value: {{ .Values.backup.webdav.webdav_user | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.webdav.auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.webdav.auth.existingSecret.usernameKey | default "webdav_username" }}
             - name: DAVPWD
-              value: {{ .Values.backup.webdav.webdave_user_password | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backup.webdav.auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
+                  key: {{ .Values.backup.webdav.auth.existingSecret.passwordKey | default "webdav_password" }}
             {{- end -}}
             #PV DUMP Settings (Requires existing PV)
             - name: PVBACKUPENABLED
-              value: {{ .Values.backup.persistent_volume.enabled | quote }}
+              value: {{ .Values.backup.persistent_volume.enabled }}
             #NFS DUMP Settings
             - name: NFSBACKUPENABLED
-              value: {{ .Values.backup.nfs.enabled | quote }}
+              value: {{ .Values.backup.nfs.enabled }}
             volumeMounts:
             {{- if .Values.backup.persistent_volume.enabled -}}
             - mountPath: /mnt/pv-backup

@@ -76,7 +76,13 @@ backup:
         ## The database user which has the ability to dump the databases you want to dump
         user: root
         ## The password of the database user which has the ability to dump the databases you want to dump
-        password:
+        password: mySuperSecurePassword!
+
+        existingSecret:
+          enabled: false
+          #secretName: nameofsecret
+          #usernameKey: username
+          #passwordKey: password
 
       ## Which database(s) should be dumped
       ## db_1 db_2 db_3 db_x
@@ -107,6 +113,12 @@ backup:
       ## Set to yes when host supports starttls as encryption
       starttls_encryption: no
 
+      existingSecret:
+        enabled: false
+        #secretName: nameofsecret
+        #usernameKey: username
+        #passwordKey: password
+
     mail_details:
       ## It's used to be able to differ from which instance the backup notification is comming from
       ## E.g. Nextcloud Productive Instance, Wordpress Test Instance, and so on ...
@@ -133,11 +145,21 @@ backup:
     ## The subdirectory (above the root directoy) where the backups finally should be placed
     ## NOTE: The subdirectory must exist!
     subdirectory:
-    ## The webdav login user
-    webdav_user:
-    ## The password to you webdav
-    ## NOTE: If you are using nextcloud with a second factor, create a login key first in your security settings
-    webdave_user_password:
+    ## Configure Webdav authentication here
+    auth:
+      ## The webdav login user
+      webdav_user:
+      ## The password to you webdav
+      ## NOTE: If you are using nextcloud with a second factor, create a login key first in your security settings
+      webdav_user_password:
+
+      ## If theres already an existing secret with you webdav credentials you set it up here
+      ## You can leave webdav_user and webdav_user_password blank
+      existingSecret:
+        enabled: false
+        #secretName: nameofsecret
+        #usernameKey: username
+        #passwordKey: password
 
   ## Move your database backup to an existing persistent volume
   ## NOTE: An existing share is required
