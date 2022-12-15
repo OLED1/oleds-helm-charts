@@ -188,7 +188,7 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 ### Chart Version 0.1.2 (0.1.20-dev) - 25.10.22
 - Reverted back to manually adding password
 
-### Chart Version 0.1.3 (0.1.3-dev1) - 15.12.22
+### Chart Version 0.1.3 (0.1.30-dev1) - 15.12.22
 - Added timezone setting in **cmsms_settings -> app_config -> timezone: Europe/Vienna**
 - Updated documentation
 
