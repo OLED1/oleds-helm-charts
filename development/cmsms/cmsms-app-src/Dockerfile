@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:7.4-apache
 
 # Install OS dependencies required
 RUN apt-get update && apt-get upgrade -y && apt-get install curl zip libzip-dev libgd-dev libicu-dev -y
@@ -8,8 +8,8 @@ RUN a2enmod rewrite
 #RUN a2enmod rewrite \
 #    && echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf
 
-# Configure gd with freetype
-RUN docker-php-ext-configure gd
+# Configure gd with freetype and jpeg support
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Install PHP ext-gd
 RUN docker-php-ext-install intl gd zip mysqli pdo pdo_mysql opcache

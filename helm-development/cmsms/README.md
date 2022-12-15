@@ -21,6 +21,14 @@ Just fill out the values.yaml file or use Visual Editor to deploy the applicatio
 
 > Please Note: Pretty URL's are configured per default. Just use the default htaccess file.
 
+### Set container timezone
+Some system modules need a correct system time like the news module.
+In the following list you can find valid settings. [See here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
+```
+cmsms_settings:
+  app_config:
+    timezone: Europe/Vienna #<--- Just an example. Use your timezone.
+```
 ### Not included in visual editor
 #### Ingress hostname and tls configuration
 By setting up the ingress controller your application can be made available through the internet.
@@ -180,6 +188,13 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 ### Chart Version 0.1.2 (0.1.20-dev) - 25.10.22
 - Reverted back to manually adding password
 
+## Chart Version 0.1.3 (0.1.3-dev0) - 25.10.22
+- Added timezone setting in **cmsms_settings -> app_config -> timezone: Europe/Vienna**
+- Updated documentation
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)
+
+### Browser Error: Too many redirects
+It seems you are using https. Go to the backend and navigate to the "Content Manager". Select all pages by hitting the top right checkbox and set all pages int the bottom left dropdown to "Set insecure (HTTP)". No worries, your instance will still be secure.

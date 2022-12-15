@@ -39,6 +39,8 @@ spec:
         image: "{{ .Values.cmsms_app.image.repository }}:{{ .Values.cmsms_app.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.cmsms_app.image.pullPolicy }}
         env:
+        - name: TZ
+          value: {{ .Values.cmsms_settings.app_config.timezone | default "Europe/Vienna" }}
         {{- if .Values.externalDatabase.enabled }}
         - name: CMSMS_DB_EXISTS
           value: "true"

@@ -233,6 +233,7 @@ cmsms_settings:
     ## The PHP Timezone which should be used by CMSMS
     ## see https://docs.cmsmadesimple.org/configuration/config-file/config-reference#config_timezone
     ## see https://www.php.net/manual/en/timezones.php
+    ## see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
     timezone: UTC
 
     ## You can setup more settings by following the CMSMS Guide
