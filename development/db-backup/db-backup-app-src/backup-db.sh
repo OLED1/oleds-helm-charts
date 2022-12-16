@@ -31,10 +31,10 @@ printf "%100s\n" " " | tr ' ' '-'
 echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Performing ENV variables check for mysqldump."
 if [ -z "$DB_USER" ] || [ -z "$DB_USER_PASSWORD" ] || [ -z "$DB_HOST" ] || [ -z "$DBS_TO_DUMP" ]; then
     echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}On or more env variables seems to be empty."
-    echo "${INFO}[INFO]${NC}Required 'DB_USER' = '$DB_USER'."
-    echo "${INFO}[INFO]${NC}Required 'DB_USER_PASSWORD' = '$DB_USER_PASSWORD'."
-    echo "${INFO}[INFO]${NC}Required 'DB_HOST' = '$DB_HOST'."
-    echo "${INFO}[INFO]${NC}Required 'DBS_TO_DUMP' = '$DBS_TO_DUMP'."
+    echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_USER' = '$DB_USER'."
+    echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_USER_PASSWORD' = '$DB_USER_PASSWORD'."
+    echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_HOST' = '$DB_HOST'."
+    echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DBS_TO_DUMP' = '$DBS_TO_DUMP'."
     execstatus=1
 else
     echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All needed env variables seem not to be emtpy and are existing."
@@ -44,6 +44,7 @@ fi
 #       Dumping Databases       #
 #################################
 if [ $execstatus -eq 0 ]; then
+    printf "%100s\n" " " | tr ' ' '-' 
     echo "${BWhite}[$(date)]${INFO}[INFO]${NC}The following databases will be dumped: ${DBS_TO_DUMP}."
     for this_db_to_dump in $DBS_TO_DUMP;
     do
@@ -137,6 +138,7 @@ if [ $execstatus -eq 0 ];then
         fi
     fi
 fi
+printf "%100s\n" " " | tr ' ' '-' 
 
 if [ $execstatus -eq 0 ];then
     status="${SUCC}[SUCC]${NC}"
@@ -147,6 +149,7 @@ else
 fi
 
 echo "${BWhite}[$(date)]${status}Script execution ended with statucode ${execstatus}."
+printf "%100s\n" " " | tr ' ' '-' 
 
 if [ $execstatus -eq 0 ];then
     echo "Subject:(Success)DB dump script ended ($(date))" > ${mailoutfile}.html
