@@ -69,7 +69,7 @@ backup:
     mariadb_mysql:
       ## The host of the database
       ## Can be an IP or an DNS Name
-      database_host: 
+      database_host:
 
       ## Database authentication settings
       database_auth:
@@ -174,7 +174,7 @@ backup:
     ## set 'enabled' to true
     enabled: false
     ## A manually managed Persistent Volume and Claim
-    ## Requires persistence.enabled: true
+    ## Requires persistent_volume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
     existingClaim:
 

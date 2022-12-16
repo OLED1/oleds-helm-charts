@@ -1,0 +1,380 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "backup": {
+            "type": "object",
+            "properties": {
+                "job": {
+                    "type": "object",
+                    "properties": {
+                        "schedule": {
+                            "type": "string",
+                            "title": "Execution schedule",
+                            "description": "When should the job be executed.",
+                            "default": "0 0,12 * * *",
+                            "form": true
+                        },
+                        "successfulJobsHistoryLimit": {
+                            "type": "integer",
+                            "title": "Successfull Jobs History Limit",
+                            "description": "How many successfull pods should be kept in the history (kubectl get pods).",
+                            "default": "5",
+                            "form": true
+                        },
+                        "failedJobsHistoryLimit": {
+                            "type": "integer",
+                            "title": "Failed Jobs History Limit",
+                            "description": "How many failed pods should be kept in the history (kubectl get pods).",
+                            "default": "2",
+                            "form": true
+                        },
+                        "restartPolicy": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "container": {
+                    "type": "object",
+                    "properties": {
+                        "timezone": {
+                            "type": "string",
+                            "title": "Pod timezone",
+                            "description": "The timezone of where you are so the pod has the correct time.",
+                            "default": "Europe/Vienna",
+                            "form": true
+                        }
+                    }
+                },
+                "db_settings": {
+                    "type": "object",
+                    "title": "Database settings",
+                    "description": "Configure your databases which should be dumped.",
+                    "form": true,
+                    "properties": {
+                        "mariadb_mysql": {
+                            "type": "object",
+                            "title": "MariaDB or MYSQL",
+                            "description": "Configuration for mariadb or mysql database",
+                            "form": true,
+                            "properties": {
+                                "database_host": {
+                                    "type": ["null","string"],
+                                    "title": "Database hostname or IP",
+                                    "description": "The host which holds the databases you want to dump.",
+                                    "form": true
+                                },
+                                "database_auth": {
+                                    "type": "object",
+                                    "title": "Database authentication",
+                                    "description": "The username and password to authentication against your mysql or mariadb instance.",
+                                    "form": true,
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "title": "Database username",
+                                            "description": "The database user which has the ability to dump the databases you want to dump.",
+                                            "form": true
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "title": "Database user password",
+                                            "description": "The password of the database user which has the ability to dump the databases you want to dump.",
+                                            "form": true
+                                        },
+                                        "existingSecret": {
+                                            "type": "object",
+                                            "properties": {
+                                                "enabled": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "databases_to_dump": {
+                                    "type": ["null","string"],
+                                    "title": "Databases to dump",
+                                    "description": "A list of databases which should be dumped (Space seperated).",
+                                    "form": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "mail_settings": {
+                    "type": "object",
+                    "title": "Notification via E-Mail",
+                    "description": "Get notified about the last dump status using external smtp.",
+                    "form": true,
+                    "properties": {
+                        "enable": {
+                            "type": "boolean",
+                            "title": "Enable E-Mail Notifications",
+                            "description": "Enable notfication via mail.",
+                            "form": true,
+                            "default": true
+                        },
+                        "host_setting": {
+                            "type": "object",
+                            "title": "SMTP connection settings.",
+                            "description": "Setup SMTP Host connection settings.",
+                            "form": true,
+                            "properties": {
+                                "host": {
+                                    "type": "string",
+                                    "title": "SMTP hostname or ip address.",
+                                    "description": "SMTP hostname or ip address where your SMTP server accepts requests.",
+                                    "form": true
+                                },
+                                "port": {
+                                    "type": "integer",
+                                    "title": "SMTP host port.",
+                                    "description": "Port where your SMTP server accepts requests.",
+                                    "form": true
+                                }
+                            }
+                        },
+                        "auth": {
+                            "type": "object",
+                            "title": "SMTP Server authentication",
+                            "description": "The username and password to authentication against your smtp server.",
+                            "form": true,
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "title": "Enable SMTP authentication",
+                                    "description": "Enable SMTP authentication.",
+                                    "form": true,
+                                    "default": true
+                                },
+                                "username": {
+                                    "type": ["null","string"],
+                                    "title": "SMTP Username",
+                                    "description": "The SMTP user which has the ability to authenticate against your smtp instance.",
+                                    "form": true
+                                },
+                                "password": {
+                                    "type": ["null","string"],
+                                    "title": "SMTP Password",
+                                    "description": "The password of this SMTP user.",
+                                    "form": true
+                                },
+                                "starttls_encryption": {
+                                    "type": "boolean",
+                                    "title": "SMTP Server SSL encryption",
+                                    "description": "Set to yes when host supports SSL for encryption.",
+                                    "default": false,
+                                    "form": true
+                                },
+                                "tls_encryption": {
+                                    "type": "boolean",
+                                    "title": "SMTP Server TLS encryption",
+                                    "description": "Set to yes when host supports TLS as encryption",
+                                    "default": false,
+                                    "form": true
+                                },
+                                "existingSecret": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "resend_on_error": {
+                            "type": "object",
+                            "title": "Resend mail on error",
+                            "description": "If you mailserver is sometimes not available you can setup an resend interval.",
+                            "form": true,
+                            "properties": {
+                                "smtp_max_retries": {
+                                    "type": "integer",
+                                    "title": "SMTP connection max retries",
+                                    "description": "Define how often it should be tried to send an e-mail before giving up.",
+                                    "default": 2,
+                                    "form": true
+                                },
+                                "smtp_retry_timeout": {
+                                    "type": "integer",
+                                    "title": "SMTP connection retry timeout",
+                                    "description": "Define how many seconds it should be waited before the script tries again.",
+                                    "default": 2,
+                                    "form": true
+                                }
+                            }
+                        },
+                        "mail_details": {
+                            "type": "object",
+                            "title": "Mail details",
+                            "description": "Configure some mail information so you are able to sort your backup mail a bit easier.",
+                            "form": true,
+                            "properties": {
+                                "mail_from": {
+                                    "type": "string",
+                                    "title": "Mail from",
+                                    "description": "E.g. Nextcloud Productive Instance, Wordpress Test Instance, and so on... Will be shown as follows: 'My Super Important Productive Instance' <my-instance@example.com>.",
+                                    "form": true
+                                },
+                                "mail_from_email": {
+                                    "type": "string",
+                                    "title": "Mail from e-mail",
+                                    "description": "From which e-mail is the notification comming from. E.g. my-instance@example.com",
+                                    "form": true
+                                },
+                                "mail_recepient_list": {
+                                    "type": ["null","string"],
+                                    "title": "Status mail recepients",
+                                    "description": "Who should get the notification mail? Sate mail. State mails comma seperated.",
+                                    "form": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "webdav": {
+                    "type": "object",
+                    "title": "Webdav share upload",
+                    "description": "Upload your database dumps to a webdav instance (e.g. Nextcloud).",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable upoad via Webdav",
+                            "description": "If you want to upload you database backup to a webdav share set 'enabled' to true.",
+                            "form": true,
+                            "default": false
+                        },
+                        "webdav_root": {
+                            "type": "string",
+                            "title": "Webdav root directory",
+                            "description": "For nextcloud it would be: https://my-nextcloud.example.com/remote.php/dav/files/<USER>/",
+                            "form": true
+                        },
+                        "subdirectory": {
+                            "type": "string",
+                            "title": "Final webdav subdirectory for backup files",
+                            "description": "The subdirectory (above the root directoy) where the backups finally should be placed. NOTE: The subdirectory must exist!",
+                            "form": true
+                        },
+                        "auth": {
+                            "type": "object",
+                            "title": "Webdav authentication",
+                            "description": "Setup the authentication to your webdav intance.",
+                            "form": true,
+                            "properties": {
+                                "webdav_user": {
+                                    "type": "string",
+                                    "title": "Webdav username",
+                                    "description": "The user which is allowed to upload files to your webdav instance.",
+                                    "form": true
+                                },
+                                "webdav_user_password": {
+                                    "type": "string",
+                                    "title": "Webdav password",
+                                    "description": "The password of the user stated above.",
+                                    "form": true
+                                },
+                                "existingSecret": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "persistent_volume": {
+                    "type": "object",
+                    "title": "Move backups to an existing pv",
+                    "description": "Move your database backup to an existing persistent volume. NOTE: An existing share is required.",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable existing pv backup",
+                            "description": "If you want to move your database backup to an existing pv set 'enabled' to true.",
+                            "form": true,
+                            "default": false
+                        },
+                        "existingClaim": {
+                            "type": ["null","string"],
+                            "title": "Existing claim name",
+                            "description": "The name of your existing claim.",
+                            "form": true
+                        }
+                    }
+                },
+                "nfs": {
+                    "type": "object",
+                    "title": "Move backups to a nfs share",
+                    "description": "Move your database backup to a nfs share.",
+                    "form": true,
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable existing pv backup",
+                            "description": "If you want to move your database backup to a nfs share set 'enabled' to true.",
+                            "form": true,
+                            "default": false
+                        },
+                        "nfs_host": {
+                            "type": ["null","string"],
+                            "title": "NFS hostname or IP",
+                            "description": "Hostname or IP of your NFS Server.",
+                            "form": true
+                        },
+                        "nfs_path": {
+                            "type": ["null","string"],
+                            "title": "NFS mount path",
+                            "description": "Full path of your NFS share where the backup files should be stored.",
+                            "form": true
+                        }
+                    }
+                }
+            }
+        },
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "pullPolicy": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            }
+        },
+        "imagePullSecrets": {
+            "type": "array"
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "podAnnotations": {
+            "type": "object"
+        },
+        "podSecurityContext": {
+            "type": "object"
+        },
+        "securityContext": {
+            "type": "object",
+            "properties": {
+                "privileged": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
