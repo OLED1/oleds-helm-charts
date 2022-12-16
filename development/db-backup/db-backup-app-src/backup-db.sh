@@ -26,25 +26,43 @@ echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Github repository: ${BWhite}https://gi
 printf "%100s\n" " " | tr ' ' '-' 
 
 #################################
+#           Pre Checks          #
+#################################
+echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Performing ENV variables check for mysqldump."
+if [ -z "$DB_USER" ] || [ -z "$DB_USER_PASSWORD" ] || [ -z "$DB_HOST" ] || [ -z "$DBS_TO_DUMP" ]; then
+    echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}On or more env variables seems to be empty."
+    echo "${INFO}[INFO]${NC}Required 'DB_USER' = '$DB_USER'."
+    echo "${INFO}[INFO]${NC}Required 'DB_USER_PASSWORD' = '$DB_USER_PASSWORD'."
+    echo "${INFO}[INFO]${NC}Required 'DB_HOST' = '$DB_HOST'."
+    echo "${INFO}[INFO]${NC}Required 'DBS_TO_DUMP' = '$DBS_TO_DUMP'."
+    execstatus=1
+else
+    echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All needed env variables seem not to be emtpy and are existing."
+fi
+
+#################################
 #       Dumping Databases       #
 #################################
-echo "${BWhite}[$(date)]${INFO}[INFO]${NC}The following databases will be dumped: ${DBS_TO_DUMP}."
-for this_db_to_dump in $DBS_TO_DUMP;
-do
-    db_dump_filename="${this_db_to_dump}_$(date +"%m_%d_%Y_%H_%M_%S").sql.gz"
-    db_tmp_save_dir="${tmpdir}/${db_dump_filename}"
-    echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Dumping database ${this_db_to_dump} to ${db_tmp_save_dir}. This can take a while. Please wait."
-    mysqldump -u$DB_USER -p$DB_USER_PASSWORD -h $DB_HOST $this_db_to_dump | gzip -c > $db_tmp_save_dir
-    dump_status=$?
-    if [ $dump_status -eq 0 ];
-    then
-        echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All worked fine. Hanging on..."
-    else
-        echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}That did not work as expected (Status: $dump_status)."
-        execstatus=1
-    fi
-    sleep 1
-done
+if [ $execstatus -eq 0 ]; then
+    echo "${BWhite}[$(date)]${INFO}[INFO]${NC}The following databases will be dumped: ${DBS_TO_DUMP}."
+    for this_db_to_dump in $DBS_TO_DUMP;
+    do
+        db_dump_filename="${this_db_to_dump}_$(date +"%m_%d_%Y_%H_%M_%S").sql.gz"
+        db_tmp_save_dir="${tmpdir}/${db_dump_filename}"
+        echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Dumping database ${this_db_to_dump} to ${db_tmp_save_dir}. This can take a while. Please wait."
+        #echo "mysqldump --column-statistics=0 -u$DB_USER -p$DB_USER_PASSWORD -h $DB_HOST $this_db_to_dump | gzip -c > $db_tmp_save_dir"
+        mysqldump --column-statistics=0 -u$DB_USER -p$DB_USER_PASSWORD -h $DB_HOST $this_db_to_dump | gzip -c > $db_tmp_save_dir
+        dump_status=$?
+        if [ $dump_status -eq 0 ];
+        then
+            echo "${BWhite}[$(date)]${SUCC}[SUCC]${NC}All worked fine. Hanging on..."
+        else
+            echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}That did not work as expected (Status: $dump_status)."
+            execstatus=1
+        fi
+        sleep 1
+    done
+fi
 
 if [ $execstatus -eq 0 ];then
     echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Uploading/Copying files to target directories."
