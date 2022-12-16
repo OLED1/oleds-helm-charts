@@ -66,6 +66,7 @@ if [ $execstatus -eq 0 ]; then
 fi
 
 if [ $execstatus -eq 0 ];then
+    printf "%100s\n" " " | tr ' ' '-' 
     echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Uploading/Copying files to target directories."
 fi
 
@@ -74,7 +75,6 @@ fi
 #####################################
 if [ $execstatus -eq 0 ];then
     if [ "${DAVBACKUPENABLED}" = "true" ];then
-        printf "%100s\n" " " | tr ' ' '-' 
         echo "${BWhite}[$(date)]${STEP}[STEP]${NC}DAV backup seems to be enabled."
 
         for file in ${tmpdir}/*.sql.gz
