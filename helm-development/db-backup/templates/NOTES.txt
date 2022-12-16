@@ -1,3 +1,4 @@
 This application does not include a web service, it runs periodically as background job.
 It is configured as following: {{ .Values.backup.job.schedule }}. [Description](https://crontab.guru/#{{ .Values.backup.job.schedule | replace " " "_" }})
 If you need help setting up the right exeuction interval take a look here: https://crontab.guru/
+**Please check your first dump if it contains all information. mysqldump sometimes does not throw an error if you have a typo e.g. in your database name.** 
