@@ -61,7 +61,6 @@ if [ $execstatus -eq 0 ];then
         for file in ${tmpdir}/*.sql.gz
         do
             echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Uploading file '${file}' to '${DAVROOTDIR}${DAVBACKUPSUBDIR}'."
-            httpcode=500
             httpcode=$(curl -s -w "%{http_code}" -o /dev/null -u $DAVUSER:$DAVPWD -T ${file} ${DAVROOTDIR}${DAVBACKUPSUBDIR})
             
             if [ $httpcode -eq 201 ];
@@ -142,6 +141,8 @@ fi
 #################################
 #       Send status mail        #
 #################################
+sent_mail=1
+retry=0
 if [ "${ENABLE_SMTP}" = "true" ];then
     echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Sending status mail."
 
@@ -160,5 +161,16 @@ UseSTARTTLS=${SMTP_STARTTLS}" > /etc/ssmtp/ssmtp.conf
 
     echo "\n\n$(cat $mailoutfile | aha --black)" >> ${mailoutfile}.html
 
-    ssmtp -vvv -F"$MAIL_FROM_NAME" $RCPT_LIST < ${mailoutfile}.html
+    while [ $sent_mail -eq 1 ] && [ $retry -le $SMTP_FAIL_RETRIES ]; do
+        ssmtp -vvv -F"$MAIL_FROM_NAME" $RCPT_LIST < ${mailoutfile}.html
+        sent_mail=$?
+        retry=$((retry+1))
+
+        if [ $sent_mail -eq 0 ];then
+            echo "${BWhite}[$(date)]${SUCC}[SUCC]E-Mail sent successfully.${NC}"
+        else    
+            echo "${BWhite}[$(date)]${CRIT}[CRIT]An error occured sending your mail.${NC}"
+        fi
+        sleep $SMTP_FAIL_RETRY_TIMEOUT
+    done
 fi

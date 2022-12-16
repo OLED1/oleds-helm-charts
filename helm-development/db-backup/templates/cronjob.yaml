@@ -74,7 +74,11 @@ spec:
             - name: MAIL_FROM_NAME
               value: {{ .Values.backup.mail_settings.mail_details.mail_from | quote }}
             - name: RCPT_LIST
-              value: {{ .Values.backup.mail_settings.mail_details.mail_recepient_list | quote }} 
+              value: {{ .Values.backup.mail_settings.mail_details.mail_recepient_list | quote }}
+            - name: SMTP_FAIL_RETRIES
+              value: {{ .Values.backup.mail_settings.resend_on_error.smtp_max_retries | default 2 | quote }}
+            - name: SMTP_FAIL_RETRY_TIMEOUT
+              value: {{ .Values.backup.mail_settings.resend_on_error.smtp_retry_timeout | default 2 | quote }}
             {{- end }}
             {{- if .Values.backup.webdav.enabled }}
             - name: DAVBACKUPENABLED

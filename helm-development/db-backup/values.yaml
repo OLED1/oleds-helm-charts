@@ -119,6 +119,12 @@ backup:
         #usernameKey: username
         #passwordKey: password
 
+    resend_on_error:
+      ## How often should the script try to resend the backup status mail
+      smtp_max_retries: 2
+      ## The interval in seconds between the send retries
+      smtp_retry_timeout: 2
+
     mail_details:
       ## It's used to be able to differ from which instance the backup notification is comming from
       ## E.g. Nextcloud Productive Instance, Wordpress Test Instance, and so on ...
