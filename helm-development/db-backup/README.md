@@ -172,7 +172,7 @@ Example config:
 Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OLED1/oleds-helm-charts).
 
 ## Whats new?
-### Chart Version 0.1.0 (0.1.13-dev) - 16.12.22
+### Chart Version 0.1.0 (0.1.14-dev) - 19.12.22
 - First version of the tool
 - Supports only MySQL/MariaDB dumping
 - See further features in the "features" section

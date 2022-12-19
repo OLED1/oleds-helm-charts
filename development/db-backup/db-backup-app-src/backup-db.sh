@@ -30,7 +30,7 @@ printf "%100s\n" " " | tr ' ' '-'
 #################################
 echo "${BWhite}[$(date)]${STEP}[STEP]${NC}Performing ENV variables check for mysqldump."
 if [ -z "$DB_USER" ] || [ -z "$DB_USER_PASSWORD" ] || [ -z "$DB_HOST" ] || [ -z "$DBS_TO_DUMP" ]; then
-    echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}On or more env variables seems to be empty."
+    echo "${BWhite}[$(date)]${CRIT}[CRIT]${NC}One or more env variables seems to be empty."
     echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_USER' = '$DB_USER'."
     echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_USER_PASSWORD' = '$DB_USER_PASSWORD'."
     echo "${BWhite}[$(date)]${INFO}[INFO]${NC}Required 'DB_HOST' = '$DB_HOST'."

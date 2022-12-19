@@ -5,7 +5,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.654546175+01:00"
+    created: "2022-12-19T10:40:50.389007721+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -29,7 +29,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.63338384+01:00"
+    created: "2022-12-19T10:40:50.345151037+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -53,7 +53,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.62703995+01:00"
+    created: "2022-12-19T10:40:50.329692863+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -77,7 +77,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.619760114+01:00"
+    created: "2022-12-19T10:40:50.320066306+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -101,7 +101,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.613334115+01:00"
+    created: "2022-12-19T10:40:50.305976464+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -125,7 +125,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.60632648+01:00"
+    created: "2022-12-19T10:40:50.296834595+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -149,7 +149,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.599636513+01:00"
+    created: "2022-12-19T10:40:50.286808035+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -173,7 +173,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.590306563+01:00"
+    created: "2022-12-19T10:40:50.270246893+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -197,7 +197,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.646115497+01:00"
+    created: "2022-12-19T10:40:50.37902498+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -221,7 +221,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-16T13:15:07.640058076+01:00"
+    created: "2022-12-19T10:40:50.35248593+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -246,7 +246,26 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.659892525+01:00"
+    created: "2022-12-19T10:40:50.398871182+01:00"
+    description: Backup your databases to a remote share.
+    digest: 8f55072e220ada9cd0ce2d0f69b41d82c5487b331b4de5014cb20de07e3b00c1
+    home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
+    icon: https://cdn-icons-png.flaticon.com/512/2818/2818744.png
+    maintainers:
+    - name: OLED1
+      url: https://github.com/OLED1
+    name: db-backup
+    sources:
+    - https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/db-backup-0.1.14-dev.tgz
+    version: 0.1.14-dev
+  - annotations:
+      category: Backup Tool
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-12-19T10:40:50.397861249+01:00"
     description: Backup your databases to a remote share.
     digest: e879a4c093be2c4f08638de95dfffdc02d195f4dfa15bd20577dbca12deff7f8
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -265,7 +284,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.658949176+01:00"
+    created: "2022-12-19T10:40:50.396905912+01:00"
     description: Backup your databases to a remote share.
     digest: ec44d44d6fe8c2f0af3ea38d22b5b63b8f467309d2372ac9432f15287640dc4a
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -284,7 +303,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.658032447+01:00"
+    created: "2022-12-19T10:40:50.396055724+01:00"
     description: Backup your databases to a remote share.
     digest: 04462bc410bb666deea7c420b52620fa0c17c1d9295dd1a09e4534917f2b01af
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -303,7 +322,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.657200146+01:00"
+    created: "2022-12-19T10:40:50.395281173+01:00"
     description: Backup your databases to a remote share.
     digest: eef1e45e6af85bf0a54412eb63fc72f9822e6038289077ee1b6ab0573299b475
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -322,7 +341,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.665561924+01:00"
+    created: "2022-12-19T10:40:50.427948257+01:00"
     description: Backup your databases to a remote share.
     digest: 15dca7c6e16f8359980ce257a97d07946c57e3139bd6841684a4d27b13492354
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -339,7 +358,7 @@ entries:
     version: 0.1.9-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.664856921+01:00"
+    created: "2022-12-19T10:40:50.423208147+01:00"
     description: Backup your databases to a remote share.
     digest: db41d1068f296f3f6dd596aa07c0cba440264b86bb43447e21b7c4dc5dbb5588
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -356,7 +375,7 @@ entries:
     version: 0.1.8-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.664107875+01:00"
+    created: "2022-12-19T10:40:50.421150405+01:00"
     description: Backup your databases to a remote share.
     digest: 4e13b72a8483fde31f3a5f95fffa1b5fe712d80aea83fed2f22da0c0d074e0d5
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -373,7 +392,7 @@ entries:
     version: 0.1.7-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.663384232+01:00"
+    created: "2022-12-19T10:40:50.419263986+01:00"
     description: Backup your databases to a remote share.
     digest: afb9ccefa4d2ebc62ed6707a7b3cd4e453390fc397062d84cc8bdb5e181a4aaf
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -390,7 +409,7 @@ entries:
     version: 0.1.6-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.662673222+01:00"
+    created: "2022-12-19T10:40:50.415028994+01:00"
     description: Backup your databases to a remote share.
     digest: 7750c129311301fe54e08859884c3d801cdd6aa0de353e917e1b63745e3f1a3d
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -407,7 +426,7 @@ entries:
     version: 0.1.5-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.661923121+01:00"
+    created: "2022-12-19T10:40:50.411111305+01:00"
     description: Backup your databases to a remote share.
     digest: c5dbec02f663b27b3a23763c6906969c672a93d959291ec15559c98879408d0d
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -424,7 +443,7 @@ entries:
     version: 0.1.4-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.661196431+01:00"
+    created: "2022-12-19T10:40:50.406601456+01:00"
     description: Backup your databases to a remote share.
     digest: 858979d3b6c1428ae612ca65be4bf75c44a59e77fd6d7c7c6beded8c4cb20afe
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -441,7 +460,7 @@ entries:
     version: 0.1.3-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.660550253+01:00"
+    created: "2022-12-19T10:40:50.401903268+01:00"
     description: Backup your databases to a remote share.
     digest: e90aed3e953e34ef84260642689827f290f6d5cdffa1045d13219fcdfff216b0
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -458,7 +477,7 @@ entries:
     version: 0.1.2-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.65641601+01:00"
+    created: "2022-12-19T10:40:50.39446818+01:00"
     description: Backup your databases to a remote share.
     digest: a7e088ee190c5883a39c0796176c46d8ed98a4f37a7dd32690944e2d41d5c5af
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -475,7 +494,7 @@ entries:
     version: 0.1.1-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-16T13:15:07.65539284+01:00"
+    created: "2022-12-19T10:40:50.3911459+01:00"
     description: Backup your databases to a remote share
     digest: 22dba39d629184f8f6a45a71e318b25054808f4117d8b8a293d3fec719489ff5
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -495,7 +514,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-12-16T13:15:07.66850187+01:00"
+    created: "2022-12-19T10:40:50.43944257+01:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -514,7 +533,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-12-16T13:15:07.666855054+01:00"
+    created: "2022-12-19T10:40:50.434073557+01:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -529,4 +548,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2022-12-16T13:15:07.583354259+01:00"
+generated: "2022-12-19T10:40:50.259268731+01:00"
