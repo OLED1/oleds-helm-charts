@@ -37,13 +37,30 @@ Oled's stable helm charts.
 ```
 helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts
 ```
+#### Included Apps
+| Chart Name | App name | App Version | Helm Version |
+| ------------- | ------------- | ------------- | ------------- |
+| Typemill  | typemill | 1.5.3.4 | 0.1.4 | 
+| CMSMS    | cmsms | 2.2.16 | 0.1.3 |
+| Database Backup Tool | Yes | 0.1.0 | 0.1.0 |
+
 ### Staging (Use with caution!)
 Oled's helm charts which are currently in testing phase.
 ```
 helm repo add oleds-charts-staging https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-staging
 ```
+#### Included Apps
+| Chart Name | App name | App Version | Helm Version |
+| ------------- | ------------- | ------------- | ------------- |
+
 ### Development (DO NOT USE!)
 Oled's helm charts which are currently in development.
 ```
 helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
 ```
+#### Included Apps
+| Chart Name | App name | App Version | Helm Version |
+| ------------- | ------------- | ------------- | ------------- |
+| Typemill  | typemill | 1.5.3.4 | 0.1.41-dev | 
+| CMSMS    | cmsms | 2.2.16 | 0.1.30-dev1 |
+| Database Backup Tool | Yes | 0.1.0 | 0.1.14-dev |
