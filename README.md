@@ -19,6 +19,13 @@ See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/
 ### Databse Backup Tool
 See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md)
 
+| Chart Name | App name | App documentation | Official | App Version | Helm Version |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Typemill  | typemill  | [click me](https://typemill.net/getting-started) | No | 1.5.3.4 | 0.1.4 |
+| CMSMS    | cmsms  | [click me](https://docs.cmsmadesimple.org/) | No | 2.2.16 | 0.1.3 |
+| Chia(R) Manager  | [click me](https://docs.chia-manager.org/) | chia-manager  | Yes | 0.1.3.alpha | None |
+| Database Backup Tool  | [click me](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md) | db-backup  | Yes | 0.1.0 | 0.1.0 |
+
 ## Install
 ### Prerequisites
 - Kubernetes installed
@@ -26,10 +33,17 @@ See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-cha
 - (Optional) Kubeapps (Helm GUI) installed. [See here](https://tanzu.vmware.com/developer/guides/kubeapps-gs/)
 
 ### Productive
+Oled's stable helm charts.
 ```
 helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts
 ```
+### Staging (Use with caution!)
+Oled's helm charts which are currently in testing phase.
+```
+helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
+```
 ### Development (DO NOT USE!)
+Oled's helm charts which are currently in development.
 ```
 helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
 ```
