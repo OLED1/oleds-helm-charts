@@ -138,6 +138,13 @@
                     "default": "my-typemill.example.org",
                     "form": true
                 },
+                "timezone" : {
+                    "type": "string",
+                    "title": "Container/App timezone",
+                    "description": "The timezone of the container the app is running.",
+                    "default": "Europe/Vienna",
+                    "form": true
+                },
                 "install_plugins" : {
                     "type": "object",
                     "title": "Configure typemill apps.",
@@ -181,6 +188,18 @@
                             }
                         }
                     }
+                },
+                "htaccess" : {
+                    "type" : "string",
+                    "title": "htaccess configuration",
+                    "description": "The htaccess file content of the typemill app. Edit with caution.",
+                    "form": true
+                },
+                "php_ini_config" : {
+                    "type": ["object", "null"],
+                    "title": "PHP settings configuration",
+                    "description" : "In this section you are able to adapt the php configuration values.",
+                    "form": false
                 }
             }
         }

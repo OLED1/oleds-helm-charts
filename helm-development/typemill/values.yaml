@@ -157,6 +157,12 @@ typemill:
   ## Hostname where your typemill instance will be available
   host: my-typemill.example.org
 
+  ## The PHP Timezone which should be used by CMSMS
+  ## see https://docs.cmsmadesimple.org/configuration/config-file/config-reference#config_timezone
+  ## see https://www.php.net/manual/en/timezones.php
+  ## see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+  timezone: Europe/Vienna
+
   ## List all plugins which should be automatically installed/updated on every deployment install/restart
   ## Please note, if you add some plugins after the first deployment, you manually need to restart your deployment
   ## How to? Just navigate to https://plugins.typemill.net/ and copy the plugin name shown on top of every tile and paste it to "plugin_names" list.
@@ -274,3 +280,11 @@ typemill:
 
     </IfModule>
 
+  ## Here you can adapt or change the default PHP values
+  ## It's not recommended to change the already setup values
+  php_ini_config:
+    recommended.ini: |
+      upload_max_filesize = 100M
+      post_max_size = 100M
+      max_execution_time = 60
+      output_buffering = on
