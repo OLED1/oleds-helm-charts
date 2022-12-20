@@ -42,6 +42,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: TZ
+            value: {{ .Values.typemill.timezone | default "Europe/Vienna" }}
           ports:
             - name: http
               containerPort: {{ .Values.typemill.containerPort | default "80" }}
@@ -117,6 +120,11 @@ spec:
             mountPath: /var/www/html/.htaccess
             subPath: .htaccess
           {{- end }}
+          {{- range $key, $value := .Values.typemill.php_ini_config }}
+          - name: php-ini-config
+            mountPath: /usr/local/etc/php/conf.d/{{ $key }}
+            subPath: {{ $key }}
+          {{- end }}
       {{- if and .Values.persistence.enabled }}
       {{- if or .Values.typemill.install_plugins.plugins_autoupdate .Values.typemill.install_themes.themes_autoupdate }}
       initContainers:
@@ -155,6 +163,9 @@ spec:
       - name: typemill-htaccess
         configMap:
           name: {{ template "typemill.fullname" . }}-htaccess
+      - name: php-ini-config
+        configMap:
+          name: {{ template "typemill.fullname" . }}-php-ini-config
       - name: plugin-install-routine
         configMap:
           name: {{ template "typemill.fullname" . }}-plugin-install-routine

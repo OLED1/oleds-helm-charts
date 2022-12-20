@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "typemill.fullname" . }}-php-ini-config
+  labels:
+    app.kubernetes.io/name: {{ include "typemill.name" . }}
+    helm.sh/chart: {{ include "typemill.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+{{- range $key, $value := .Values.typemill.php_ini_config }}
+  {{ $key }}: |-
+{{ $value | indent 4 }}
+{{- end }}
