@@ -40,7 +40,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 ### Staging (Use with caution!)
 Oled's helm charts which are currently in testing phase.
 ```
-helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-dev
+helm repo add oleds-charts-staging https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts-staging
 ```
 ### Development (DO NOT USE!)
 Oled's helm charts which are currently in development.
