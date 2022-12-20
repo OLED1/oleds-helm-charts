@@ -167,7 +167,7 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - It's now possible to configure most of the needed settings in the "Visual editor" of kubeapps.
 > NOTE: Due to wrong list generation of the plugin_names and themes_names section in the Visual editor, they must be added "manually" in the yaml file.
 
-### Chart Version 0.1.4 (0.1.40-dev)
+### Chart Version 0.1.4 (0.1.41-dev) - 20.12.2022
 - Added the ability to setup pod timezone
 - Added the ability to change php.ini-config values
 

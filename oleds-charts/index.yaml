@@ -5,7 +5,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-19T10:40:57.002022794+01:00"
+    created: "2022-12-20T12:29:56.612049534+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -29,7 +29,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-19T10:40:56.994055778+01:00"
+    created: "2022-12-20T12:29:56.601386299+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -53,7 +53,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-19T10:40:56.982802246+01:00"
+    created: "2022-12-20T12:29:56.593118698+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -77,7 +77,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2022-12-19T10:40:56.97065751+01:00"
+    created: "2022-12-20T12:29:56.586628547+01:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -102,7 +102,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-12-19T10:40:57.003349624+01:00"
+    created: "2022-12-20T12:29:56.614015774+01:00"
     description: Backup your databases to a remote share.
     digest: 44f3d5e34ff831277ade6bca857f1850388fc5112e74489a89f5202ceaa90511
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -122,7 +122,26 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2022-12-19T10:40:57.016441722+01:00"
+    created: "2022-12-20T12:29:56.626076667+01:00"
+    description: A lightweight flat file cms for micro-publishers.
+    digest: 63ca73d1b1f0d6bd981baee6419fce45d71462d39fd6d51fd8ba0c70328d59c2
+    home: https://typemill.net/
+    icon: https://typemill.net/media/live/typemill-hero-1.png
+    maintainers:
+    - name: Typemill
+      url: https://typemill.net/
+    name: typemill
+    sources:
+    - https://github.com/typemill/typemill
+    type: application
+    urls:
+    - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts/typemill-0.1.4.tgz
+    version: 0.1.4
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 1.5.3-4
+    created: "2022-12-20T12:29:56.624813226+01:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: a703e9bba1d74bdbfb77aa43dfa9937d009e12385ce7f086a6288e81a22dd9a0
     home: https://typemill.net/
@@ -139,7 +158,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-12-19T10:40:57.01269946+01:00"
+    created: "2022-12-20T12:29:56.621846505+01:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 29ba52501e82d4dab147c71beeece38fda345c4e256314684c7fe714d7b618df
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -150,7 +169,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2022-12-19T10:40:57.007621437+01:00"
+    created: "2022-12-20T12:29:56.616507466+01:00"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 2f6c1a7dc6eecafc992d9adcddea098027d3b2af0f2637950232bd918e3a4aee
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -159,4 +178,4 @@ entries:
     urls:
     - https://github.com/OLED1/oleds-helm-charts/raw/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
-generated: "2022-12-19T10:40:56.960967495+01:00"
+generated: "2022-12-20T12:29:56.575438505+01:00"
