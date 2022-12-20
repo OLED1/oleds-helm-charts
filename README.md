@@ -23,8 +23,8 @@ See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-cha
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Typemill  | typemill  | [click me](https://typemill.net/getting-started) | No | 1.5.3.4 | 0.1.4 |
 | CMSMS    | cmsms  | [click me](https://docs.cmsmadesimple.org/) | No | 2.2.16 | 0.1.3 |
-| Chia(R) Manager  | [click me](https://docs.chia-manager.org/) | chia-manager  | Yes | 0.1.3.alpha | None |
-| Database Backup Tool  | [click me](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md) | db-backup  | Yes | 0.1.0 | 0.1.0 |
+| Chia(R) Manager  | chia-manager | [click me](https://docs.chia-manager.org/) | Yes | 0.1.3.alpha | None |
+| Database Backup Tool | db-backup  | [click me](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md) | Yes | 0.1.0 | 0.1.0 |
 
 ## Install
 ### Prerequisites
