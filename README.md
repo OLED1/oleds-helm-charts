@@ -1,5 +1,7 @@
-# Welcome to **Oled's helm charts**
+4# Welcome to **Oled's helm charts**
 This repository is a collection of some custom helm charts adapted and packaged by Oled1.
+
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/oleds-helm-charts)](https://artifacthub.io/packages/search?repo=oleds-helm-charts)
 
 > **This Helm chart repository is a custom helm chart packaged by OLED1**.
 > There is no official support from any app developer itself except "Chia(R) Manager" (because I am the developer).
@@ -8,15 +10,18 @@ This repository is a collection of some custom helm charts adapted and packaged 
 
 ## Applications
 ### Typemill
+![Version: 0.1.4](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
 ### CMSMS (CMS Made Simple)
+![Version: 0.1.3](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 2.2.16](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
 See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/cmsms/README.md)
 
 ### Chia(R) Manager
 > Currently in progress.
 
 ### Databse Backup Tool
+![Version: 0.1.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 0.0.](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
 See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md)
 
 | Chart Name | App name | App documentation | Official | App Version | Helm Version |
