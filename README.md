@@ -10,12 +10,12 @@ This repository is a collection of some custom helm charts adapted and packaged 
 
 ## Applications
 ### Typemill
-![Version: 0.1.4](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
+![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
 
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
 ### CMSMS (CMS Made Simple)
-![Version: 0.1.3](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 2.2.16](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![AppVersion: 2.2.16](https://img.shields.io/badge/AppVersion-2.2.16-informational?style=flat-square)
 
 See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/cmsms/README.md)
 
@@ -23,7 +23,7 @@ See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/
 > Currently in progress.
 
 ### Databse Backup Tool
-![Version: 0.1.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 0.0.](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
 See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md)
 
