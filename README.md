@@ -22,7 +22,7 @@ See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/
 ### Chia(R) Manager
 > Currently in progress.
 
-### Databse Backup Tool
+### Database Backup Tool
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
 See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md)
