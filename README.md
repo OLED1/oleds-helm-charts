@@ -69,6 +69,6 @@ helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/ma
 #### Included Apps
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
-| Typemill  | typemill | 1.5.3.4 | 0.1.41-dev | 
+| Typemill  | typemill | 1.5.3.4 | 0.1.42-dev | 
 | CMSMS    | cmsms | 2.2.16 | 0.1.30-dev1 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.14-dev |
