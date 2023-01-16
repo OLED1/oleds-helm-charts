@@ -171,6 +171,11 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - Added the ability to setup pod timezone
 - Added the ability to change php.ini-config values
 
+### Chart Version 0.1.5 (0.1.45-dev) - 16.01.2022
+- Removed Busybox as initContainer for installing plugins
+- Adapted docker init to install plugins on container start
+- Changed PullPolicy from IfNotPresent to Always
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)
