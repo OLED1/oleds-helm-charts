@@ -10,9 +10,9 @@ replicaCount: 1
 ##
 image:
   repository: oled01/typemill
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "1.5.3-4_0.1.5"
 
 ## The following settings can be left default. They are only needed when you want to deploy your own image
 imagePullSecrets: []
