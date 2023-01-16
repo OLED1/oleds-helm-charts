@@ -10,7 +10,7 @@ This repository is a collection of some custom helm charts adapted and packaged 
 
 ## Applications
 ### Typemill
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
 
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
@@ -48,7 +48,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 #### Included Apps
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
-| Typemill  | typemill | 1.5.3.4 | 0.1.4 | 
+| Typemill  | typemill | 1.5.3.4 | 0.1.5 | 
 | CMSMS    | cmsms | 2.2.16 | 0.1.3 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.0 |
 
@@ -69,6 +69,6 @@ helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/ma
 #### Included Apps
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
-| Typemill  | typemill | 1.5.3.4 | 0.1.44-dev | 
+| Typemill  | typemill | 1.5.3.4 | 0.1.45-dev | 
 | CMSMS    | cmsms | 2.2.16 | 0.1.30-dev1 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.14-dev |
