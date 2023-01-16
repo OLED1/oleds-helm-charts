@@ -1,4 +1,4 @@
-4# Welcome to **Oled's helm charts**
+# Welcome to **Oled's helm charts**
 This repository is a collection of some custom helm charts adapted and packaged by Oled1.
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/oleds-helm-charts)](https://artifacthub.io/packages/search?repo=oleds-helm-charts)
