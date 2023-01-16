@@ -12,7 +12,7 @@ data:
   install-selected-plugins.sh: |-
     #!/bin/bash
 
-    busy_box_path='/mnt/typemill_plugins/'
+    busy_box_path='/var/www/html/plugins/'
 
     {{- $plugins_download_root := .Values.typemill.install_plugins.plugins_download_root -}}
     {{- $plugins_download_subpath := .Values.typemill.install_plugins.plugins_download_subpath -}}
@@ -28,7 +28,7 @@ data:
   install-selected-themes.sh: |-
     #!/bin/bash
 
-    busy_box_path='/mnt/typemill_themes/'
+    busy_box_path='/var/www/html/themes/'
 
     {{- $themes_download_root := .Values.typemill.install_themes.themes_download_root -}}
     {{- $themes_download_subpath := .Values.typemill.install_themes.themes_download_subpath -}}
