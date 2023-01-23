@@ -14,7 +14,7 @@ So i decided to create my own ones with a higher quality and much more documenta
 
 ## Applications
 ### Typemill
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
+![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
 
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
@@ -36,7 +36,7 @@ See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-cha
 
 | Chart Name | App name | App documentation | Official | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Typemill  | typemill  | [click me](https://typemill.net/getting-started) | No | 1.5.3.4 | 0.1.5 |
+| Typemill  | typemill  | [click me](https://typemill.net/getting-started) | No | 1.5.3.4 | 0.1.6 |
 | CMSMS    | cmsms  | [click me](https://docs.cmsmadesimple.org/) | No | 2.2.16 | 0.1.3 |
 | Chia(R) Manager  | chia-manager | [click me](https://docs.chia-manager.org/) | Yes | 0.1.3.alpha | None |
 | Database Backup Tool | db-backup  | [click me](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md) | Yes | 0.1.0 | 0.1.0 |
@@ -55,7 +55,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 #### Included Apps
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
-| Typemill  | typemill | 1.5.3.4 | 0.1.5 | 
+| Typemill  | typemill | 1.5.3.4 | 0.1.6 | 
 | CMSMS    | cmsms | 2.2.16 | 0.1.3 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.0 |
 
