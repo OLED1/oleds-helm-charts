@@ -8,6 +8,10 @@ This repository is a collection of some custom helm charts adapted and packaged 
 > Active unofficial supported charts. If a new version will be released a new updated package will be created.
 > Please NOTE: The charts a mostly new and you might still find some bugs.
 
+## Why are there already existing Helm Charts?
+Yes it's true, some of my charts are already existing out there, but the already existing ones are partially poorly implemented. Sometimes the values files are just a joke.
+So i decided to create my own ones with a higher quality and much more documentation. If you found some settings which are missing or mistakable please contact me. I will change it as soon as possible.
+
 ## Applications
 ### Typemill
 ![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
@@ -20,6 +24,9 @@ See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-char
 See CMSMS HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/cmsms/README.md)
 
 ### Chia(R) Manager
+> Currently in progress.
+
+### Bookstack
 > Currently in progress.
 
 ### Database Backup Tool
