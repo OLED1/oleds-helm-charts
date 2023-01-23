@@ -14,7 +14,7 @@ So i decided to create my own ones with a higher quality and much more documenta
 
 ## Applications
 ### Typemill
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
+![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![AppVersion: 1.5.3-4](https://img.shields.io/badge/AppVersion-1.5.3.4-informational?style=flat-square)
 
 See Typemill HELM Documentation: [here](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/typemill/README.md)
 
