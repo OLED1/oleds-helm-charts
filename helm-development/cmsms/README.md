@@ -192,6 +192,12 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - Added timezone setting in **cmsms_settings -> app_config -> timezone: Europe/Vienna**
 - Updated documentation
 
+### Chart Version 0.1.4 (0.1.31-dev) - 20.03.23
+- Modules custom folder now symlinked from uploads folder (See Details above)
+- This chart now actively working with different tags
+- Bug fix copying files init script. Added maxdepth.
+- Artifact hub changelog added.
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)

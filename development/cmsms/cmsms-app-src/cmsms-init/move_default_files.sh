@@ -8,3 +8,4 @@ ln -s /var/www/html/uploads/assets/module_custom/* /var/www/html/assets/module_c
 echo "[STEP]Setting default rights www-data:www-data for uploads and modules directory."
 chown -R www-data:www-data /var/www/html/uploads
 chown -R www-data:www-data /var/www/html/modules
+echo "[STEP]Starting pod PHP init script."

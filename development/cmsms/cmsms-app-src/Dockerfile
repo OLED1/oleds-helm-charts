@@ -1,3 +1,4 @@
+#cmsms:2.2.16-v0.1.4-php7.4
 FROM php:7.4-apache
 
 # Install OS dependencies required
