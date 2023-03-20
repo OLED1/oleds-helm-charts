@@ -3,6 +3,21 @@ name: db-backup
 description: Backup your databases to a remote share.
 annotations:
   category: Backup Tool
+  #ref: https://blog.artifacthub.io/blog/changelogs/
+  #artifacthub.io/changes: |
+  #  - kind: added
+  #    description: Support for Tekton pipelines
+  #    links:
+  #        - name: Github Issue
+  #          url: https://github.com/artifacthub/hub/issues/1485
+  #  - kind: added
+  #    description: Versions index to changelog modal
+  #  - kind: added
+  #    description: Allow publishers to include screenshots in packages
+  #  - kind: changed
+  #    description: Something that has been changed
+  #  - kind: fixed
+  #    description: Something that has been fixed
 
 # A chart can be either an 'application' or a 'library' chart.
 #
