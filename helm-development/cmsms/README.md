@@ -160,6 +160,9 @@ custom_htaccess:
     My custom content
 ```
 
+#### Modules custom folder (assets/module_custom)
+Some modules can be configured by adapting or adding a configuration in the assets/module_custom folder. Well that will be a bit difficult when running in a container. So a symlink from uploads/assets/module_custom/ to assets/module_custom/ was created. Just navigate to the **File Manager** in the WebGUI, head to the assets/module_custom/ folder and upload your files.
+
 ## Migrating
 If you plan to move an existing installation you just need follow the upcomming steps:
 1. Skip the installation by set **install_cmsms: false**.
