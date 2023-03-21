@@ -37,7 +37,7 @@ See DB-Dumper HELM Documentation: [here](https://github.com/OLED1/oleds-helm-cha
 | Chart Name | App name | App documentation | Official | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Typemill  | typemill  | [click me](https://typemill.net/getting-started) | No | 1.5.3.4 | 0.1.6 |
-| CMSMS    | cmsms  | [click me](https://docs.cmsmadesimple.org/) | No | 2.2.16 | 0.1.3 |
+| CMSMS    | cmsms  | [click me](https://docs.cmsmadesimple.org/) | No | 2.2.16 | 0.1.4 |
 | Chia(R) Manager  | chia-manager | [click me](https://docs.chia-manager.org/) | Yes | 0.1.3.alpha | None |
 | Database Backup Tool | db-backup  | [click me](https://github.com/OLED1/oleds-helm-charts/blob/main/helm-development/db-backup/README.md) | Yes | 0.1.0 | 0.1.0 |
 
@@ -56,7 +56,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
 | Typemill  | typemill | 1.5.3.4 | 0.1.6 | 
-| CMSMS    | cmsms | 2.2.16 | 0.1.3 |
+| CMSMS    | cmsms | 2.2.16 | 0.1.4 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.0 |
 
 ### Staging (Use with caution!)
@@ -77,5 +77,5 @@ helm repo add oleds-charts-dev https://github.com/OLED1/oleds-helm-charts/raw/ma
 | Chart Name | App name | App Version | Helm Version |
 | ------------- | ------------- | ------------- | ------------- |
 | Typemill  | typemill | 1.5.3.4 | 0.1.45-dev | 
-| CMSMS    | cmsms | 2.2.16 | 0.1.30-dev1 |
+| CMSMS    | cmsms | 2.2.16 | 0.1.31-dev |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.14-dev |
