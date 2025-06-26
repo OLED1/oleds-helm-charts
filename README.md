@@ -58,6 +58,7 @@ helm repo add oleds-charts https://github.com/OLED1/oleds-helm-charts/raw/main/o
 | Typemill  | typemill | 1.5.3.4 | 0.1.6 | 
 | CMSMS    | cmsms | 2.2.16 | 0.1.4 |
 | Database Backup Tool | db-backup | 0.1.0 | 0.1.0 |
+| Automx2| automx2 | 2025.1.1 | 1.0.0 |
 
 ### Staging (Use with caution!)
 Oled's helm charts which are currently in testing phase.
