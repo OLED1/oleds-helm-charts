@@ -51,7 +51,7 @@ cmsms_app:
     pullPolicy: Always
     ## Overrides the image tag whose default is the chart appVersion.
     ## Use with caution, every chart version is balanced with the container image and used tag
-    tag: "2.2.16-php7.4-hardened-0.1.33-dev"
+    tag: "2.2.16-php7.4-hardened-0.1.34-dev"
   ## The following settings can be left default. They are only needed when you want to deploy your own image
   imagePullSecrets: []
   ## The following setting can be left default.
