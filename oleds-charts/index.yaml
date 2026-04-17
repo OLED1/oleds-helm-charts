@@ -3,7 +3,7 @@ entries:
   bunkerweb:
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-04-17T10:47:54.923637594Z"
+    created: "2026-04-17T10:54:45.743746362Z"
     description: BunkerWeb Helm chart for Kubernetes
     digest: 21b1a05a2c9cf5bdeebb85dd8d24016293b50072bfc6b6bb0ecc3607f65259a8
     name: bunkerweb
@@ -25,7 +25,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.105500794Z"
+    created: "2026-04-17T10:54:45.947849287Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -58,7 +58,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.098060352Z"
+    created: "2026-04-17T10:54:45.940253536Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -91,7 +91,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.089330625Z"
+    created: "2026-04-17T10:54:45.935356413Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -124,7 +124,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.081747604Z"
+    created: "2026-04-17T10:54:45.926880083Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -157,7 +157,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.075649326Z"
+    created: "2026-04-17T10:54:45.919812106Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -190,7 +190,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.067122916Z"
+    created: "2026-04-17T10:54:45.909713434Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -223,7 +223,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.062660418Z"
+    created: "2026-04-17T10:54:45.902530308Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -256,7 +256,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.056934606Z"
+    created: "2026-04-17T10:54:45.891026143Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -289,7 +289,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.049356455Z"
+    created: "2026-04-17T10:54:45.880539236Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -322,7 +322,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.039405682Z"
+    created: "2026-04-17T10:54:45.870930059Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -355,7 +355,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.032182637Z"
+    created: "2026-04-17T10:54:45.859242397Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -388,7 +388,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.022518681Z"
+    created: "2026-04-17T10:54:45.848355795Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -421,7 +421,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.018047833Z"
+    created: "2026-04-17T10:54:45.838684338Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -454,14 +454,14 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.010597371Z"
+    created: "2026-04-17T10:54:45.832221554Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
       repository: oci://registry-1.docker.io/bitnamicharts
       version: 11.4.*
     description: CMS Made Simple. An easy to use CMS System.
-    digest: 59f5284f4b19a9dfc48b2e0548a2d4b298e73a43a8be659aa7876516967109c7
+    digest: 4e7f45e08191793636a349896bf2d98836a01ee20299ccf927589a766dbc3339
     home: https://www.cmsmadesimple.org/
     icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
     maintainers:
@@ -487,7 +487,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:55.004190486Z"
+    created: "2026-04-17T10:54:45.822733045Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -511,7 +511,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.997310527Z"
+    created: "2026-04-17T10:54:45.816095513Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -535,7 +535,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.980462715Z"
+    created: "2026-04-17T10:54:45.789222948Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -559,7 +559,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.97237973Z"
+    created: "2026-04-17T10:54:45.783252348Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -583,7 +583,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.964621122Z"
+    created: "2026-04-17T10:54:45.775755976Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -607,7 +607,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.955692827Z"
+    created: "2026-04-17T10:54:45.769618838Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -631,7 +631,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.944870994Z"
+    created: "2026-04-17T10:54:45.762939387Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -655,7 +655,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.939842303Z"
+    created: "2026-04-17T10:54:45.754181799Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -679,7 +679,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.929999949Z"
+    created: "2026-04-17T10:54:45.749453465Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -703,7 +703,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.992931239Z"
+    created: "2026-04-17T10:54:45.806058311Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -727,7 +727,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-04-17T10:47:54.98690185Z"
+    created: "2026-04-17T10:54:45.799404719Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -752,7 +752,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.111428665Z"
+    created: "2026-04-17T10:54:45.957215677Z"
     description: Backup your databases to a remote share.
     digest: 8f55072e220ada9cd0ce2d0f69b41d82c5487b331b4de5014cb20de07e3b00c1
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -771,7 +771,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.110456966Z"
+    created: "2026-04-17T10:54:45.956479516Z"
     description: Backup your databases to a remote share.
     digest: e879a4c093be2c4f08638de95dfffdc02d195f4dfa15bd20577dbca12deff7f8
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -790,7 +790,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.109501487Z"
+    created: "2026-04-17T10:54:45.955536057Z"
     description: Backup your databases to a remote share.
     digest: ec44d44d6fe8c2f0af3ea38d22b5b63b8f467309d2372ac9432f15287640dc4a
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -809,7 +809,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.108674647Z"
+    created: "2026-04-17T10:54:45.954847115Z"
     description: Backup your databases to a remote share.
     digest: 04462bc410bb666deea7c420b52620fa0c17c1d9295dd1a09e4534917f2b01af
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -828,7 +828,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.107865597Z"
+    created: "2026-04-17T10:54:45.953381792Z"
     description: Backup your databases to a remote share.
     digest: eef1e45e6af85bf0a54412eb63fc72f9822e6038289077ee1b6ab0573299b475
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -847,7 +847,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.119102414Z"
+    created: "2026-04-17T10:54:45.96289075Z"
     description: Backup your databases to a remote share.
     digest: 15dca7c6e16f8359980ce257a97d07946c57e3139bd6841684a4d27b13492354
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -864,7 +864,7 @@ entries:
     version: 0.1.9-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.117064318Z"
+    created: "2026-04-17T10:54:45.96120899Z"
     description: Backup your databases to a remote share.
     digest: db41d1068f296f3f6dd596aa07c0cba440264b86bb43447e21b7c4dc5dbb5588
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -881,7 +881,7 @@ entries:
     version: 0.1.8-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.116310347Z"
+    created: "2026-04-17T10:54:45.960620977Z"
     description: Backup your databases to a remote share.
     digest: 4e13b72a8483fde31f3a5f95fffa1b5fe712d80aea83fed2f22da0c0d074e0d5
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -898,7 +898,7 @@ entries:
     version: 0.1.7-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.115560586Z"
+    created: "2026-04-17T10:54:45.960050934Z"
     description: Backup your databases to a remote share.
     digest: afb9ccefa4d2ebc62ed6707a7b3cd4e453390fc397062d84cc8bdb5e181a4aaf
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -915,7 +915,7 @@ entries:
     version: 0.1.6-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.114819155Z"
+    created: "2026-04-17T10:54:45.959466161Z"
     description: Backup your databases to a remote share.
     digest: 7750c129311301fe54e08859884c3d801cdd6aa0de353e917e1b63745e3f1a3d
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -932,7 +932,7 @@ entries:
     version: 0.1.5-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.114055234Z"
+    created: "2026-04-17T10:54:45.958902317Z"
     description: Backup your databases to a remote share.
     digest: c5dbec02f663b27b3a23763c6906969c672a93d959291ec15559c98879408d0d
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -949,7 +949,7 @@ entries:
     version: 0.1.4-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.113103055Z"
+    created: "2026-04-17T10:54:45.958312364Z"
     description: Backup your databases to a remote share.
     digest: 858979d3b6c1428ae612ca65be4bf75c44a59e77fd6d7c7c6beded8c4cb20afe
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -966,7 +966,7 @@ entries:
     version: 0.1.3-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.112163336Z"
+    created: "2026-04-17T10:54:45.957770921Z"
     description: Backup your databases to a remote share.
     digest: e90aed3e953e34ef84260642689827f290f6d5cdffa1045d13219fcdfff216b0
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -983,7 +983,7 @@ entries:
     version: 0.1.2-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.107055626Z"
+    created: "2026-04-17T10:54:45.952022348Z"
     description: Backup your databases to a remote share.
     digest: a7e088ee190c5883a39c0796176c46d8ed98a4f37a7dd32690944e2d41d5c5af
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -1000,7 +1000,7 @@ entries:
     version: 0.1.1-dev
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T10:47:55.106308245Z"
+    created: "2026-04-17T10:54:45.950006042Z"
     description: Backup your databases to a remote share
     digest: 22dba39d629184f8f6a45a71e318b25054808f4117d8b8a293d3fec719489ff5
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -1020,7 +1020,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.135745219Z"
+    created: "2026-04-17T10:54:45.971379971Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 1fc031d39ea0e74fdca6a082f7dd46acd1bf906fdd67695316e37ac7348ada87
     home: https://typemill.net/
@@ -1039,7 +1039,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.133653563Z"
+    created: "2026-04-17T10:54:45.970446592Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 5cbf7c4d6b115bad49515b7b85100961bb437445000583551f3e93c3bd3791f0
     home: https://typemill.net/
@@ -1058,7 +1058,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.131586148Z"
+    created: "2026-04-17T10:54:45.969391014Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 529e7ee06fe8d6e0e8a5d7f09d859bad4088caedbb8366597ef590e64c905ea1
     home: https://typemill.net/
@@ -1077,7 +1077,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.129334274Z"
+    created: "2026-04-17T10:54:45.968181458Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: c39e6b808d48804a27983e9ef1a24be2da8601de7ab16ddad1ef46d308d47914
     home: https://typemill.net/
@@ -1096,7 +1096,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.126207611Z"
+    created: "2026-04-17T10:54:45.966962383Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: ec0b985aad9a625e74a818153c028239f33e4accdb2a407f16f057c195039cb8
     home: https://typemill.net/
@@ -1115,7 +1115,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.124533231Z"
+    created: "2026-04-17T10:54:45.965741937Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 92561012fc50d9fe992b12165a957d79baa4793dfda68fc0baee6fdf745cc44f
     home: https://typemill.net/
@@ -1134,7 +1134,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-04-17T10:47:55.12286157Z"
+    created: "2026-04-17T10:54:45.964714879Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: c89131c17ce27264233c03e482998f000022974ab33d9ed28a19c1338cbb86e4
     home: https://typemill.net/
@@ -1153,7 +1153,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-04-17T10:47:55.121239569Z"
+    created: "2026-04-17T10:54:45.963848069Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 60d8902e1389722477d27737b29dbc2eaf23e0814dc6ed1ddaf53e94f61be0cc
     home: https://typemill.net/
@@ -1168,4 +1168,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/OLED1/oleds-helm-charts/development/oleds-charts/typemill-0.1.3-dev10.tgz
     version: 0.1.3-dev10
-generated: "2026-04-17T10:47:54.922436908Z"
+generated: "2026-04-17T10:54:45.742739824Z"
