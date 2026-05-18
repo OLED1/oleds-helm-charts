@@ -1,0 +1,313 @@
+# Default values for cmsms and its needed components.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## You will not need a service account. So leave it empty and default as it is.
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+ingress:
+  enabled: false
+  className: ""
+  ## className: "nginx"
+  annotations: {}
+  ## Want to setup automatic certificate provisioning? Take a look here:
+  ## https://www.howtogeek.com/devops/how-to-install-kubernetes-cert-manager-and-configure-lets-encrypt/
+  ##
+  ##  annotations: 
+  ##    {
+  ##      cert-manager.io/cluster-issuer: "letsencrypt-prod",
+  ##      kubernetes.io/tls-acme: "true"
+  ##    }
+  hosts:
+    - host: my-cmsms.example.org
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - my-cmsms.example.org
+######################################
+## Settings regarding the CMSMS pod ##
+######################################
+cmsms_app:
+  ## Where and on which port the CMSMS Service should be published
+  service:
+    #Can be ClusterIP, NodePort, LoadBalancer or ExternalName
+    #ref: https://kubernetes.io/docs/concepts/services-networking/service/
+    type: ClusterIP
+    port: 80
+  ## Unofficial CMSMS image version based on the official CMSMS Sources 
+  ## ref: https://github.com/typemill/typemill
+  ##
+  image:
+    repository: oled01/cmsms
+    pullPolicy: Always
+    ## Overrides the image tag whose default is the chart appVersion.
+    ## Use with caution, every chart version is balanced with the container image and used tag
+    tag: "2.2.16-php7.4-hardened-0.1.5"
+  ## The following settings can be left default. They are only needed when you want to deploy your own image
+  imagePullSecrets: []
+  ## The following setting can be left default.
+  nameOverride: ""
+  ## The following setting can be left default.
+  fullnameOverride: ""
+  podAnnotations: {}
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  ## Number of replicas to be deployed
+  ## Use accessMode: ReadWriteMany when using replicaCount > 1 when setting up persistence
+  replicaCount: 1
+  ## Enable if you want your data to be saved forever
+  ## Please use ReadWriteMany when its planned to use more than one pod
+  ## Peristence will be enabled for modules and uploads directory
+  persistence:
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    ## cmsms data Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    # storageClass: "-"
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  #existingClaim:
+
+  ## Define when a second pod should be started and whats the minimum and maximum count
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  ## Strategy used to replace old pods
+  ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+      # type: Recreate
+  ## Liveness and readiness probe values
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  ##
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    enabled: false
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+    successThreshold: 1
+########################################################
+## Custom settings and configuration for cmsms itself ##
+########################################################
+cmsms_settings:
+  ## Hostname where your cmsms instance will be available
+  ## Notation: http://domain.tld or https://domain.tld
+  host: my-cmsms.example.org
+  ## If you are planning to use https:// set enable_site_encryption to true.
+  site_encryption_enabled: false
+  ## Install CMSMS instance
+  ## Set to true if you want this chart to install and preconfigure a working instance.
+  ## Set to false if you want to import an existing CMSMS Instance.
+  ## This will import a database with default values an example content.
+  install_cmsms: true
+  ## If you want to setup a new instance you can setup an initial user here.
+  ## Will be saved to a secret.
+  ## Will only be executed when "install_cmsms" and "create" is set to "true".
+  initial_user:
+    create: true
+    username: Admin
+    ## Leave it empty and a password will be generated
+    password:
+    email: admin@example.com
+    ## Use an existing secret
+    existingSecret:
+      enabled: false
+      #secretName: nameofsecret
+      #usernameKey: username
+      #passwordKey: password
+      #emailKey: email
+  ## This app only supports sending mails via an external smtp server.
+  ## Will be saved to a secret.
+  ## If you wish it to be preconfigured you can do it here.
+  ## Will only be executed when "install_cmsms" and "preconfigure_smtp" is set to "true".
+  setup_smtp:
+    preconfigure_smtp: false
+    smtp_host: smtp.example.com
+    ## Normally SMTP Server are listening to 25, 465, 587
+    smtp_port: 465
+    ## The e-mail address of the sender
+    smtp_from: info@example.org
+    ## This settings configures the name from where the mail was sent from
+    smtp_sender_name: My Example Site
+    ## SMTP authentication settings
+    smtp_auth:
+      ## Set to true when username and password is needed
+      ## TRUE is always recommended because SMTP Server should alwys use authentication no matter if internal or external used!
+      auth_needed: false
+      auth_user:
+      auth_pw:
+      ## The connection encryption. Can be ssl/tls or none.
+      auth_encryption: none
+      ## Use an existing secret
+      existingSecret:
+        enabled: false
+        #secretName: nameofsecret
+        #usernameKey: username
+        #passwordKey: password
+  ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values.
+  ## Plese note: Pretty URLS are enable by default
+  app_config:
+    ## The PHP Timezone which should be used by CMSMS
+    ## see https://docs.cmsmadesimple.org/configuration/config-file/config-reference#config_timezone
+    ## see https://www.php.net/manual/en/timezones.php
+    ## see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+    timezone: UTC
+    ## You can setup more settings by following the CMSMS Guide
+    ## Take a look at the examples some lines below
+    ## see: https://docs.cmsmadesimple.org/configuration/config-file
+    ## see: https://docs.cmsmadesimple.org/configuration/config-file/config-reference
+    additional_config_settings: []
+    #additional_config_settings:
+    #- $config['param_key1'] = "param_value1";
+    #- $config['param_key2'] = "param_value2";
+
+    ## CMSMS htaccess configuration
+    htaccess:
+      ## Set to false if you do not wish to use the CMSMS' default htaccess and use your own or no htacess
+      ## Use with care, it might break your intance
+      use_default_htaccess: true
+      ## You can insert an custom htaccess here
+      ## NOTE: Will only be used when "use_default_htaccess" is set to false and custom_htaccess has content
+      custom_htaccess:
+      #  My custom content
+    ## Here you can adapt or change the default PHP values
+    ## It's not recommended to change the already setup values
+    php_ini_config:
+      cmsms_recommended.ini: |
+        upload_max_filesize = 100M
+        post_max_size = 100M
+        max_execution_time = 60
+        output_buffering = on
+      ## Default:
+      #cmsms_recommended.ini: |
+      #  upload_max_filesize = 100M
+      #  post_max_size = 100M
+      #  max_execution_time = 60
+      #  output_buffering = on
+#my_settings.ini: |
+#  example_php_setting = example_value
+
+#################################################################
+## Custom settings and configuration for cmsms needed database ##
+#################################################################
+## Only MYSQL/MariaDB is currently supported
+## Internal database configuration
+mariadb:
+  ## Set to true when you want to deploy an internal database
+  ## NOTE: Will be ignored when "external_db" -> "enabled" is set to true
+  enabled: true
+  ## Override Source Image Source
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/mariadb
+    tag: "11.4.7-debian-12-r2"
+  ## Decide which architecture of the internal database you want to deploy
+  ## Can be standalone or replication
+  ## Use "accessMode: ReadWriteMany" in the persistence section when using replication
+  architecture: standalone
+  ## MariaDB user and database configuration
+  ## Auth Data will be saved to a secret
+  auth:
+    ## The name of the database where CMSMS is/should be installed
+    database: cmsms_app
+    username: cmsms
+    password: changeMeNow!
+  ## CMS Made Simple database prefix as stated in the installer
+  ## Can be left default when deploying a new instance
+  ## Adapt when Prefix changed in existing installation
+  ## DO NOT CHANGE ON NEW INSTALLATION WHERE HELM SHOULD CONFIGURE THE NEW INSTANCE!
+  database_prefix: cms_
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  primary:
+    persistence:
+      enabled: false
+      # storageClass: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+## External MYSQL/MariaDB Database
+externalDatabase:
+  ## Set to true when you want to use an external database
+  ## When "use_external_db" is set to false a database pod will be created using the stated auth values
+  enabled: false
+  ## Hostname or IP Address of you external mysql instance
+  host: mysql.local
+  ## Database name
+  database: cmsms_app
+  ## Database user
+  user: cmsms
+  ## Database password
+  password: MySuperStrongPassword1234!?
+  ## CMS Made Simple database prefix as stated in the installer
+  ## Can be left default when deploying a new instance
+  ## Adapt when Prefix changed in existing installation
+  database_prefix: cms_
+  ## Use an existing secret
+  existingSecret:
+    enabled: false
+    # secretName: nameofsecret
+    # usernameKey: username
+    # passwordKey: password

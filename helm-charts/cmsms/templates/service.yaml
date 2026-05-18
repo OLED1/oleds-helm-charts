@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cmsms.fullname" . }}-app
+  labels:
+    {{- include "cmsms.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.cmsms_app.service.type }}
+  ports:
+    - port: {{ .Values.cmsms_app.service.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "cmsms.selectorLabels" . | nindent 4 }}
