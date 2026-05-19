@@ -13,7 +13,6 @@ annotations:
       description: Artifact hub changelog added.
     - kind: fixed
       description: Bug fix copying files init script. Added maxdepth.
-
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -23,32 +22,25 @@ annotations:
 # a dependency of application charts to inject those utilities and functions into the rendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
-
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.4
-#version: 0.1.31-dev
-
+version: 0.1.6 #<-- Prod Branch
+# version: 0.1.32-dev #<-- Dev Branch
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "2.2.16"
-
 icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
-
 home: https://www.cmsmadesimple.org/
-
 maintainers:
   - name: CMS Made Simple Foundation
     url: https://www.cmsmadesimple.org/
-
 sources:
   - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
-
 dependencies:
-- name: mariadb
-  version: 11.0.*
-  repository: https://charts.bitnami.com/bitnami
-  condition: mariadb.enabled
+  - name: mariadb
+    version: 11.4.*
+    repository: "oci://registry-1.docker.io/bitnamicharts"
+    condition: mariadb.enabled
