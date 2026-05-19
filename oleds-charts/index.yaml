@@ -16,7 +16,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.080688434Z"
+    created: "2026-05-19T07:24:05.268317623Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1af57826cf753ffb630fdb233d39b0791a79c7b53ce455451ae607a456e95178
     home: https://github.com/rseichter/automx2
@@ -44,7 +44,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.080083568Z"
+    created: "2026-05-19T07:24:05.267684408Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: b73a469435102686bf2458b709cc031f2e5a670aedc5e05e25c45ba2e0157609
     home: https://github.com/rseichter/automx2
@@ -70,7 +70,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.079478233Z"
+    created: "2026-05-19T07:24:05.267051953Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1ec7ef6378b353fe82dedda1e125c592e3649006850788379b90eda98440be7a
     home: https://github.com/rseichter/automx2
@@ -94,7 +94,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.078884817Z"
+    created: "2026-05-19T07:24:05.266504528Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 4aefffa3cf3599bcbc387f84e9b03d0534f8907cd4a1ecabf05b4817a33fdaad
     home: https://github.com/rseichter/automx2
@@ -116,7 +116,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.078305302Z"
+    created: "2026-05-19T07:24:05.265923532Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 2954322076abec336b317cf4995eb95cea1bc6e7b3d664c5f67b904d9af77e91
     home: https://github.com/rseichter/automx2
@@ -135,7 +135,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T06:17:29.077754506Z"
+    created: "2026-05-19T07:24:05.265110988Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: ebeeebffba7e9ce6935d3c806793fb3c08037306cf7c0a1c1371651de804120c
     home: https://github.com/rseichter/automx2
@@ -164,16 +164,16 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.135813876Z"
+    created: "2026-05-19T07:24:05.320373584Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
       repository: oci://registry-1.docker.io/bitnamicharts
       version: 11.4.*
     description: CMS Made Simple. An easy to use CMS System.
-    digest: ca8f248fda8a2e92b14b9546707998a5e8c6ca3a89f3799acfa9c816ba2824d5
+    digest: ac1227b57f8d4776a77ba30db3e85c08f9f3a586a95e1613950fe777133b2f14
     home: https://www.cmsmadesimple.org/
-    icon: https://framalibre.org/sites/default/files/leslogos/cmsms_logo.png
+    icon: https://framalibre.org/images/logo/CMS%20Made%20Simple.png
     maintainers:
     - name: CMS Made Simple Foundation
       url: https://www.cmsmadesimple.org/
@@ -197,7 +197,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.130690754Z"
+    created: "2026-05-19T07:24:05.312189497Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -230,7 +230,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.121858841Z"
+    created: "2026-05-19T07:24:05.30390228Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -254,7 +254,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.113997731Z"
+    created: "2026-05-19T07:24:05.299218016Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -278,7 +278,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.106652037Z"
+    created: "2026-05-19T07:24:05.289506471Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -302,7 +302,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.0983615Z"
+    created: "2026-05-19T07:24:05.283872774Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -326,7 +326,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T06:17:29.089799875Z"
+    created: "2026-05-19T07:24:05.273068297Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -351,7 +351,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-05-19T06:17:29.137549503Z"
+    created: "2026-05-19T07:24:05.321367196Z"
     description: Backup your databases to a remote share.
     digest: 44f3d5e34ff831277ade6bca857f1850388fc5112e74489a89f5202ceaa90511
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -380,7 +380,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T06:17:29.147426727Z"
+    created: "2026-05-19T07:24:05.329207216Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: c82a2aa0575f56c728dea8e5c0cff9935fec063f15e72eade1a722aa2a798455
     home: https://typemill.net/
@@ -399,7 +399,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T06:17:29.146467435Z"
+    created: "2026-05-19T07:24:05.32724567Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 12761cee9fdcba5166debc06374459043946c257983ccdd12ae3778890360830
     home: https://typemill.net/
@@ -418,7 +418,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T06:17:29.145462033Z"
+    created: "2026-05-19T07:24:05.326353448Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 63ca73d1b1f0d6bd981baee6419fce45d71462d39fd6d51fd8ba0c70328d59c2
     home: https://typemill.net/
@@ -437,7 +437,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T06:17:29.14324775Z"
+    created: "2026-05-19T07:24:05.325481045Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: a703e9bba1d74bdbfb77aa43dfa9937d009e12385ce7f086a6288e81a22dd9a0
     home: https://typemill.net/
@@ -454,7 +454,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-05-19T06:17:29.141275294Z"
+    created: "2026-05-19T07:24:05.324336653Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 29ba52501e82d4dab147c71beeece38fda345c4e256314684c7fe714d7b618df
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -465,7 +465,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-05-19T06:17:29.139455699Z"
+    created: "2026-05-19T07:24:05.322971754Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 2f6c1a7dc6eecafc992d9adcddea098027d3b2af0f2637950232bd918e3a4aee
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -474,4 +474,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
-generated: "2026-05-19T06:17:29.077005761Z"
+generated: "2026-05-19T07:24:05.264312284Z"
