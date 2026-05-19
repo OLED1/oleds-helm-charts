@@ -6,13 +6,9 @@ annotations:
   #ref: https://blog.artifacthub.io/blog/changelogs/
   artifacthub.io/changes: |
     - kind: added
-      description: Modules custom folder now symlinked from uploads folder.
+      description: Added the option to specify database image.
     - kind: changed
-      description: This chart now actively working with different tags.
-    - kind: added
-      description: Artifact hub changelog added.
-    - kind: fixed
-      description: Bug fix copying files init script. Added maxdepth.
+      description: Changed version of Bitnami Mariadb to 11.4.*.
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives

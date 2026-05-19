@@ -16,7 +16,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.268317623Z"
+    created: "2026-05-19T11:11:27.77500065Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1af57826cf753ffb630fdb233d39b0791a79c7b53ce455451ae607a456e95178
     home: https://github.com/rseichter/automx2
@@ -44,7 +44,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.267684408Z"
+    created: "2026-05-19T11:11:27.774420003Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: b73a469435102686bf2458b709cc031f2e5a670aedc5e05e25c45ba2e0157609
     home: https://github.com/rseichter/automx2
@@ -70,7 +70,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.267051953Z"
+    created: "2026-05-19T11:11:27.773171003Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1ec7ef6378b353fe82dedda1e125c592e3649006850788379b90eda98440be7a
     home: https://github.com/rseichter/automx2
@@ -94,7 +94,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.266504528Z"
+    created: "2026-05-19T11:11:27.772642697Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 4aefffa3cf3599bcbc387f84e9b03d0534f8907cd4a1ecabf05b4817a33fdaad
     home: https://github.com/rseichter/automx2
@@ -116,7 +116,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.265923532Z"
+    created: "2026-05-19T11:11:27.772095392Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 2954322076abec336b317cf4995eb95cea1bc6e7b3d664c5f67b904d9af77e91
     home: https://github.com/rseichter/automx2
@@ -135,7 +135,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-05-19T07:24:05.265110988Z"
+    created: "2026-05-19T11:11:27.771503855Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: ebeeebffba7e9ce6935d3c806793fb3c08037306cf7c0a1c1371651de804120c
     home: https://github.com/rseichter/automx2
@@ -154,24 +154,20 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
-          description: Modules custom folder now symlinked from uploads folder.
+          description: Added the option to specify database image.
         - kind: changed
-          description: This chart now actively working with different tags.
-        - kind: added
-          description: Artifact hub changelog added.
-        - kind: fixed
-          description: Bug fix copying files init script. Added maxdepth.
+          description: Changed version of Bitnami Mariadb to 11.4.*.
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.320373584Z"
+    created: "2026-05-19T11:11:27.83317321Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
       repository: oci://registry-1.docker.io/bitnamicharts
       version: 11.4.*
     description: CMS Made Simple. An easy to use CMS System.
-    digest: ac1227b57f8d4776a77ba30db3e85c08f9f3a586a95e1613950fe777133b2f14
+    digest: 2c69a279d0649a1b0c76b1cfefa1ae08aa817e6648a4c2846f5ffa30e99d3777
     home: https://www.cmsmadesimple.org/
     icon: https://framalibre.org/images/logo/CMS%20Made%20Simple.png
     maintainers:
@@ -197,7 +193,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.312189497Z"
+    created: "2026-05-19T11:11:27.823199776Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -230,7 +226,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.30390228Z"
+    created: "2026-05-19T11:11:27.815452774Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -254,7 +250,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.299218016Z"
+    created: "2026-05-19T11:11:27.807609743Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -278,7 +274,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.289506471Z"
+    created: "2026-05-19T11:11:27.800227759Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -302,7 +298,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.283872774Z"
+    created: "2026-05-19T11:11:27.791797773Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -326,7 +322,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-05-19T07:24:05.273068297Z"
+    created: "2026-05-19T11:11:27.783667394Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -351,7 +347,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-05-19T07:24:05.321367196Z"
+    created: "2026-05-19T11:11:27.834753459Z"
     description: Backup your databases to a remote share.
     digest: 44f3d5e34ff831277ade6bca857f1850388fc5112e74489a89f5202ceaa90511
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -380,7 +376,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T07:24:05.329207216Z"
+    created: "2026-05-19T11:11:27.843933459Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: c82a2aa0575f56c728dea8e5c0cff9935fec063f15e72eade1a722aa2a798455
     home: https://typemill.net/
@@ -399,7 +395,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T07:24:05.32724567Z"
+    created: "2026-05-19T11:11:27.842968507Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 12761cee9fdcba5166debc06374459043946c257983ccdd12ae3778890360830
     home: https://typemill.net/
@@ -418,7 +414,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T07:24:05.326353448Z"
+    created: "2026-05-19T11:11:27.841861146Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 63ca73d1b1f0d6bd981baee6419fce45d71462d39fd6d51fd8ba0c70328d59c2
     home: https://typemill.net/
@@ -437,7 +433,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-05-19T07:24:05.325481045Z"
+    created: "2026-05-19T11:11:27.83989158Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: a703e9bba1d74bdbfb77aa43dfa9937d009e12385ce7f086a6288e81a22dd9a0
     home: https://typemill.net/
@@ -454,7 +450,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-05-19T07:24:05.324336653Z"
+    created: "2026-05-19T11:11:27.838066004Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 29ba52501e82d4dab147c71beeece38fda345c4e256314684c7fe714d7b618df
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -465,7 +461,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-05-19T07:24:05.322971754Z"
+    created: "2026-05-19T11:11:27.836366987Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 2f6c1a7dc6eecafc992d9adcddea098027d3b2af0f2637950232bd918e3a4aee
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -474,4 +470,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
-generated: "2026-05-19T07:24:05.264312284Z"
+generated: "2026-05-19T11:11:27.770712591Z"
