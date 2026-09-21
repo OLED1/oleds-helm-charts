@@ -201,6 +201,11 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - Bug fix copying files init script. Added maxdepth.
 - Artifact hub changelog added.
 
+### Chart Version 0.1.5 + 0.1.6 (0.1.32-dev) 19.05.26
+- Added the option to specify database image.
+- Changed version of Bitnami Mariadb to 11.4.*.
+- Fixed Artifact Hub CMSMS logo link
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)
