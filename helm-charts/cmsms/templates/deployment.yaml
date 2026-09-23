@@ -3,25 +3,27 @@ kind: Deployment
 metadata:
   name: {{ include "cmsms.fullname" . }}-app
   labels:
-    app.kubernetes.io/name: {{ include "cmsms.name" . }}
-    helm.sh/chart: {{ include "cmsms.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/component: app
     {{- include "cmsms.labels" . | nindent 4 }}
+    app.kubernetes.io/component: app
 spec:
   {{- if not .Values.cmsms_app.autoscaling.enabled }}
   replicas: {{ .Values.cmsms_app.replicaCount }}
+  {{- end }}
+  {{- with .Values.cmsms_app.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "cmsms.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.cmsms_app.podAnnotations }}
       annotations:
+        checksum/db-secret: {{ include (print $.Template.BasePath "/db-secret.yaml") . | sha256sum }}
+        checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+        {{- with .Values.cmsms_app.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- end }}
       labels:
         {{- include "cmsms.selectorLabels" . | nindent 8 }}
     spec:
@@ -40,115 +42,102 @@ spec:
         imagePullPolicy: {{ .Values.cmsms_app.image.pullPolicy }}
         env:
         - name: TZ
-          value: {{ .Values.cmsms_settings.app_config.timezone | default "Europe/Vienna" }}
-        {{- if .Values.externalDatabase.enabled }}
+          value: {{ .Values.cmsms_settings.app_config.timezone | default "Europe/Vienna" | quote }}
+        {{- if or .Values.externalDatabase.enabled .Values.mariadb.enabled }}
+        {{- $dbSecret := include "cmsms.db.secretName" . }}
+        {{- $dbES := include "cmsms.db.existingSecret" . | fromYaml }}
         - name: CMSMS_DB_EXISTS
-          value: "true"
-        - name: CMSMS_DB_HOST
-          value: {{ .Values.externalDatabase.host | quote }}
-        - name: CMSMS_DB
-          value: {{ .Values.externalDatabase.database | quote }}
-        - name: CMSMS_DB_PREFIX
-          value: {{ default "cms_" .Values.externalDatabase.database_prefix | quote }}
-        - name: CMSMS_DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
-              key: {{ .Values.externalDatabase.existingSecret.usernameKey | default "db-username" }}
-        - name: CMSMS_DB_USER_PW
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
-              key: {{ .Values.externalDatabase.existingSecret.usernameKey | default "db-password" }}
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ printf "%s-%s" .Release.Name "mariadb" }}
-              key: "mariadb-root-password"
-        {{- else if .Values.mariadb.enabled }}
-        - name: CMSMS_DB_EXISTS
-          {{- if .Values.cmsms_settings.install_cmsms }}
+          {{- if and (not .Values.externalDatabase.enabled) .Values.cmsms_settings.install_cmsms }}
           value: "false"
           {{- else }}
           value: "true"
           {{- end }}
+        {{- if .Values.externalDatabase.enabled }}
         - name: CMSMS_DB_HOST
-          value: "{{ template "mariadb.primary.fullname" .Subcharts.mariadb }}"
+          value: {{ required "externalDatabase.host is required" .Values.externalDatabase.host | quote }}
+        - name: CMSMS_DB
+          value: {{ required "externalDatabase.database is required" .Values.externalDatabase.database | quote }}
+        - name: CMSMS_DB_PREFIX
+          value: {{ default "cms_" .Values.externalDatabase.database_prefix | quote }}
+        {{- else }}
+        - name: CMSMS_DB_HOST
+          value: {{ include "mariadb.primary.fullname" .Subcharts.mariadb | quote }}
         - name: CMSMS_DB
           value: {{ .Values.mariadb.auth.database | quote }}
         - name: CMSMS_DB_PREFIX
           value: {{ default "cms_" .Values.mariadb.database_prefix | quote }}
-        - name: CMSMS_DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
-              key: {{ .Values.externalDatabase.existingSecret.usernameKey | default "db-username" }}   
-        - name: CMSMS_DB_USER_PW
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.externalDatabase.existingSecret.secretName | default (printf "%s-%s" .Release.Name "db") }}
-              key: {{ .Values.externalDatabase.existingSecret.passwordKey | default "db-password" }}
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ printf "%s-%s" .Release.Name "mariadb" }}
-              key: "mariadb-root-password"
+              name: {{ include "mariadb.secretName" .Subcharts.mariadb }}
+              key: mariadb-root-password
+        {{- end }}
+        - name: CMSMS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ $dbSecret }}
+              key: {{ $dbES.usernameKey }}
+        - name: CMSMS_DB_USER_PW
+          valueFrom:
+            secretKeyRef:
+              name: {{ $dbSecret }}
+              key: {{ $dbES.passwordKey }}
         {{- end }}
         - name: CMSMS_DOMAIN
-          {{- if .Values.cmsms_settings.site_encryption_enabled }}
-          value: {{ printf "%s%s" "https://" .Values.cmsms_settings.host | quote }}
-          {{- else }}
-          value: {{ printf "%s%s" "http://" .Values.cmsms_settings.host | quote }}
-          {{- end }}
+          value: {{ printf "%s://%s" (ternary "https" "http" (.Values.cmsms_settings.site_encryption_enabled | default false)) .Values.cmsms_settings.host | quote }}
         - name: CMSMS_INSTALL
-          value: {{ default "false" .Values.cmsms_settings.install_cmsms | quote }}
+          value: {{ .Values.cmsms_settings.install_cmsms | default false | toString | quote }}
         - name: CMSMS_SMTP_PRECONFIGURE
-          value: {{ default "false" .Values.cmsms_settings.setup_smtp.preconfigure_smtp | quote }}
+          value: {{ .Values.cmsms_settings.setup_smtp.preconfigure_smtp | default false | toString | quote }}
         {{- if .Values.cmsms_settings.install_cmsms }}
         {{- if .Values.cmsms_settings.initial_user.create }}
+        {{- $iuSecret := include "cmsms.initialUser.secretName" . }}
+        {{- $iuES := include "cmsms.initialUser.existingSecret" . | fromYaml }}
         - name: CMSMS_APP_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.cmsms_settings.initial_user.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
-              key: {{ .Values.cmsms_settings.initial_user.existingSecret.usernameKey | default "cmsms_username" }}   
+              name: {{ $iuSecret }}
+              key: {{ $iuES.usernameKey }}
         - name: CMSMS_APP_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.cmsms_settings.initial_user.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
-              key: {{ .Values.cmsms_settings.initial_user.existingSecret.passwordKey | default "cmsms_password" }} 
+              name: {{ $iuSecret }}
+              key: {{ $iuES.passwordKey }}
         - name: CMSMS_APP_ADMIN_EMAIL
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.cmsms_settings.initial_user.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
-              key: {{ .Values.cmsms_settings.initial_user.existingSecret.cmsms_email | default "cmsms_email" }}
+              name: {{ $iuSecret }}
+              key: {{ $iuES.emailKey }}
         {{- end }}
-        {{- if .Values.cmsms_settings.setup_smtp.preconfigure_smtp }}
+        {{- $smtp := .Values.cmsms_settings.setup_smtp }}
+        {{- if $smtp.preconfigure_smtp }}
         - name: CMSMS_SMTP_HOST
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_host | default "" | quote }}
+          value: {{ required "cmsms_settings.setup_smtp.smtp_host is required" $smtp.smtp_host | quote }}
         - name: CMSMS_SMTP_PORT
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_port | default 465 | quote }}
+          value: {{ $smtp.smtp_port | default 465 | quote }}
         - name: CMSMS_SMTP_FROM
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_from | default "info@example.com" | quote }}
+          value: {{ $smtp.smtp_from | default "info@example.com" | quote }}
         - name: CMSMS_SMTP_SENDERRNAME
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_sender_name | default "My Example Site" | quote }}
+          value: {{ $smtp.smtp_sender_name | default "My Example Site" | quote }}
         - name: CMSMS_SMTP_AUTH_NEEDED
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_needed | default "true" | quote }}
+          value: {{ $smtp.smtp_auth.auth_needed | default false | toString | quote }}
+        {{- if $smtp.smtp_auth.auth_needed }}
+        {{- $smtpSecret := include "cmsms.smtp.secretName" . }}
+        {{- $smtpES := include "cmsms.smtp.existingSecret" . | fromYaml }}
         - name: CMSMS_SMTP_AUTH_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
-              key: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.usernameKey | default "cmsms_smtp_username" }}
+              name: {{ $smtpSecret }}
+              key: {{ $smtpES.usernameKey }}
         - name: CMSMS_SMTP_AUTH_PW
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.secretName | default (printf "%s-%s" .Release.Name "secrets") }}
-              key: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.existingSecret.passwordKey | default "cmsms_smtp_password" }}
+              name: {{ $smtpSecret }}
+              key: {{ $smtpES.passwordKey }}
+        {{- end }}
         - name: CMSMS_SMTP_AUTH_ENCRYPTION
-          {{- if eq "none" .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption }}
-          value: ""
-          {{- else }}
-          value: {{ .Values.cmsms_settings.setup_smtp.smtp_auth.auth_encryption  | quote }} #ssl|tls|none
-          {{- end }}
+          {{- $enc := $smtp.smtp_auth.auth_encryption | default "none" | toString | lower }}
+          value: {{ ternary "" $enc (eq $enc "none") | quote }}
         {{- end }}
         {{- end }}
         ports:
@@ -169,7 +158,7 @@ spec:
           successThreshold: {{ .Values.cmsms_app.livenessProbe.successThreshold }}
           failureThreshold: {{ .Values.cmsms_app.livenessProbe.failureThreshold }}
         {{- end }}
-        {{- if and .Values.cmsms_app.readinessProbe.enabled }}
+        {{- if .Values.cmsms_app.readinessProbe.enabled }}
         readinessProbe:
           httpGet:
             path: /admin/login.php
@@ -183,7 +172,7 @@ spec:
           successThreshold: {{ .Values.cmsms_app.readinessProbe.successThreshold }}
           failureThreshold: {{ .Values.cmsms_app.readinessProbe.failureThreshold }}
         {{- end }}
-        {{- if and .Values.cmsms_app.startupProbe.enabled }}
+        {{- if .Values.cmsms_app.startupProbe.enabled }}
         startupProbe:
           httpGet:
             path: /admin/login.php
@@ -223,20 +212,20 @@ spec:
       - name: cmsms-data
       {{- if .Values.cmsms_app.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ if .Values.cmsms_app.persistence.existingClaim }}{{ .Values.cmsms_app.persistence.existingClaim }}{{- else }}{{ include "cmsms.fullname" . }}-cmsms-data{{- end }}
+          claimName: {{ .Values.cmsms_app.persistence.existingClaim | default (printf "%s-cmsms-data" (include "cmsms.fullname" .)) }}
       {{- else }}
         emptyDir: {}
       {{- end }}
       - name: cmsms-config
         configMap:
-          name: {{ template "cmsms.fullname" . }}-config
+          name: {{ include "cmsms.fullname" . }}-config
       - name: php-ini-config
         configMap:
-          name: {{ template "cmsms.fullname" . }}-php-ini-config
+          name: {{ include "cmsms.fullname" . }}-php-ini-config
       {{- if or .Values.cmsms_settings.app_config.htaccess.use_default_htaccess .Values.cmsms_settings.app_config.htaccess.custom_htaccess }}
       - name: cmsms-htaccess
         configMap:
-          name: {{ template "cmsms.fullname" . }}-cmsms-htaccess
+          name: {{ include "cmsms.fullname" . }}-cmsms-htaccess
       {{- end }}
       {{- with .Values.cmsms_app.nodeSelector }}
       nodeSelector:

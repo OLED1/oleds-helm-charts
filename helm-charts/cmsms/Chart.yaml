@@ -7,6 +7,52 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: Image rebuild to use Debian 12.
+    - kind: added
+      description: Added more bitnami mariadb related settings and documentation.
+    - kind: changed
+      description: "BREAKING: existingSecret settings (externalDatabase, initial_user, smtp_auth) are now a plain string (secret name) following the Bitnami convention. Empty string disables them."
+    - kind: changed
+      description: "BREAKING: existing secrets in the string format must use the chart's key names (db-username/db-password, cmsms_username/cmsms_password/cmsms_email, cmsms_smtp_username/cmsms_smtp_password)."
+    - kind: deprecated
+      description: The legacy existingSecret object format (enabled, secretName, usernameKey, passwordKey, emailKey) is still accepted, including custom key names, but prints a deprecation warning and will be removed in a future release.
+    - kind: added
+      description: New cmsms_settings.db_authentication section for CMSMS database credentials when mariadb.auth.existingSecret is used, including its own existingSecret.
+    - kind: added
+      description: existingSecret names are rendered through tpl, so template expressions like "{{ .Release.Name }}-creds" are supported.
+    - kind: added
+      description: Pod checksum annotations for the DB and app secrets, so pods restart automatically when credentials change.
+    - kind: added
+      description: Render-time validation - mariadb.enabled and externalDatabase.enabled must not both be true, mariadb.auth.existingSecret must be a string.
+    - kind: added
+      description: values.schema.json covers db_authentication, nameOverride/fullnameOverride and rejects typos in legacy existingSecret objects.
+    - kind: changed
+      description: "BREAKING: nameOverride and fullnameOverride moved to the top level (they had no effect under cmsms_app)."
+    - kind: changed
+      description: "BREAKING: SMTP credentials are required when auth_needed is true and no existingSecret is set. Fallback defaults were removed."
+    - kind: changed
+      description: Generated initial admin password is now persisted across upgrades via lookup (set it explicitly when using helm template or ArgoCD).
+    - kind: changed
+      description: Chart-generated secrets (<release>-db, <release>-secrets) are only rendered when no existing secret is configured.
+    - kind: changed
+      description: cmsms_app.strategy is now applied to the Deployment (default RollingUpdate with maxSurge 1, maxUnavailable 0).
+    - kind: changed
+      description: Unified labels across all chart resources.
+    - kind: removed
+      description: MYSQL_ROOT_PASSWORD is no longer injected when using an external database.
+    - kind: fixed
+      description: smtp_auth.auth_needed false was always rendered as "true".
+    - kind: fixed
+      description: CMSMS_DB_USER_PW used the username key of externalDatabase.existingSecret.
+    - kind: fixed
+      description: Internal MariaDB mode read DB credentials from externalDatabase.existingSecret settings.
+    - kind: fixed
+      description: MYSQL_ROOT_PASSWORD ignored mariadb.auth.existingSecret and fullnameOverride.
+    - kind: fixed
+      description: Initial user emailKey of existingSecret was not applied.
+    - kind: fixed
+      description: SMTP auth env vars referenced secret keys even when authentication was disabled.
+    - kind: fixed
+      description: helm test and NOTES.txt referenced the wrong service name (now <fullname>-app).
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -19,8 +65,8 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-# version: 0.1.5 #<-- Prod Branch
-version: 0.1.33-dev #<-- Dev Branch
+# version: 0.1.6 #<-- Prod Branch
+version: 0.2.0-dev #<-- Dev Branch
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.

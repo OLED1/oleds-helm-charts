@@ -4,6 +4,111 @@
 > There is no official support from CMS Made Simple (CMS Made Simple Foundation) itself.
 > Active unofficial supported chart. If a new version will be released a new updated package will be created.
 
+## BREAKING CHANGES by upgrading 0.1.x to 0.2.x !!!
+
+### From 0.1.x to 0.2.0
+
+> **⚠️ 0.2.0 contains breaking changes.** Review your values file before upgrading.
+> Do **not** use `helm upgrade --reuse-values` for this upgrade — pass your adapted values file explicitly.
+
+#### Existing secrets: new format, legacy format still accepted
+
+All `existingSecret` settings now accept a plain **string** (the secret name), following the
+Bitnami convention. Empty string = disabled. When set, the plain-text credentials of that
+section are ignored. The name is rendered through `tpl`, so `"{{ .Release.Name }}-creds"` works.
+
+With the string format, the secret must use the same key names as the chart-generated secret:
+
+| Setting | Required keys |
+|---|---|
+| `externalDatabase.existingSecret` | `db-username`, `db-password` |
+| `cmsms_settings.db_authentication.existingSecret` *(new)* | `db-username`, `db-password` |
+| `cmsms_settings.initial_user.existingSecret` | `cmsms_username`, `cmsms_password`, `cmsms_email` |
+| `cmsms_settings.setup_smtp.smtp_auth.existingSecret` | `cmsms_smtp_username`, `cmsms_smtp_password` |
+| `mariadb.auth.existingSecret` *(Bitnami, string only)* | `mariadb-root-password`, `mariadb-password` |
+
+**New format (recommended):**
+
+```yaml
+externalDatabase:
+  existingSecret: my-db-secret   # must contain db-username / db-password
+```
+
+**Legacy format (deprecated, still supported in 0.2.x):**
+
+```yaml
+externalDatabase:
+  existingSecret:
+    enabled: true
+    secretName: my-db-secret
+    usernameKey: user        # optional, custom key names are honored
+    passwordKey: pass
+    # emailKey: mail         # initial_user only
+```
+
+The legacy object format keeps working, including custom key names. `helm install/upgrade`
+prints a **deprecation warning** listing the affected settings. It will be removed in a future
+release — migrate to the string format.
+
+When using the legacy format, Helm may log a harmless warning like:
+
+```
+coalesce.go:289: warning: destination for cmsms.cmsms_settings.initial_user.existingSecret is a table. Ignoring non-table value ()
+```
+
+This only means Helm replaced the string default from `values.yaml` with your object. The rendered
+output is correct. The warning disappears once you switch to the string format.
+
+Typos in the legacy object (e.g. `secretname`) are rejected by the schema.
+`mariadb.auth.existingSecret` is passed to the Bitnami subchart and **must** be a string.
+
+#### Internal database with `mariadb.auth.existingSecret`
+
+New section `cmsms_settings.db_authentication`. When `mariadb.auth.existingSecret` is set,
+CMSMS takes its database credentials from here:
+
+- `db_authentication.existingSecret`: secret with `db-username` / `db-password`, **or**
+- `db_authentication.username` / `password`: must match `mariadb-password` in the MariaDB secret.
+
+Without `mariadb.auth.existingSecret`, `mariadb.auth.username` / `password` are used as before.
+
+#### Other breaking changes
+
+- **`nameOverride` / `fullnameOverride` moved to the top level.** Under `cmsms_app` they never had an effect.
+  Setting them now changes resource names; only set them if you actually want that.
+- **External database no longer gets `MYSQL_ROOT_PASSWORD`.** Previously the pod referenced a
+  non-existent `<release>-mariadb` secret in this mode.
+- **`smtp_auth.auth_needed: false` is now respected.** It previously always rendered `"true"`.
+- **SMTP credentials are required** when `auth_needed: true` and no `existingSecret` is set.
+  The fallback defaults (`cmsms_smtp` / `changeme!`) were removed.
+- **Initial admin password is now persistent.** If `initial_user.password` is empty, the generated
+  password is kept across upgrades (via `lookup`). With `helm template` / ArgoCD, `lookup` is not
+  available: set the password explicitly or use `existingSecret`.
+- **`cmsms_app.strategy` is now applied** (default: `RollingUpdate`, `maxSurge: 1`, `maxUnavailable: 0`).
+  With `persistence.accessMode: ReadWriteOnce`, the new pod may fail with a *Multi-Attach* error if
+  scheduled on another node — use `ReadWriteMany` or set `strategy.type: Recreate`.
+- **Pods restart on secret changes** (checksum annotations on the pod template).
+- **Chart-generated secrets are only rendered when needed.** When you switch to an `existingSecret`,
+  Helm deletes the now-unused `<release>-db` / `<release>-secrets`.
+- **Validation:** `mariadb.enabled` and `externalDatabase.enabled` must not both be `true`.
+- **`helm test` fixed:** the connection test now targets the correct service (`<fullname>-app`).
+
+#### Upgrade procedure
+
+```bash
+# 1. Compare your values with the new defaults
+helm show values <repo>/cmsms --version 0.2.0 > values-0.2.0.yaml
+diff -u my-values.yaml values-0.2.0.yaml
+
+# 2. Adapt your values (see above); legacy existingSecret objects may stay for now
+
+# 3. Render and review before applying
+helm template my-release <repo>/cmsms --version 0.2.0 -f my-values.yaml
+
+# 4. Upgrade with the adapted values file (no --reuse-values)
+helm upgrade my-release <repo>/cmsms --version 0.2.0 -f my-values.yaml
+```
+
 ## Prerequisites
 - Kubernetes installed
 - Helm installed and configured. [See here](https://helm.sh/docs/intro/install/)

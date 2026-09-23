@@ -11,6 +11,10 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+## The following setting can be left default.
+nameOverride: ""
+## The following setting can be left default.
+fullnameOverride: ""
 ingress:
   enabled: false
   className: ""
@@ -51,13 +55,9 @@ cmsms_app:
     pullPolicy: Always
     ## Overrides the image tag whose default is the chart appVersion.
     ## Use with caution, every chart version is balanced with the container image and used tag
-    tag: "2.2.16-php7.4-hardened-0.1.33-dev"
+    tag: "2.2.16-php7.4-hardened-0.2.0-dev"
   ## The following settings can be left default. They are only needed when you want to deploy your own image
   imagePullSecrets: []
-  ## The following setting can be left default.
-  nameOverride: ""
-  ## The following setting can be left default.
-  fullnameOverride: ""
   podAnnotations: {}
   podSecurityContext: {}
   # fsGroup: 2000
@@ -172,12 +172,26 @@ cmsms_settings:
     password:
     email: admin@example.com
     ## Use an existing secret
-    existingSecret:
-      enabled: false
-      #secretName: nameofsecret
-      #usernameKey: username
-      #passwordKey: password
-      #emailKey: email
+    ## Existing Secret overrides auth settings `initial_user.username`, `initial_user.password` and `initial_user.email`
+    ## The secret must live in the same namespace as this release and contain:
+    ##   cmsms_username         (required)
+    ##   cmsms_password         (required)
+    ##   cmsms_email            (required)
+    existingSecret: ""
+  ## Database Auth Configuration for CMSMS
+  ## ONLY USED WHEN `mariadb.enabled=true` AND `mariadb.auth.existingSecret` is set
+  ## Ignored when `externalDatabase.enabled=true`
+  db_authentication:
+    ## Must match the user MariaDB creates (defaults to mariadb.auth.username if empty)
+    username: cmsms
+    ## Must match `mariadb-password` in mariadb.auth.existingSecret
+    password: ""
+    ## Existing Secret overrides auth settings `db_authentication.username` and `db_authentication.password`
+    ## The secret must live in the same namespace as this release and contain:
+    ##   db-username         (required)
+    ##   db-password         (required)
+    existingSecret: ""
+  ## Mail Sending / SMTP Configuration
   ## This app only supports sending mails via an external smtp server.
   ## Will be saved to a secret.
   ## If you wish it to be preconfigured you can do it here.
@@ -201,11 +215,13 @@ cmsms_settings:
       ## The connection encryption. Can be ssl/tls or none.
       auth_encryption: none
       ## Use an existing secret
-      existingSecret:
-        enabled: false
-        #secretName: nameofsecret
-        #usernameKey: username
-        #passwordKey: password
+      ## Name of an existing secret, empty = disabled.
+      ## When set, auth_user/auth_pw above are ignored. Must contain:
+      ##   cmsms_smtp_username, cmsms_smtp_password
+      ## The secret must live in the same namespace as this release and contain:
+      ##   cmsms_smtp_username         (required)
+      ##   cmsms_smtp_password         (required)
+      existingSecret: ""
   ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values.
   ## Plese note: Pretty URLS are enable by default
   app_config:
@@ -274,6 +290,15 @@ mariadb:
     database: cmsms_app
     username: cmsms
     password: changeMeNow!
+    #rootPassword: changeMeNow!
+
+    ## Existing Secret overrides auth settings `password` and `rootPassword`
+    ## YOU ALSO NEED TO SET cmsms_settings.db_authentication WHEN USING existingSecret
+    ## The secret must live in the same namespace as this release and contain:
+    ##   mariadb-root-password         (required)
+    ##   mariadb-password              (required if `username` above is set)
+    ##   mariadb-replication-password  (required only if architecture: replication)
+    existingSecret: ""
   ## CMS Made Simple database prefix as stated in the installer
   ## Can be left default when deploying a new instance
   ## Adapt when Prefix changed in existing installation
@@ -306,8 +331,7 @@ externalDatabase:
   ## Adapt when Prefix changed in existing installation
   database_prefix: cms_
   ## Use an existing secret
-  existingSecret:
-    enabled: false
-    # secretName: nameofsecret
-    # usernameKey: username
-    # passwordKey: password
+  ## The secret must live in the same namespace as this release and contain:
+  ##   db-username         (required)
+  ##   db-password         (required)
+  existingSecret: ""
