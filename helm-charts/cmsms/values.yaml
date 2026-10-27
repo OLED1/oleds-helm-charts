@@ -11,6 +11,10 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+## The following setting can be left default.
+nameOverride: ""
+## The following setting can be left default.
+fullnameOverride: ""
 ingress:
   enabled: false
   className: ""
@@ -51,13 +55,9 @@ cmsms_app:
     pullPolicy: Always
     ## Overrides the image tag whose default is the chart appVersion.
     ## Use with caution, every chart version is balanced with the container image and used tag
-    tag: "2.2.16-php7.4-hardened-0.1.33-dev"
+    tag: "2.2.16-php7.4-hardened-0.1.7"
   ## The following settings can be left default. They are only needed when you want to deploy your own image
   imagePullSecrets: []
-  ## The following setting can be left default.
-  nameOverride: ""
-  ## The following setting can be left default.
-  fullnameOverride: ""
   podAnnotations: {}
   podSecurityContext: {}
   # fsGroup: 2000
@@ -118,12 +118,14 @@ cmsms_app:
   ## Strategy used to replace old pods
   ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+  ## For a ReadWriteOnce PVC use `type: Recreate` — a rolling update can hit a
+  ## Multi-Attach error when the new pod lands on another node. Setting only
+  ## `type: Recreate` is enough; `rollingUpdate` is ignored for that type.
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-      # type: Recreate
   ## Liveness and readiness probe values
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
   ##
@@ -172,12 +174,26 @@ cmsms_settings:
     password:
     email: admin@example.com
     ## Use an existing secret
-    existingSecret:
-      enabled: false
-      #secretName: nameofsecret
-      #usernameKey: username
-      #passwordKey: password
-      #emailKey: email
+    ## Existing Secret overrides auth settings `initial_user.username`, `initial_user.password` and `initial_user.email`
+    ## The secret must live in the same namespace as this release and contain:
+    ##   cmsms_username         (required)
+    ##   cmsms_password         (required)
+    ##   cmsms_email            (required)
+    existingSecret: ""
+  ## Database Auth Configuration for CMSMS
+  ## ONLY USED WHEN `mariadb.enabled=true` AND `mariadb.auth.existingSecret` is set
+  ## Ignored when `externalDatabase.enabled=true`
+  db_authentication:
+    ## Must match the user MariaDB creates (defaults to mariadb.auth.username if empty)
+    username: cmsms
+    ## Must match `mariadb-password` in mariadb.auth.existingSecret
+    password: ""
+    ## Existing Secret overrides auth settings `db_authentication.username` and `db_authentication.password`
+    ## The secret must live in the same namespace as this release and contain:
+    ##   db-username         (required)
+    ##   db-password         (required)
+    existingSecret: ""
+  ## Mail Sending / SMTP Configuration
   ## This app only supports sending mails via an external smtp server.
   ## Will be saved to a secret.
   ## If you wish it to be preconfigured you can do it here.
@@ -201,11 +217,13 @@ cmsms_settings:
       ## The connection encryption. Can be ssl/tls or none.
       auth_encryption: none
       ## Use an existing secret
-      existingSecret:
-        enabled: false
-        #secretName: nameofsecret
-        #usernameKey: username
-        #passwordKey: password
+      ## Name of an existing secret, empty = disabled.
+      ## When set, auth_user/auth_pw above are ignored. Must contain:
+      ##   cmsms_smtp_username, cmsms_smtp_password
+      ## The secret must live in the same namespace as this release and contain:
+      ##   cmsms_smtp_username         (required)
+      ##   cmsms_smtp_password         (required)
+      existingSecret: ""
   ## In this section you can adapt the config.php, .htaccess and php.ini from CMSMS with further values.
   ## Plese note: Pretty URLS are enable by default
   app_config:
@@ -234,6 +252,10 @@ cmsms_settings:
       #  My custom content
     ## Here you can adapt or change the default PHP values
     ## It's not recommended to change the already setup values
+    ## Each key is mounted as /etc/php/7.4/{apache2,cli}/conf.d/zzz-<key> and
+    ## therefore overrides the image's built-in defaults (zz-hardening.ini).
+    ## NOTE: Apache in the image caps request bodies at 20 MB (LimitRequestBody),
+    ## so uploads above that fail with 413 regardless of upload_max_filesize.
     php_ini_config:
       cmsms_recommended.ini: |
         upload_max_filesize = 100M
@@ -274,6 +296,15 @@ mariadb:
     database: cmsms_app
     username: cmsms
     password: changeMeNow!
+    #rootPassword: changeMeNow!
+
+    ## Existing Secret overrides auth settings `password` and `rootPassword`
+    ## YOU ALSO NEED TO SET cmsms_settings.db_authentication WHEN USING existingSecret
+    ## The secret must live in the same namespace as this release and contain:
+    ##   mariadb-root-password         (required)
+    ##   mariadb-password              (required if `username` above is set)
+    ##   mariadb-replication-password  (required only if architecture: replication)
+    existingSecret: ""
   ## CMS Made Simple database prefix as stated in the installer
   ## Can be left default when deploying a new instance
   ## Adapt when Prefix changed in existing installation
@@ -306,8 +337,7 @@ externalDatabase:
   ## Adapt when Prefix changed in existing installation
   database_prefix: cms_
   ## Use an existing secret
-  existingSecret:
-    enabled: false
-    # secretName: nameofsecret
-    # usernameKey: username
-    # passwordKey: password
+  ## The secret must live in the same namespace as this release and contain:
+  ##   db-username         (required)
+  ##   db-password         (required)
+  existingSecret: ""

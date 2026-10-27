@@ -2,6 +2,16 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "nameOverride": {
+            "type": "string",
+            "title": "Chart name override",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "title": "Full name override",
+            "default": ""
+        },
         "ingress": {
             "type": "object",
             "title": "Ingress configuration",
@@ -70,19 +80,19 @@
                         },
                         "minReplicas": {
                             "type": "integer",
-                            "title":"Least available replicas",
+                            "title": "Least available replicas",
                             "form": true,
                             "default": 1
                         },
                         "maxReplicas": {
                             "type": "integer",
-                            "title":"Maximum available replicas",
+                            "title": "Maximum available replicas",
                             "form": true,
                             "default": 100
                         },
                         "targetCPUUtilizationPercentage": {
                             "type": "integer",
-                            "title":"When CPU is utilised for at least x% ",
+                            "title": "When CPU is utilised for at least x%",
                             "form": true,
                             "default": 80
                         }
@@ -122,7 +132,7 @@
                         "enabled": {
                             "type": "boolean",
                             "title": "Enable startup probe",
-                            "default": true,
+                            "default": false,
                             "form": true
                         }
                     }
@@ -143,12 +153,12 @@
                             "type": "string",
                             "title": "AccessMode of the PV created",
                             "default": "ReadWriteOnce",
-                            "enum": ["ReadWriteOnce","ReadWriteMany"],
+                            "enum": ["ReadWriteOnce", "ReadWriteMany"],
                             "form": true
                         },
                         "size": {
                             "type": "string",
-                            "title": "Persistent voume size",
+                            "title": "Persistent volume size",
                             "default": "1Gi",
                             "render": "slider",
                             "sliderMin": 1,
@@ -202,7 +212,6 @@
                     "type": "object",
                     "title": "Initial CMSMS user configuration",
                     "description": "If you want to setup a new instance you can setup an initial user here.",
-                    "default": true,
                     "form": true,
                     "properties": {
                         "create": {
@@ -221,7 +230,7 @@
                         "password": {
                             "type": ["string", "null"],
                             "title": "Password of initial user",
-                            "description": "Leave emtpy and a password will be generated.",
+                            "description": "Leave empty and a password will be generated.",
                             "default": "",
                             "form": true
                         },
@@ -232,12 +241,55 @@
                             "form": true
                         },
                         "existingSecret": {
-                            "type": "object",
+                            "type": ["string", "null", "object"],
+                            "title": "Use an existing Secret for the initial user",
+                            "description": "Name of an existing Secret (same namespace) with keys cmsms_username, cmsms_password, cmsms_email. Empty = disabled. When set, username/password/email above are ignored. The legacy object format { enabled, secretName, usernameKey, passwordKey, emailKey } is deprecated but still accepted.",
+                            "default": "",
+                            "form": true,
                             "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                }
-                            }
+                                "enabled": { "type": "boolean" },
+                                "secretName": { "type": "string" },
+                                "usernameKey": { "type": "string" },
+                                "passwordKey": { "type": "string" },
+                                "emailKey": { "type": "string" }
+                            },
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "db_authentication": {
+                    "type": "object",
+                    "title": "CMSMS database credentials",
+                    "description": "Used only with the internal MariaDB when mariadb.auth.existingSecret is set. Ignored when externalDatabase.enabled=true.",
+                    "form": true,
+                    "properties": {
+                        "username": {
+                            "type": "string",
+                            "title": "Database username",
+                            "description": "Must match the user MariaDB creates (defaults to mariadb.auth.username if empty).",
+                            "default": "cmsms",
+                            "form": true
+                        },
+                        "password": {
+                            "type": ["string", "null"],
+                            "title": "Database password",
+                            "description": "Must match mariadb-password in mariadb.auth.existingSecret. Ignored when existingSecret below is set.",
+                            "default": "",
+                            "form": true
+                        },
+                        "existingSecret": {
+                            "type": ["string", "null", "object"],
+                            "title": "Use an existing Secret for CMSMS database credentials",
+                            "description": "Name of an existing Secret (same namespace) with keys db-username, db-password. Empty = disabled. When set, username/password above are ignored. The legacy object format { enabled, secretName, usernameKey, passwordKey } is deprecated but still accepted.",
+                            "default": "",
+                            "form": true,
+                            "properties": {
+                                "enabled": { "type": "boolean" },
+                                "secretName": { "type": "string" },
+                                "usernameKey": { "type": "string" },
+                                "passwordKey": { "type": "string" }
+                            },
+                            "additionalProperties": false
                         }
                     }
                 },
@@ -245,7 +297,6 @@
                     "type": "object",
                     "title": "Initial SMTP connection configuration",
                     "description": "If you wish to preconfigure mailing via SMTP you can do it here.",
-                    "default": false,
                     "form": true,
                     "properties": {
                         "preconfigure_smtp": {
@@ -292,31 +343,39 @@
                                     "form": true
                                 },
                                 "auth_user": {
-                                    "type": ["string","null"],
+                                    "type": ["string", "null"],
                                     "title": "SMTP login username",
+                                    "description": "Ignored when existingSecret below is set.",
                                     "default": "",
                                     "form": true
                                 },
                                 "auth_pw": {
-                                    "type": ["string","null"],
+                                    "type": ["string", "null"],
                                     "title": "SMTP login password",
+                                    "description": "Ignored when existingSecret below is set.",
                                     "default": "",
                                     "form": true
                                 },
                                 "auth_encryption": {
                                     "type": "string",
                                     "title": "SMTP encryption method",
-                                    "enum": ["ssl","tls","none"],
+                                    "enum": ["ssl", "tls", "none"],
                                     "default": "none",
                                     "form": true
                                 },
                                 "existingSecret": {
-                                    "type": "object",
+                                    "type": ["string", "null", "object"],
+                                    "title": "Use an existing Secret for SMTP credentials",
+                                    "description": "Name of an existing Secret (same namespace) with keys cmsms_smtp_username, cmsms_smtp_password. Empty = disabled. When set, auth_user/auth_pw above are ignored. The legacy object format { enabled, secretName, usernameKey, passwordKey } is deprecated but still accepted.",
+                                    "default": "",
+                                    "form": true,
                                     "properties": {
-                                        "enabled": {
-                                            "type": "boolean"
-                                        }
-                                    }
+                                        "enabled": { "type": "boolean" },
+                                        "secretName": { "type": "string" },
+                                        "usernameKey": { "type": "string" },
+                                        "passwordKey": { "type": "string" }
+                                    },
+                                    "additionalProperties": false
                                 }
                             }
                         }
@@ -350,7 +409,7 @@
                                     "form": true
                                 },
                                 "custom_htaccess": {
-                                    "type": ["string","null"]
+                                    "type": ["string", "null"]
                                 }
                             }
                         },
@@ -369,7 +428,7 @@
         "mariadb": {
             "type": "object",
             "title": "Internal database configuration",
-            "description": "An internal mariadb pod will be deployed.",
+            "description": "An internal mariadb pod will be deployed. Must be disabled when externalDatabase.enabled=true.",
             "form": true,
             "properties": {
                 "enabled": {
@@ -382,7 +441,7 @@
                     "type": "string",
                     "title": "Internal database architecture configuration",
                     "description": "Decide which architecture of the internal database you want to deploy.",
-                    "enum": ["standalone","replication"],
+                    "enum": ["standalone", "replication"],
                     "default": "standalone",
                     "form": true
                 },
@@ -405,8 +464,23 @@
                             "form": true
                         },
                         "password": {
-                            "type": "string",
+                            "type": ["string", "null"],
                             "title": "MariaDB database password",
+                            "description": "Ignored when existingSecret below is set.",
+                            "default": "",
+                            "form": true
+                        },
+                        "rootPassword": {
+                            "type": ["string", "null"],
+                            "title": "MariaDB root password",
+                            "description": "Password for the internal MariaDB root user. Ignored when existingSecret below is set.",
+                            "default": "",
+                            "form": true
+                        },
+                        "existingSecret": {
+                            "type": ["string", "null"],
+                            "title": "Use an existing Secret for MariaDB credentials",
+                            "description": "Name of an existing Secret (same namespace) with keys mariadb-root-password, mariadb-password (+ mariadb-replication-password for replication). Empty = disabled. When set, password and rootPassword above are ignored. Passed to the Bitnami subchart: string only, no legacy object format.",
                             "default": "",
                             "form": true
                         }
@@ -423,41 +497,43 @@
                     "type": "object",
                     "title": "Primary persistence configuration",
                     "form": true,
-                    "persistence": {
-                        "type": "object",
-                        "title": "Pod data persistence",
-                        "description": "If you want your data saved.",
-                        "form": true,
-                        "properties": {
-                            "enabled": {
-                                "type": "boolean",
-                                "title": "Enable persistent volume",
-                                "default": false,
-                                "form": true
-                            },
-                            "accessMode": {
-                                "type": "string",
-                                "title": "AccessMode of the PV created",
-                                "enum": ["ReadWriteOnce","ReadWriteMany"],
-                                "default": "ReadWriteOnce",
-                                "form": true
-                            },
-                            "size": {
-                                "type": "string",
-                                "title": "Persistent voume size",
-                                "default": "1Gi",
-                                "render": "slider",
-                                "sliderMin": 1,
-                                "sliderMax": 100,
-                                "sliderUnit": "Gi",
-                                "form": true
-                            },
-                            "storageClass": {
-                                "title": "StorageClass(Name) configuration",
-                                "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
-                                "type": ["string", "null"],
-                                "default": null,
-                                "form": true
+                    "properties": {
+                        "persistence": {
+                            "type": "object",
+                            "title": "Pod data persistence",
+                            "description": "If you want your data saved.",
+                            "form": true,
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "title": "Enable persistent volume",
+                                    "default": false,
+                                    "form": true
+                                },
+                                "accessMode": {
+                                    "type": "string",
+                                    "title": "AccessMode of the PV created",
+                                    "enum": ["ReadWriteOnce", "ReadWriteMany"],
+                                    "default": "ReadWriteOnce",
+                                    "form": true
+                                },
+                                "size": {
+                                    "type": "string",
+                                    "title": "Persistent volume size",
+                                    "default": "1Gi",
+                                    "render": "slider",
+                                    "sliderMin": 1,
+                                    "sliderMax": 100,
+                                    "sliderUnit": "Gi",
+                                    "form": true
+                                },
+                                "storageClass": {
+                                    "title": "StorageClass(Name) configuration",
+                                    "description": "If using a custom StorageClass, pass name ref to all StatefulSets here.",
+                                    "type": ["string", "null"],
+                                    "default": null,
+                                    "form": true
+                                }
                             }
                         }
                     }
@@ -478,7 +554,7 @@
                 },
                 "host": {
                     "type": "string",
-                    "title": "Enable external database connection",
+                    "title": "External database host",
                     "description": "The hostname or IP address of the instance where CMSMS should connect to.",
                     "default": "mysql.local",
                     "form": true
@@ -492,14 +568,16 @@
                 },
                 "user": {
                     "type": "string",
-                    "title": "MariaDB database username",
+                    "title": "External database username",
+                    "description": "Ignored when existingSecret below is set.",
                     "default": "cmsms",
                     "form": true
                 },
                 "password": {
-                    "type": "string",
-                    "title": "MariaDB database password",
-                    "default": "MySuperStrongPassword1234!?",
+                    "type": ["string", "null"],
+                    "title": "External database password",
+                    "description": "Ignored when existingSecret below is set.",
+                    "default": "",
                     "form": true
                 },
                 "database_prefix": {
@@ -510,12 +588,18 @@
                     "form": true
                 },
                 "existingSecret": {
-                    "type": "object",
+                    "type": ["string", "null", "object"],
+                    "title": "Use an existing Secret for external database credentials",
+                    "description": "Name of an existing Secret (same namespace) with keys db-username, db-password. Empty = disabled. When set, user/password above are ignored. The legacy object format { enabled, secretName, usernameKey, passwordKey } is deprecated but still accepted.",
+                    "default": "",
+                    "form": true,
                     "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
+                        "enabled": { "type": "boolean" },
+                        "secretName": { "type": "string" },
+                        "usernameKey": { "type": "string" },
+                        "passwordKey": { "type": "string" }
+                    },
+                    "additionalProperties": false
                 }
             }
         }

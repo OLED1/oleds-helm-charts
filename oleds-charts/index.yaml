@@ -16,7 +16,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.550095235Z"
+    created: "2026-10-27T13:37:13.078199774Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1af57826cf753ffb630fdb233d39b0791a79c7b53ce455451ae607a456e95178
     home: https://github.com/rseichter/automx2
@@ -44,7 +44,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.54931115Z"
+    created: "2026-10-27T13:37:13.075765669Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: b73a469435102686bf2458b709cc031f2e5a670aedc5e05e25c45ba2e0157609
     home: https://github.com/rseichter/automx2
@@ -70,7 +70,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.548585084Z"
+    created: "2026-10-27T13:37:13.074293887Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 1ec7ef6378b353fe82dedda1e125c592e3649006850788379b90eda98440be7a
     home: https://github.com/rseichter/automx2
@@ -94,7 +94,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.547268333Z"
+    created: "2026-10-27T13:37:13.071464054Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 4aefffa3cf3599bcbc387f84e9b03d0534f8907cd4a1ecabf05b4817a33fdaad
     home: https://github.com/rseichter/automx2
@@ -116,7 +116,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.546529347Z"
+    created: "2026-10-27T13:37:13.070896127Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: 2954322076abec336b317cf4995eb95cea1bc6e7b3d664c5f67b904d9af77e91
     home: https://github.com/rseichter/automx2
@@ -135,7 +135,7 @@ entries:
       category: E-Mail Configuration Tool
     apiVersion: v2
     appVersion: 2025.1.1
-    created: "2026-09-21T09:46:48.545514154Z"
+    created: "2026-10-27T13:37:13.07032671Z"
     description: Mail User Agent (email client) configuration made easy.
     digest: ebeeebffba7e9ce6935d3c806793fb3c08037306cf7c0a1c1371651de804120c
     home: https://github.com/rseichter/automx2
@@ -153,6 +153,55 @@ entries:
   cmsms:
   - annotations:
       artifacthub.io/changes: |
+        - kind: security
+          description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.
+          links:
+            - name: CVE-2026-109618
+              url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+            - name: CVE-2026-109619
+              url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+        - kind: security
+          description: Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.
+          links:
+            - name: CVE-2026-115560
+              url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560
+        - kind: security
+          description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.
+          links:
+            - name: CVE-2018-9206
+              url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206
+        - kind: fixed
+          description: Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.
+        - kind: fixed
+          description: cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
+        - kind: fixed
+          description: php_ini_config was ignored since the move to the Debian/Sury PHP base; it is now mounted to /etc/php/7.4/{apache2,cli}/conf.d and overrides the image defaults.
+      artifacthub.io/containsSecurityUpdates: "true"
+      category: CMS
+    apiVersion: v2
+    appVersion: 2.2.16
+    created: "2026-10-27T13:37:13.136212325Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 11.4.*
+    description: CMS Made Simple. An easy to use CMS System.
+    digest: a4c0484db231b8814a87439c60d8f1167780106d77927eedccaa91ad0f7db328
+    home: https://www.cmsmadesimple.org/
+    icon: https://framalibre.org/images/logo/CMS%20Made%20Simple.png
+    maintainers:
+    - name: CMS Made Simple Foundation
+      url: https://www.cmsmadesimple.org/
+    name: cmsms
+    sources:
+    - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/cmsms-0.1.7.tgz
+    version: 0.1.7
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Added the option to specify database image.
         - kind: changed
@@ -160,7 +209,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.60934811Z"
+    created: "2026-10-27T13:37:13.129982601Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -193,7 +242,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.601133922Z"
+    created: "2026-10-27T13:37:13.122179777Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -226,7 +275,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.593785798Z"
+    created: "2026-10-27T13:37:13.112773542Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -250,7 +299,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.576344839Z"
+    created: "2026-10-27T13:37:13.104300021Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -274,7 +323,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.566750849Z"
+    created: "2026-10-27T13:37:13.094623378Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -298,7 +347,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.561773791Z"
+    created: "2026-10-27T13:37:13.090268534Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -322,7 +371,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 2.2.16
-    created: "2026-09-21T09:46:48.555760139Z"
+    created: "2026-10-27T13:37:13.084468778Z"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -347,7 +396,7 @@ entries:
       category: Backup Tool
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-09-21T09:46:48.610302764Z"
+    created: "2026-10-27T13:37:13.13703085Z"
     description: Backup your databases to a remote share.
     digest: 44f3d5e34ff831277ade6bca857f1850388fc5112e74489a89f5202ceaa90511
     home: https://github.com/OLED1/oleds-helm-charts/tree/main/helm-development/db-backup
@@ -376,7 +425,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-09-21T09:46:48.618076895Z"
+    created: "2026-10-27T13:37:13.142533587Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: c82a2aa0575f56c728dea8e5c0cff9935fec063f15e72eade1a722aa2a798455
     home: https://typemill.net/
@@ -395,7 +444,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-09-21T09:46:48.616430305Z"
+    created: "2026-10-27T13:37:13.141493294Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 12761cee9fdcba5166debc06374459043946c257983ccdd12ae3778890360830
     home: https://typemill.net/
@@ -414,7 +463,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-09-21T09:46:48.615154533Z"
+    created: "2026-10-27T13:37:13.14044444Z"
     description: A lightweight flat file cms for micro-publishers.
     digest: 63ca73d1b1f0d6bd981baee6419fce45d71462d39fd6d51fd8ba0c70328d59c2
     home: https://typemill.net/
@@ -433,7 +482,7 @@ entries:
       category: CMS
     apiVersion: v2
     appVersion: 1.5.3-4
-    created: "2026-09-21T09:46:48.613901591Z"
+    created: "2026-10-27T13:37:13.139517875Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: a703e9bba1d74bdbfb77aa43dfa9937d009e12385ce7f086a6288e81a22dd9a0
     home: https://typemill.net/
@@ -450,7 +499,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-09-21T09:46:48.61255361Z"
+    created: "2026-10-27T13:37:13.13867341Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 29ba52501e82d4dab147c71beeece38fda345c4e256314684c7fe714d7b618df
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -461,7 +510,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.5.3-3
-    created: "2026-09-21T09:46:48.611354317Z"
+    created: "2026-10-27T13:37:13.137869785Z"
     description: Helm chart for typemill cms. - A lightweight flat file cms for micro-publishers.
     digest: 2f6c1a7dc6eecafc992d9adcddea098027d3b2af0f2637950232bd918e3a4aee
     icon: https://typemill.net/media/live/typemill-hero-1.png
@@ -470,4 +519,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/typemill-0.1.1.tgz
     version: 0.1.1
-generated: "2026-09-21T09:46:48.543984583Z"
+generated: "2026-10-27T13:37:13.069471235Z"
