@@ -86,10 +86,15 @@ spec:
               key: mariadb-root-password
         {{- end }}
         - name: CMSMS_DB_USER
+          {{- if $dbES.usernameKey }}
           valueFrom:
             secretKeyRef:
               name: {{ $dbSecret }}
               key: {{ $dbES.usernameKey }}
+          {{- else }}
+          {{- /* Bitnami MariaDB secret has no username key */}}
+          value: {{ $dbES.username | toString | quote }}
+          {{- end }}
         - name: CMSMS_DB_USER_PW
           valueFrom:
             secretKeyRef:

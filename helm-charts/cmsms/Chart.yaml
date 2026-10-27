@@ -28,7 +28,10 @@ annotations:
     - kind: fixed
       description: cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
     - kind: fixed
-      description: php_ini_config was ignored since the move to the Debian/Sury PHP base; it is now mounted to /etc/php/7.4/{apache2,cli}/conf.d and overrides the image defaults.
+      description: Fallback to older database configuration when available.
+  artifacthub.io/signKey: |-
+    fingerprint: 9A3B1FFDED5C7968555E746049E2868104D45C5C
+    url: https://raw.githubusercontent.com/OLED1/oleds-helm-charts/development/oleds-charts/pgp-public-key.asc
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -41,8 +44,8 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-# version: 0.1.6 #<-- Prod Branch
-version: 0.2.1-dev #<-- Dev Branch
+#version: 2.0.0 #<-- Prod Branch
+version: 0.2.2-dev #<-- Dev Branch
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.

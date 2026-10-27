@@ -55,7 +55,7 @@ cmsms_app:
     pullPolicy: Always
     ## Overrides the image tag whose default is the chart appVersion.
     ## Use with caution, every chart version is balanced with the container image and used tag
-    tag: "2.2.16-php7.4-hardened-0.2.1-dev"
+    tag: "2.2.16-php7.4-hardened-0.2.2-dev"
   ## The following settings can be left default. They are only needed when you want to deploy your own image
   imagePullSecrets: []
   podAnnotations: {}
@@ -183,15 +183,21 @@ cmsms_settings:
   ## Database Auth Configuration for CMSMS
   ## ONLY USED WHEN `mariadb.enabled=true` AND `mariadb.auth.existingSecret` is set
   ## Ignored when `externalDatabase.enabled=true`
+  ##
+  ## FALLBACK: leave `password` and `existingSecret` empty and CMSMS reads its password
+  ## directly from mariadb.auth.existingSecret (key `mariadb-password`) and uses `username`
+  ## below (or mariadb.auth.username) as plain value. This is the recommended setup.
   db_authentication:
     ## Must match the user MariaDB creates (defaults to mariadb.auth.username if empty)
     username: cmsms
-    ## Must match `mariadb-password` in mariadb.auth.existingSecret
+    ## Optional. Must match `mariadb-password` in mariadb.auth.existingSecret
     password: ""
     ## Existing Secret overrides auth settings `db_authentication.username` and `db_authentication.password`
     ## The secret must live in the same namespace as this release and contain:
     ##   db-username         (required)
     ##   db-password         (required)
+    ## Exception: if this is the MariaDB secret itself (mariadb.auth.existingSecret or
+    ## <release>-mariadb), `mariadb-password` and `username` above are used instead.
     existingSecret: ""
   ## Mail Sending / SMTP Configuration
   ## This app only supports sending mails via an external smtp server.
@@ -299,7 +305,7 @@ mariadb:
     #rootPassword: changeMeNow!
 
     ## Existing Secret overrides auth settings `password` and `rootPassword`
-    ## YOU ALSO NEED TO SET cmsms_settings.db_authentication WHEN USING existingSecret
+    ## CMSMS reads `mariadb-password` from this secret as well (see cmsms_settings.db_authentication)
     ## The secret must live in the same namespace as this release and contain:
     ##   mariadb-root-password         (required)
     ##   mariadb-password              (required if `username` above is set)

@@ -89,14 +89,64 @@ Usage: include "cmsms.existingSecret" (dict "root" $ "value" <val> "path" "<valu
 {{- end -}}
 
 {{/*
-Active DB existingSecret (external or internal), normalized
+Name of the secret used by the bundled Bitnami MariaDB
+(mariadb.auth.existingSecret, or the generated <release>-mariadb)
+*/}}
+{{- define "cmsms.mariadb.secretName" -}}
+{{- if and .Values.mariadb.enabled (not .Values.externalDatabase.enabled) -}}
+  {{- include "mariadb.secretName" .Subcharts.mariadb -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Active DB existingSecret (external or internal), normalized.
+Returns YAML: { name, legacy, usernameKey, passwordKey, bitnami, username }
+
+Bitnami fallback (internal MariaDB only): CMSMS reads its password from the
+MariaDB secret (key mariadb-password) and its username as a plain value
+(db_authentication.username, else mariadb.auth.username). Active when either
+  a) mariadb.auth.existingSecret is set and neither db_authentication.password
+     nor db_authentication.existingSecret is given, or
+  b) db_authentication.existingSecret points to the MariaDB secret itself,
+     which has no db-username / db-password keys.
+In that case usernameKey is "" and username holds the plain value.
+Keys set explicitly in the legacy object format still win.
 */}}
 {{- define "cmsms.db.existingSecret" -}}
 {{- $defaults := dict "usernameKey" "db-username" "passwordKey" "db-password" -}}
 {{- if .Values.externalDatabase.enabled -}}
-  {{- include "cmsms.existingSecret" (dict "root" . "value" .Values.externalDatabase.existingSecret "path" "externalDatabase" "defaults" $defaults) -}}
+  {{- $es := include "cmsms.existingSecret" (dict "root" . "value" .Values.externalDatabase.existingSecret "path" "externalDatabase" "defaults" $defaults) | fromYaml -}}
+  {{- $_ := set $es "bitnami" false -}}
+  {{- $_ := set $es "username" "" -}}
+  {{- toYaml $es -}}
 {{- else -}}
-  {{- include "cmsms.existingSecret" (dict "root" . "value" .Values.cmsms_settings.db_authentication.existingSecret "path" "cmsms_settings.db_authentication" "defaults" $defaults) -}}
+  {{- $auth := .Values.cmsms_settings.db_authentication -}}
+  {{- $raw := $auth.existingSecret -}}
+  {{- $es := include "cmsms.existingSecret" (dict "root" . "value" $raw "path" "cmsms_settings.db_authentication" "defaults" $defaults) | fromYaml -}}
+  {{- $_ := set $es "bitnami" false -}}
+  {{- $_ := set $es "username" "" -}}
+  {{- $mdbSecret := include "cmsms.mariadb.secretName" . -}}
+  {{- if $mdbSecret -}}
+    {{- $useMdb := false -}}
+    {{- if and (not $es.name) .Values.mariadb.auth.existingSecret (not $auth.password) -}}
+      {{- $useMdb = true -}}
+      {{- $_ := set $es "name" $mdbSecret -}}
+    {{- else if eq $es.name $mdbSecret -}}
+      {{- $useMdb = true -}}
+    {{- end -}}
+    {{- if $useMdb -}}
+      {{- $explicit := dict -}}
+      {{- if and (kindIs "map" $raw) $raw.enabled -}}{{- $explicit = $raw -}}{{- end -}}
+      {{- $_ := set $es "bitnami" true -}}
+      {{- $_ := set $es "passwordKey" ($explicit.passwordKey | default "mariadb-password") -}}
+      {{- $_ := set $es "usernameKey" ($explicit.usernameKey | default "") -}}
+      {{- if not $es.usernameKey -}}
+        {{- $user := $auth.username | default .Values.mariadb.auth.username -}}
+        {{- $_ := set $es "username" (required "cmsms_settings.db_authentication.username or mariadb.auth.username is required when CMSMS uses the MariaDB secret" $user) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- toYaml $es -}}
 {{- end -}}
 {{- end -}}
 
