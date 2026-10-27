@@ -10,8 +10,21 @@ spec:
   replicas: {{ .Values.cmsms_app.replicaCount }}
   {{- end }}
   {{- with .Values.cmsms_app.strategy }}
+  {{- /*
+    Helm deep-merges user values with the chart defaults, so setting only
+    `type: Recreate` still inherits the default `rollingUpdate` block, which
+    Kubernetes rejects. Emit rollingUpdate only for type RollingUpdate.
+  */}}
+  {{- $type := .type | default "RollingUpdate" }}
+  {{- if not (has $type (list "RollingUpdate" "Recreate")) }}
+  {{- fail (printf "cmsms_app.strategy.type must be RollingUpdate or Recreate, got %q" $type) }}
+  {{- end }}
   strategy:
-    {{- toYaml . | nindent 4 }}
+    type: {{ $type }}
+    {{- if and (eq $type "RollingUpdate") .rollingUpdate }}
+    rollingUpdate:
+      {{- toYaml .rollingUpdate | nindent 6 }}
+    {{- end }}
   {{- end }}
   selector:
     matchLabels:
@@ -198,10 +211,20 @@ spec:
         - name: cmsms-config
           mountPath: /var/www/html/config.php
           subPath: config.php
+        {{- /*
+          The image runs Debian/Sury PHP 7.4, which reads per-SAPI conf.d dirs
+          (/etc/php/7.4/<sapi>/conf.d), not the old php:7.4-apache path
+          /usr/local/etc/php/conf.d. Mounted for apache2 (requests) and cli
+          (init script). The "zzz-" prefix sorts after the image's own
+          zz-hardening.ini / zz-opcache.ini, so chart values override them.
+        */}}
         {{- range $key, $value := .Values.cmsms_settings.app_config.php_ini_config }}
+        {{- range $sapi := list "apache2" "cli" }}
         - name: php-ini-config
-          mountPath: /usr/local/etc/php/conf.d/{{ $key }}
+          mountPath: /etc/php/7.4/{{ $sapi }}/conf.d/zzz-{{ $key }}
           subPath: {{ $key }}
+          readOnly: true
+        {{- end }}
         {{- end }}
         {{- if or .Values.cmsms_settings.app_config.htaccess.use_default_htaccess .Values.cmsms_settings.app_config.htaccess.custom_htaccess }}
         - name: cmsms-htaccess

@@ -7,19 +7,28 @@ annotations:
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/changes: |
     - kind: security
-      description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which carries the PHP security team's EOL backport for 7.4.
+      description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.
       links:
         - name: CVE-2026-109618
           url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618
         - name: CVE-2026-109619
           url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619
     - kind: security
-      description: Disabled PHP session upload progress (session.upload_progress.enabled=0) as defense in depth for CVE-2026-109619.
+      description: Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.
+      links:
+        - name: CVE-2026-115560
+          url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560
     - kind: security
-      description: Mitigated blueimp-file-upload CVE-2018-9206 — HTTP access to the bundled jQuery File Upload server handler is denied, client scripts updated to 9.22.1.
+      description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.
       links:
         - name: CVE-2018-9206
           url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206
+    - kind: fixed
+      description: Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.
+    - kind: fixed
+      description: cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
+    - kind: fixed
+      description: php_ini_config was ignored since the move to the Debian/Sury PHP base; it is now mounted to /etc/php/7.4/{apache2,cli}/conf.d and overrides the image defaults.
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives

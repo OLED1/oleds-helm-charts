@@ -118,12 +118,14 @@ cmsms_app:
   ## Strategy used to replace old pods
   ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+  ## For a ReadWriteOnce PVC use `type: Recreate` — a rolling update can hit a
+  ## Multi-Attach error when the new pod lands on another node. Setting only
+  ## `type: Recreate` is enough; `rollingUpdate` is ignored for that type.
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-      # type: Recreate
   ## Liveness and readiness probe values
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
   ##
@@ -250,6 +252,10 @@ cmsms_settings:
       #  My custom content
     ## Here you can adapt or change the default PHP values
     ## It's not recommended to change the already setup values
+    ## Each key is mounted as /etc/php/7.4/{apache2,cli}/conf.d/zzz-<key> and
+    ## therefore overrides the image's built-in defaults (zz-hardening.ini).
+    ## NOTE: Apache in the image caps request bodies at 20 MB (LimitRequestBody),
+    ## so uploads above that fail with 413 regardless of upload_max_filesize.
     php_ini_config:
       cmsms_recommended.ini: |
         upload_max_filesize = 100M
