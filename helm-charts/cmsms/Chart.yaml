@@ -5,30 +5,10 @@ annotations:
   category: CMS
   #ref: https://blog.artifacthub.io/blog/changelogs/
   artifacthub.io/containsSecurityUpdates: "true"
-  artifacthub.io/changes: |
-    - kind: security
-      description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.
-      links:
-        - name: CVE-2026-109618
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618
-        - name: CVE-2026-109619
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619
-    - kind: security
-      description: Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.
-      links:
-        - name: CVE-2026-115560
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560
-    - kind: security
-      description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.
-      links:
-        - name: CVE-2018-9206
-          url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206
-    - kind: fixed
-      description: Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.
-    - kind: fixed
-      description: cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
-    - kind: fixed
-      description: php_ini_config was ignored since the move to the Debian/Sury PHP base; it is now mounted to /etc/php/7.4/{apache2,cli}/conf.d and overrides the image defaults.
+  artifacthub.io/changes: "- kind: security\n  description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.\n  links:\n    - name: CVE-2026-109618\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618\n    - name: CVE-2026-109619\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619\n- kind: security\n  description: Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.\n  links:\n    - name: CVE-2026-115560\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560\n- kind: security\n  description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.\n  links:\n    - name: CVE-2018-9206\n      url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206\n- kind: fixed\n  description: Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.\n- kind: fixed\n  description: cmsms_app.strategy.type Recreate no longer fails with \"rollingUpdate may not be specified\".\n- kind: fixed\n  description: Fallback to older database configuration when available.\n- kind: changed\n  description: Changed Image Source to Debian Trixie (13).\n  \n"
+  artifacthub.io/signKey: |-
+    fingerprint: 9A3B1FFDED5C7968555E746049E2868104D45C5C
+    url: https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/pgp-public-key.asc
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -41,8 +21,8 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 2.0.0 #<-- Prod Branch
-# version: 0.1.32-dev #<-- Dev Branch
+version: 2.0.1 #<-- Prod Branch
+#version: 0.2.2-dev #<-- Dev Branch
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.

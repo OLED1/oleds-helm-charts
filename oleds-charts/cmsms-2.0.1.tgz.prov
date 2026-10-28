@@ -1,0 +1,66 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+annotations:
+  artifacthub.io/changes: "- kind: security\n  description: Fixed PHP2Shell (CVE-2026-109618,
+    CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports
+    the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.\n
+    \ links:\n    - name: CVE-2026-109618\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618\n
+    \   - name: CVE-2026-109619\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619\n-
+    kind: security\n  description: Disabled PHP session upload progress and pinned
+    it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for
+    CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.\n  links:\n
+    \   - name: CVE-2026-115560\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560\n-
+    kind: security\n  description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable
+    server handler is not shipped (FileManager uses its own upload handling), client
+    scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.\n
+    \ links:\n    - name: CVE-2018-9206\n      url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206\n-
+    kind: fixed\n  description: Redirects such as /admin → /admin/ now use the public
+    URL from cmsms_settings.host instead of http://<host>:8080.\n- kind: fixed\n  description:
+    cmsms_app.strategy.type Recreate no longer fails with \"rollingUpdate may not
+    be specified\".\n- kind: fixed\n  description: Fallback to older database configuration
+    when available.\n- kind: changed\n  description: Changed Image Source to Debian
+    Trixie (13).\n  \n"
+  artifacthub.io/containsSecurityUpdates: "true"
+  artifacthub.io/signKey: |-
+    fingerprint: 9A3B1FFDED5C7968555E746049E2868104D45C5C
+    url: https://raw.githubusercontent.com/OLED1/oleds-helm-charts/main/oleds-charts/pgp-public-key.asc
+  category: CMS
+apiVersion: v2
+appVersion: 2.2.16
+dependencies:
+- - condition: mariadb.enabled
+  name: mariadb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 11.4.*
+description: CMS Made Simple. An easy to use CMS System.
+home: https://www.cmsmadesimple.org/
+icon: https://framalibre.org/images/logo/CMS%20Made%20Simple.png
+maintainers:
+- - name: CMS Made Simple Foundation
+  url: https://www.cmsmadesimple.org/
+name: cmsms
+sources:
+- - https://github.com/OLED1/oleds-helm-charts/tree/main/development/cmsms/cmsms-app-src
+type: application
+version: 2.0.1
+
+...
+files:
+  cmsms-2.0.1.tgz: sha256:4c44ce0ab27b61c0f335f58f0f0fd92de4210b9c12099456a72bd2d8d18362e0
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJq4bAiCRBJ4oaBBNRcXAAAiMsQAFN0ASZNvyHmnnoLTuysUsHw
+kvE8id5RlVkpWImz+/yG2QVlqL2QBaq77zWFkcFZFJ05yh1E10td7dkNZt6VyfrP
+/llsJeUJiztlIBp7uaaDlSZLilL28IEPwk1jRuZGQJJhmYyjXlD91bvAV5lnUll6
+M+xi6VaTcuUSLb8OaNlM6zFpPLMs/oytza53SGyuhTRuoC/BUi3Q4He9lTHMn9zn
+Pks7Uc2maTWPKqbWuoGyFCuNTpNelqDcGuNCZ8NthS9Zb2D1+FYrj3x/PD0p50Bk
+uRpQLJlD728h6csK6X0uHWLp+Oy7QSMC+j0euTbTb8zF9QvGg37HeIMOvMkA29SH
+vjpxJaTVh5SSQrInGaUiHg8XMFcdrBN/BK7V4MexlGC+IE4jDi9Ra95g6ht4ouzq
+csyyhl3rMQNBVN0tMFChICgAuUfhxKA7hFKCOgRiaZpwqXrOVIigJvAjeDvYQQBf
+o510G/PQOqAwljWwTPdx61egh71K7eeukE/meVrknYdTDDRJzna04a40dORTy6zs
+AhpNBRv1tcIC3QNdsTyW6Hv42sQV8rm++qjv9J+5UwLhLVUZddpczLGRh/j6dA5D
+ZQNOThZ95VmFbJdmtv43r5mEmBLzgBt4d3Pzw2eO5SiY3N8V6kJynONip3F9/elU
+dz2PHpx8hgj2YNJjsyrA
+=EYuG
+-----END PGP SIGNATURE-----

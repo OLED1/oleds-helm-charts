@@ -260,7 +260,7 @@
                 "db_authentication": {
                     "type": "object",
                     "title": "CMSMS database credentials",
-                    "description": "Used only with the internal MariaDB when mariadb.auth.existingSecret is set. Ignored when externalDatabase.enabled=true.",
+                    "description": "Used only with the internal MariaDB when mariadb.auth.existingSecret is set. Ignored when externalDatabase.enabled=true. Leave password and existingSecret empty to read mariadb-password from the MariaDB secret.",
                     "form": true,
                     "properties": {
                         "username": {
@@ -273,14 +273,14 @@
                         "password": {
                             "type": ["string", "null"],
                             "title": "Database password",
-                            "description": "Must match mariadb-password in mariadb.auth.existingSecret. Ignored when existingSecret below is set.",
+                            "description": "Optional. Must match mariadb-password in mariadb.auth.existingSecret. Ignored when existingSecret below is set. Empty = read mariadb-password from the MariaDB secret.",
                             "default": "",
                             "form": true
                         },
                         "existingSecret": {
                             "type": ["string", "null", "object"],
                             "title": "Use an existing Secret for CMSMS database credentials",
-                            "description": "Name of an existing Secret (same namespace) with keys db-username, db-password. Empty = disabled. When set, username/password above are ignored. The legacy object format { enabled, secretName, usernameKey, passwordKey } is deprecated but still accepted.",
+                            "description": "Name of an existing Secret (same namespace) with keys db-username, db-password. Empty = disabled. When set, username/password above are ignored. If it names the MariaDB secret, mariadb-password and username above are used instead. The legacy object format { enabled, secretName, usernameKey, passwordKey } is deprecated but still accepted.",
                             "default": "",
                             "form": true,
                             "properties": {

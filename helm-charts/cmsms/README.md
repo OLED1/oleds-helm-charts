@@ -311,6 +311,18 @@ Please tell me by open a github issue: [oleds-helm-charts](https://github.com/OL
 - Changed version of Bitnami Mariadb to 11.4.*.
 - Fixed Artifact Hub CMSMS logo link
 
+### Chart Version 0.2.0 (0.2.1-dev) 27.10.26
+- Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.
+- Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.
+- Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.
+- Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.
+- cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
+- Fallback to older database configuration when available.
+
+### Chart Version 0.2.1 (0.2.2-dev) 27.10.26
+- Updated Base Image to Debian Trixie
+- Backported fixes to make the image secure
+
 ## FAQ
 If you have a feature request or found a bug, open a github issue [here](https://github.com/OLED1/oleds-helm-charts).
 There are currently no open questions. You ask me, I will answer ;)
