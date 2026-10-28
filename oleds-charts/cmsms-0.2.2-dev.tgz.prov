@@ -2,30 +2,25 @@
 Hash: SHA512
 
 annotations:
-  artifacthub.io/changes: |
-    - kind: security
-      description: Fixed PHP2Shell (CVE-2026-109618, CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.
-      links:
-        - name: CVE-2026-109618
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618
-        - name: CVE-2026-109619
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619
-    - kind: security
-      description: Disabled PHP session upload progress and pinned it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.
-      links:
-        - name: CVE-2026-115560
-          url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560
-    - kind: security
-      description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable server handler is not shipped (FileManager uses its own upload handling), client scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.
-      links:
-        - name: CVE-2018-9206
-          url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206
-    - kind: fixed
-      description: Redirects such as /admin → /admin/ now use the public URL from cmsms_settings.host instead of http://<host>:8080.
-    - kind: fixed
-      description: cmsms_app.strategy.type Recreate no longer fails with "rollingUpdate may not be specified".
-    - kind: fixed
-      description: Fallback to older database configuration when available.
+  artifacthub.io/changes: "- kind: security\n  description: Fixed PHP2Shell (CVE-2026-109618,
+    CVE-2026-109619) — image now requires Sury php7.4 >= 1:7.4.33-31, which backports
+    the fix from PHP 8.2.35. The package changelog is kept in the image as evidence.\n
+    \ links:\n    - name: CVE-2026-109618\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109618\n
+    \   - name: CVE-2026-109619\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-109619\n-
+    kind: security\n  description: Disabled PHP session upload progress and pinned
+    it via php_admin_flag so .htaccess cannot re-enable it — defense in depth for
+    CVE-2026-109619 and mitigation for the not yet patched CVE-2026-115560.\n  links:\n
+    \   - name: CVE-2026-115560\n      url: https://nvd.nist.gov/vuln/detail/CVE-2026-115560\n-
+    kind: security\n  description: Fixed blueimp-file-upload CVE-2018-9206 — the vulnerable
+    server handler is not shipped (FileManager uses its own upload handling), client
+    scripts updated to 9.22.1, HTTP access to the handler path denied as a safeguard.\n
+    \ links:\n    - name: CVE-2018-9206\n      url: https://nvd.nist.gov/vuln/detail/CVE-2018-9206\n-
+    kind: fixed\n  description: Redirects such as /admin → /admin/ now use the public
+    URL from cmsms_settings.host instead of http://<host>:8080.\n- kind: fixed\n  description:
+    cmsms_app.strategy.type Recreate no longer fails with \"rollingUpdate may not
+    be specified\".\n- kind: fixed\n  description: Fallback to older database configuration
+    when available.\n- kind: changed\n  description: Changed Image Source to Debian
+    Trixie (13).\n  \n"
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/signKey: |-
     fingerprint: 9A3B1FFDED5C7968555E746049E2868104D45C5C
@@ -52,20 +47,20 @@ version: 0.2.2-dev
 
 ...
 files:
-  cmsms-0.2.2-dev.tgz: sha256:9ba1efc05d337eaa21b3de8b54bb8a6f2f65898ad0f8fe3897118bbfa9041516
+  cmsms-0.2.2-dev.tgz: sha256:d913a176e89a0e676e6ac095953076bb95560307bff38d6785fbf214ef7064a4
 -----BEGIN PGP SIGNATURE-----
 
-wsFcBAEBCgAQBQJq4MXlCRBJ4oaBBNRcXAAAe/YQAIuJgmy3R/TGXBGoLASIwtQH
-eYrAcTuhiCk4rkpuqhtgNR2PRCWg1J9zgucglXPrmnqIhz0VsMXSwlYZPsY8YJNP
-FGanJCrWxoppRA8odfGxdNS2iz782JB1mOYBAdd3u9YaaRZGIPrMYufDYkpwuao9
-kgFiO8hh0TSfE6nqmx72QznWnhfy/dPoZfyIbrWFqFCWhsNqR8sODjvOEuPpTWNX
-gmhE1W+jmnmyERKEiHI/YAiF1Evz0xB1cIgFnrq+aLGs/YtDY5NU3Rmi/dBfZ0Z4
-v3B8icWiw+s4TxktP6JO3MTDcsK6KuQBxCaqeluCTvP39r1SAkQRLl1ZKQHvilhM
-awaAhbaxGrPaSZT8rpezpTyXsvbsoZuI77Vp6IJIuvHR6UpHene8vZiX84nunBqt
-bz4VGfm5tHkvcf9manDwDvVjz84BWROtkSLkUv3wH4ijQG7KEPvHR1iIS/LNoicB
-DGXuCbRakz7HnWJ/ODKTu1EeNPt9/N9TFCpuUNFXewaPV4L8CsiizhpcZau1fDjU
-GEsJXtpbbBWb2kTOMIMW+VC3PrPHAUC8u05JWK1yXvpIOCigIvUZfz8aCm2y+VPp
-5godasA3dVaexPfd2XERyKVvN8hk2Y3KqN4IqC3s/b9ddLzu9nPcvGhQeHlF9IJg
-iY7CSydku2rlzHEBVSr1
-=wHvB
+wsFcBAEBCgAQBQJq4Zq8CRBJ4oaBBNRcXAAAhawQAEEHXGND4zmoVM69gMlIkOvT
+UYzqlP4FPF4oDUVGKluwA0DIRdQCMT1iqcCs13Rx88G7UlGOrMSLH6zwv+E1ISDM
+R2vKMTSNrVwh7+SvBqiK80OryKmAouua0jSWq1r1k2/PjhPQ7EdYuGbZVd9ab36s
+CaN2+UMxo0adxteJ4P6FDk/TjiYzX+U/27cyppAntyrNCMRot5Rb5Uj7Z0vYKiBF
+6hxNiZoz4/IUYqN5hk9gscY+rEpxlir9aq9PCWD3k2jHGaJg3og0hfYj7yTjQlea
+vu1RhQWTVov4mfy8AnEAwK3hWDITU1RyqP+L8+hv9GH01AsRtJ41AlVkDYSdR8ar
+No3MmwKy0ZulBaKZSJk3cYaZEXjNYOgN1iKoV1N4Zrn4AazsjpWB1Uor91tDHLx9
+vLecYT0yLesZVAOy/Qz9TlxMiMydpjNgXQSXHY6UJvaDnLjEIowoOe/ipLu1ff1K
+2g2PzUzkG+Ylh6Fh2JHytRGzvm1OKjSY9ko+jjzrRCTxhhS7ZIe1x98QlRVsL4sO
+5GNfh+JkBBu1yEiA121gri6y8jcx2pWDZ5NQKqZhncaywP84iaOleRut7Vg+RmcT
+rGcOf7AuidU6bd/QE1FT9HWt3C6xZlbW1VXV5RqvmSeavjNJ22NjaXpBkjA9USmq
+PGoHL0C1oxW5BUmaZ15o
+=m9rs
 -----END PGP SIGNATURE-----

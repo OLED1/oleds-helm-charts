@@ -59,17 +59,32 @@ cmsms_app:
   ## The following settings can be left default. They are only needed when you want to deploy your own image
   imagePullSecrets: []
   podAnnotations: {}
-  podSecurityContext: {}
-  # fsGroup: 2000
-
-  securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
+  ## Pod security context. The image runs as www-data (UID/GID 33); the numeric
+  ## runAsUser is required, kubelet cannot verify runAsNonRoot for a named user.
+  ## fsGroup keeps the modules/uploads volumes writable; OnRootMismatch skips the
+  ## recursive chown on every start when ownership is already correct.
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 33
+    runAsGroup: 33
+    fsGroup: 33
+    fsGroupChangePolicy: OnRootMismatch
+    seccompProfile:
+      type: RuntimeDefault
+  ## Container security context. Apache listens on 8080, so no capabilities
+  ## are needed at all.
+  ## readOnlyRootFilesystem is NOT enabled yet: CMSMS writes into the webroot
+  ## at runtime (tmp/, assets/) and PHP stores sessions in /var/lib/php/sessions.
+  ## Accepted in .trivyignore.yaml (KSV-0014) until the chart mounts those paths.
+  securityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
   ## Number of replicas to be deployed
   ## Use accessMode: ReadWriteMany when using replicaCount > 1 when setting up persistence
   replicaCount: 1
